@@ -12,7 +12,7 @@ public:
 	static const AbstractType AbsID = AbstractType::TerrainType;
 
 	//Array
-	ABSTRACTTYPE_ARRAY(TerrainTypeClass, 0xA8E318u);
+	ABSTRACTTYPE_ARRAY(TerrainTypeClass);
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

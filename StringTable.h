@@ -5,7 +5,6 @@
 #pragma once
 
 #include <GeneralDefinitions.h>
-#include <Helpers/CompileTime.h>
 
 #define CSF_SIGNATURE 0x43534620 //" FSC"
 #define CSF_LABEL_SIGNATURE 0x4C424C20 //" LBL"
@@ -56,24 +55,24 @@ struct CSFString
 struct CSFLanguage
 {
 	CSFLanguages Index; // one of the language constants
-	char const* Name; // the display name
-	char const* Short; // two letter language code
-	char const* Letter; // one letter language code
+	char* Name; // the display name
+	char* Short; // two letter language code
+	char* Letter; // one letter language code
 };
 
 class StringTable
 {
 public:
-	static constexpr reference<CSFString*, 0xB1CF88u> const LastLoadedString{};
-	static constexpr reference<int, 0xB1CF58u> const MaxLabelLen{};
-	static constexpr reference<int, 0xB1CF6Cu> const LabelCount{};
-	static constexpr reference<int, 0xB1CF70u> const ValueCount{};
-	static constexpr reference<CSFLanguages, 0x845728u> const Language{};
-	static constexpr reference<bool, 0xB1CF80u> const IsLoaded{};
-	static constexpr reference<char*, 0xB1CF68u> const FileName{};
-	static constexpr reference<CSFLabel*, 0xB1CF74u> const Labels{};
-	static constexpr reference<wchar_t**, 0xB1CF78u> const Values{};
-	static constexpr reference<char**, 0xB1CF7Cu> const ExtraValues{};
+	static CSFString * &LastLoadedString;
+	static int &MaxLabelLen;
+	static int &LabelCount;
+	static int &ValueCount;
+	static CSFLanguages &Language;
+	static bool &IsLoaded;
+	static char* &FileName;
+	static CSFLabel* &Labels;
+	static wchar_t** &Values;
+	static char** &ExtraValues;
 
 	static const wchar_t* __fastcall LoadString(
 		const char* pLabel,
@@ -87,7 +86,7 @@ public:
 	static bool __fastcall ReadFile(const char* pFileName)
 		{ JMP_STD(0x734990); }
 
-	static CSFLanguage const* __fastcall GetLanguage(CSFLanguages language)
+	static CSFLanguage* __fastcall GetLanguage(CSFLanguages language)
 		{ JMP_STD(0x734640); }
 	static const char* __fastcall GetLanguageName(CSFLanguages language)
 		{ JMP_STD(0x734670); }

@@ -15,7 +15,7 @@ public:
 	static const AbstractType AbsID = AbstractType::ParticleType;
 
 	//Array
-	ABSTRACTTYPE_ARRAY(ParticleTypeClass, 0xA83D98u);
+	ABSTRACTTYPE_ARRAY(ParticleTypeClass);
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

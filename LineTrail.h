@@ -2,8 +2,6 @@
 
 #include <GeneralDefinitions.h>
 
-#include <Helpers/CompileTime.h>
-
 struct LineTrailNode
 {
 	CoordStruct Position;
@@ -13,7 +11,7 @@ struct LineTrailNode
 class LineTrail
 {
 public:
-	static constexpr constant_ptr<DynamicVectorClass<LineTrail*>, 0xABCB78u> const Array{};
+	static DynamicVectorClass<LineTrail*>* const Array;
 
 	//Constructor, Destructor
 	LineTrail()

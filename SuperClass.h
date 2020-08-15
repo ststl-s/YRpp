@@ -16,9 +16,9 @@ public:
 	static const AbstractType AbsID = AbstractType::Super;
 
 	//Static
-	static constexpr constant_ptr<DynamicVectorClass<SuperClass*>, 0xA83CB8u> const Array{};
+	static DynamicVectorClass<SuperClass*>* const Array;
 
-	static constexpr reference<DynamicVectorClass<SuperClass*>, 0xA83D50u> const ShowTimers{};
+	static DynamicVectorClass<SuperClass*>* const ShowTimers;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
@@ -142,18 +142,19 @@ public:
 class LightningStorm
 {
 public:
-	static constexpr reference<double, 0xB0CDD8u> const CloudHeightFactor{};
-	static constexpr reference<CellStruct, 0xA9F9CCu> const Coords{};
-	static constexpr reference<HouseClass*, 0xA9FACCu> const Owner{};
-	static constexpr reference<int, 0xA9FAB8u> const Deferment{};
-	static constexpr reference<int, 0x827FC4u> const Duration{};
-	static constexpr reference<int, 0x827FC0u> const StartTime{};
-	static constexpr reference<bool, 0xA9FAB4u> const Active{};
-	static constexpr reference<bool, 0xA9FAD0u> const TimeToEnd{};
+	static double &CloudHeightFactor;
 
-	static constexpr reference<DynamicVectorClass<AnimClass*>, 0xA9F9D0u> const CloudsPresent{};
-	static constexpr reference<DynamicVectorClass<AnimClass*>, 0xA9FA60u> const CloudsManifesting{};
-	static constexpr reference<DynamicVectorClass<AnimClass*>, 0xA9FA18u> const BoltsPresent{};
+	static CellStruct &Coords;
+	static HouseClass* &Owner;
+	static int &Deferment;
+	static int &Duration;
+	static int &StartTime;
+	static bool &Active;
+	static bool &TimeToEnd;
+
+	static DynamicVectorClass<AnimClass*>* const CloudsPresent;
+	static DynamicVectorClass<AnimClass*>* const CloudsManifesting;
+	static DynamicVectorClass<AnimClass*>* const BoltsPresent;
 
 	static void Start(int duration, int deferment, CellStruct cell, HouseClass* pOwner)
 		{ PUSH_VAR32(pOwner); PUSH_VAR32(cell); SET_REG32(EDX, deferment); SET_REG32(ECX, duration);
@@ -178,10 +179,10 @@ public:
 class PsyDom
 {
 public:
-	static constexpr reference<PsychicDominatorStatus, 0xA9FAC0u> const Status{};
-	static constexpr reference<CellStruct, 0xA9FA48u> const Coords{};
-	static constexpr reference<HouseClass*, 0xA9FAC8u> const Owner{};
-	static constexpr reference<AnimClass*, 0xA9FAC4u> const Anim{};
+	static PsychicDominatorStatus &Status;
+	static CellStruct &Coords;
+	static HouseClass* &Owner;
+	static AnimClass* &Anim;
 
 	static void Start(HouseClass* pOwner, CellStruct coords)
 		{ PUSH_VAR32(coords); SET_REG32(ECX, pOwner);
@@ -203,8 +204,8 @@ public:
 class ChronoScreenEffect
 {
 public:
-	static constexpr reference<int, 0xA9FAB0u> const Status{};
-	static constexpr reference<int, 0xA9FA98u> const Duration{};
+	static int &Status;
+	static int &Duration;
 
 	static void Start(int duration)
 		{ SET_REG32(ECX, duration);
@@ -220,9 +221,9 @@ public:
 class NukeFlash
 {
 public:
-	static constexpr reference<NukeFlashStatus, 0xA9FABCu> const Status{};
-	static constexpr reference<int, 0x827FC8u> const StartTime{};
-	static constexpr reference<int, 0x827FCCu> const Duration{};
+	static NukeFlashStatus &Status;
+	static int &StartTime;
+	static int &Duration;
 
 	static void FadeIn()
 		{ CALL(0x53AB70); }

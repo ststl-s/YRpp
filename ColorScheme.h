@@ -7,8 +7,6 @@
 #include <ArrayClasses.h>
 #include <GeneralStructures.h>
 
-#include <Helpers/CompileTime.h>
-
 class LightConvertClass;
 
 class ColorScheme
@@ -28,7 +26,7 @@ public:
 	};
 
 	//global array
-	static constexpr constant_ptr<DynamicVectorClass<ColorScheme*>, 0xB054D0u> const Array{};
+	static DynamicVectorClass<ColorScheme*>* const Array;
 /*
  * trap! most schemes are duplicated - ShadeCount 1 and ShadeCount 53
 */

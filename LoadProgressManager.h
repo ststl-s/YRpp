@@ -2,20 +2,18 @@
 
 #include <YRPP.h>
 
-#include <Helpers/CompileTime.h>
-
 struct SHPStruct;
 class Surface;
 
 class LoadProgressManager
 {
 public:
-	static constexpr reference<LoadProgressManager*, 0xABC9BCu> const Instance{};
+	static LoadProgressManager* &LPMgr;
 
-	static void DrawText(const wchar_t* pText, Point2D location, WORD color) {
-		if(auto const pManager = LoadProgressManager::Instance()) {
-			if(auto const pSurface = pManager->ProgressSurface) {
-				pSurface->DrawText(pText, location, color);
+	static void DrawText(const wchar_t* pText,int X,int Y,DWORD dwColor) {
+		if(LoadProgressManager::LPMgr) {
+			if(Surface * S = LoadProgressManager::LPMgr->ProgressSurface) {
+				S->DrawText(pText, X, Y, dwColor);
 			}
 		}
 	}

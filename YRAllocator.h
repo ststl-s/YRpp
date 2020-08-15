@@ -8,14 +8,16 @@
 class MemoryBuffer
 {
 public:
-	constexpr MemoryBuffer() noexcept = default;
+	MemoryBuffer()
+		: MemoryBuffer(nullptr, 0)
+	{ }
 
-	explicit MemoryBuffer(int size) noexcept
+	MemoryBuffer(int size)
 		: MemoryBuffer(nullptr, size)
 	{ }
 
-	MemoryBuffer(void* pBuffer, int size) noexcept
-		: Buffer(pBuffer), Size(size)
+	MemoryBuffer(void* pBuffer, int size)
+		: Buffer(pBuffer), Size(size), Allocated(false)
 	{
 		if(!this->Buffer && this->Size > 0) {
 			this->Buffer = YRMemory::Allocate(static_cast<size_t>(size));
@@ -23,27 +25,26 @@ public:
 		}
 	}
 
-	constexpr MemoryBuffer(MemoryBuffer const& other) noexcept
-		: Buffer(other.Buffer), Size(other.Size)
+	MemoryBuffer(const MemoryBuffer& other)
+		: MemoryBuffer(other.Buffer, other.Size)
 	{ }
 
-	MemoryBuffer(MemoryBuffer&& other) noexcept
-		: Buffer(other.Buffer), Size(other.Size), Allocated(other.Allocated)
+	MemoryBuffer(MemoryBuffer&& other)
+		: MemoryBuffer(other.Buffer, other.Size)
 	{
+		this->Allocated = other.Allocated;
 		other.Allocated = false;
 	}
 
-	~MemoryBuffer() noexcept
+	~MemoryBuffer()
 	{
-		if(this->Allocated) {
-			YRMemory::Deallocate(this->Buffer);
-		}
+		this->Deallocate();
 	}
 
-	MemoryBuffer& operator = (MemoryBuffer const& other) noexcept
+	MemoryBuffer& operator = (const MemoryBuffer& other)
 	{
 		if(this != &other) {
-			MemoryBuffer tmp(static_cast<MemoryBuffer&&>(*this));
+			this->Deallocate();
 			this->Buffer = other.Buffer;
 			this->Size = other.Size;
 		}
@@ -51,24 +52,33 @@ public:
 		return *this;
 	}
 
-	MemoryBuffer& operator = (MemoryBuffer&& other) noexcept
+	MemoryBuffer& operator = (MemoryBuffer&& other)
 	{
 		*this = other;
-		auto const allocated = other.Allocated;
+		this->Allocated = other.Allocated;
 		other.Allocated = false;
-		this->Allocated = allocated;
 		return *this;
 	}
 
-	void Clear() noexcept
+	void Clear()
 	{
-		MemoryBuffer tmp(static_cast<MemoryBuffer&&>(*this));
+		this->Deallocate();
 		this->Buffer = nullptr;
 		this->Size = 0;
 	}
 
+private:
+	void Deallocate()
+	{
+		if(this->Allocated) {
+			YRMemory::Deallocate(this->Buffer);
+			this->Allocated = false;
+		}
+	}
+
 public:
-	void* Buffer{ nullptr };
-	int Size{ 0 };
-	bool Allocated{ false };
+	void* Buffer;
+	int Size;
+	bool Allocated;
 };
+

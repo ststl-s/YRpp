@@ -2,8 +2,6 @@
 
 #include <wchar.h>
 
-#include <Helpers/CompileTime.h>
-
 class StartingSlotClass;
 
 struct AISlotsStruct
@@ -19,7 +17,7 @@ class GameModeOptionsClass
 {
 public:
 	// this is the same as SessionClass::Instance->Config
-	static constexpr reference<GameModeOptionsClass, 0xA8B250u> const Instance{};
+	static GameModeOptionsClass* const Instance;
 
 	int MPModeIndex;
 	int ScenarioIndex;

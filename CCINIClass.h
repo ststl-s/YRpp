@@ -4,7 +4,6 @@
 #include <GenericList.h>
 #include <ArrayClasses.h>
 #include <CCFileClass.h>
-#include <Helpers/CompileTime.h>
 
 struct ColorStruct;
 class TechnoTypeClass;
@@ -103,7 +102,7 @@ public:
 		{ JMP_THIS(0x5276D0); }
 	//Writes an integer value.
 	bool WriteInteger(const char* pSection, const char* pKey, int nValue, bool bHex)
-		{ JMP_THIS(0x5276D0); }
+		{ JMP_THIS(0x5275C0); }
 
 	//Reads a decimal value.
 	double ReadDouble(const char* pSection, const char* pKey, double dDefault)
@@ -283,20 +282,19 @@ class CCINIClass : public INIClass
 {
 public:
 	//STATIC
-	static constexpr reference<DWORD, 0xB77E00u> const RulesHash{};
-	static constexpr reference<DWORD, 0xB77E04u> const ArtHash{};
-	static constexpr reference<DWORD, 0xB77E08u> const AIHash{};
+	static DWORD &RulesHash;
+	static DWORD &ArtHash;
+	static DWORD &AIHash;
 
 	// westwood genius shines again
 
 	// this is a pointer in the class
-	static constexpr reference<CCINIClass*, 0x887048u> const INI_Rules{};
+	static CCINIClass *&INI_Rules; //0x887048
 
 	// these are static class variables, why the fuck did you differentiate them, WW?
-	static constexpr reference<CCINIClass, 0x887128u> const INI_AI{};
-	static constexpr reference<CCINIClass, 0x887180u> const INI_Art{};
-	static constexpr reference<CCINIClass, 0x887208u> const INI_UIMD{};
-	static constexpr reference<CCINIClass, 0x8870C0u> const INI_RA2MD{};
+	static CCINIClass * const INI_AI; //0x887128
+	static CCINIClass * const INI_Art; //0x887180
+	static CCINIClass * const INI_RA2MD; //0x8870C0
 
 	//non-static
 	CCINIClass() : INIClass(false)

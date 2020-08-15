@@ -12,7 +12,7 @@ public:
 	static const AbstractType AbsID = AbstractType::Side;
 
 	//Array
-	ABSTRACTTYPE_ARRAY(SideClass, 0x8B4120u);
+	ABSTRACTTYPE_ARRAY(SideClass);
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

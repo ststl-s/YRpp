@@ -10,7 +10,7 @@ public:
 	static const AbstractType AbsID = AbstractType::UnitType;
 
 	//Array
-	ABSTRACTTYPE_ARRAY(UnitTypeClass, 0xA83CE0u);
+	ABSTRACTTYPE_ARRAY(UnitTypeClass);
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

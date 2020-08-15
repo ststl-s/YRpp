@@ -140,10 +140,10 @@ public:
 	enum {PlayerAtA = 4475, PlayerAtB, PlayerAtC, PlayerAtD, PlayerAtE, PlayerAtF, PlayerAtG, PlayerAtH};
 
 	//Static
-	static constexpr constant_ptr<DynamicVectorClass<HouseClass*>, 0xA80228u> const Array{};
+	static DynamicVectorClass<HouseClass*>* const Array;
 
-	static constexpr reference<HouseClass*, 0xA83D4Cu> const Player{};
-	static constexpr reference<HouseClass*, 0xAC1198u> const Observer{};;
+	static HouseClass *&Player;
+	static HouseClass *&Observer;
 
 	//IConnectionPointContainer
 	virtual HRESULT __stdcall EnumConnectionPoints(IEnumConnectionPoints** ppEnum) R0;
@@ -569,7 +569,7 @@ public:
 		return pItem->InForbiddenHouses(1u << this->Type->ArrayIndex2);
 	}
 
-	CanBuildResult CanBuild(TechnoTypeClass const* pItem, bool buildLimitOnly, bool allowIfInProduction) const
+	int CanBuild(TechnoTypeClass const* pItem, bool buildLimitOnly, bool includeInProduction) const
 		{ JMP_THIS(0x4F7870); }
 
 	int AI_BaseConstructionUpdate()

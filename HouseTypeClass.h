@@ -17,7 +17,7 @@ public:
 	static const AbstractType AbsID = AbstractType::HouseType;
 
 	//Array
-	ABSTRACTTYPE_ARRAY(HouseTypeClass, 0xA83C98u);
+	ABSTRACTTYPE_ARRAY(HouseTypeClass);
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

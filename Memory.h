@@ -2,11 +2,8 @@
 
 #include <ASMMacros.h>
 
-#include <stdlib.h>
-
-#include <memory>
+#include <exception>
 #include <type_traits>
-#include <utility>
 
 /*
  * The memory (de)allocators have to match!
@@ -62,7 +59,7 @@ namespace YRMemory {
 		if(auto const ptr = YRMemory::Allocate(sz)) {
 			return ptr;
 		}
-		exit(static_cast<int>(0x30000000u | sz));
+		std::terminate();
 	}
 }
 
@@ -77,19 +74,19 @@ template <typename T>
 struct GameAllocator {
 	using value_type = T;
 
-	constexpr GameAllocator() noexcept = default;
+	GameAllocator() {}
 
 	template <typename U>
-	constexpr GameAllocator(const GameAllocator<U>&) noexcept {}
+	GameAllocator(const GameAllocator<U>&) {}
 
-	constexpr bool operator == (const GameAllocator&) const noexcept { return true; }
-	constexpr bool operator != (const GameAllocator&) const noexcept { return false; }
+	bool operator == (const GameAllocator&) const { return true; }
+	bool operator != (const GameAllocator&) const { return false; }
 
-	T* allocate(const size_t count) const noexcept {
+	T* allocate(const size_t count) const {
 		return static_cast<T*>(YRMemory::AllocateChecked(count * sizeof(T)));
 	}
 
-	void deallocate(T* const ptr, size_t count) const noexcept {
+	void deallocate(T* const ptr, size_t count) const {
 		YRMemory::Deallocate(ptr);
 	}
 };
@@ -206,7 +203,7 @@ static inline void DLLDeleteArray(T* ptr, size_t capacity) {
 
 struct GameDeleter {
 	template <typename T>
-	void operator ()(T* ptr) noexcept {
+	void operator ()(T* ptr) {
 		if(ptr) {
 			GameDelete(ptr);
 		}

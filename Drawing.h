@@ -6,48 +6,92 @@
 
 #pragma once
 
-#include <ColorScheme.h>
 #include <GeneralDefinitions.h>
-#include <Helpers/CompileTime.h>
+#include "ColorScheme.h"
 #include <Surface.h>
 
 class Drawing
 {
 public:
-	static constexpr reference<ColorStruct, 0xB0FA1Cu> const TooltipColor{};
+
+	static RectangleStruct &SurfaceDimensions_Hidden;
+
+	static ColorStruct &TooltipColor;
 
 	//TextBox dimensions for tooltip-style boxes
-	static RectangleStruct* __fastcall GetTextDimensions(
-		RectangleStruct* pOutBuffer, wchar_t const* pText, Point2D location,
-		WORD flags, int marginX = 0, int marginY = 0)
-			{ JMP_STD(0x4A59E0); }
+	static RectangleStruct GetTextBox(const wchar_t* pText, int nX, int nY, DWORD flags, int nMarginX, int nMarginY)
+		{
+			RectangleStruct box;
+			RectangleStruct* p_box=&box;
 
-	static RectangleStruct __fastcall GetTextDimensions(
-		wchar_t const* pText, Point2D location, WORD flags, int marginX = 0,
-		int marginY = 0)
-	{
-		RectangleStruct buffer;
-		GetTextDimensions(&buffer, pText, location, flags, marginX, marginY);
-		return buffer;
-	}
+			PUSH_VAR32(nMarginY);		//X Margin
+			PUSH_VAR32(nMarginX);		//Y Margin - should add 2, because X margin adds to 2 internally!
+			PUSH_VAR32(flags);
+			PUSH_VAR32(nY);
+			PUSH_VAR32(nX);
+			SET_REG32(edx,pText);
+			SET_REG32(ecx,p_box);
+			CALL(0x4A59E0);
+
+			return box;
+		}
+
+	static RectangleStruct GetTextBox(const wchar_t* pText, int nX, int nY, int nMargin)
+		{ return GetTextBox(pText, nX, nY, 0, nMargin + 2, nMargin); }
+
+	static RectangleStruct GetTextBox(const wchar_t* pText, int nX, int nY)
+		{ return GetTextBox(pText, nX, nY, 2); }
+
+	static RectangleStruct GetTextBox(const wchar_t* pText, Point2D* pPoint)
+		{ return GetTextBox(pText, pPoint->X, pPoint->Y, 2); }
+
+	static RectangleStruct GetTextBox(const wchar_t* pText, Point2D* pPoint, int nMargin)
+		{ return GetTextBox(pText, pPoint->X, pPoint->Y, nMargin); }
+
+	//TextDimensions for text aligning
+	static RectangleStruct GetTextDimensions(const wchar_t* pText)
+		{
+			RectangleStruct dim=GetTextBox(pText,0,0,0);
+
+			dim.X=0;
+			dim.Y=0;
+			dim.Width-=4;
+			dim.Height-=2;
+
+			return dim;
+		}
 
 	// Rectangles
-	static RectangleStruct* __fastcall Intersect(
-		RectangleStruct* pOutBuffer, RectangleStruct const& rect1,
-		RectangleStruct const& rect2, int* delta_left = nullptr,
-		int* delta_top = nullptr)
-			{ JMP_STD(0x421B60); }
-
-	static RectangleStruct __fastcall Intersect(
-		RectangleStruct const& rect1, RectangleStruct const& rect2,
-		int* delta_left = nullptr, int* delta_top = nullptr)
+	static RectangleStruct Intersect(RectangleStruct* rect1, RectangleStruct* rect2, int* delta_left, int* delta_top)
 	{
-		RectangleStruct buffer;
-		Intersect(&buffer, rect1, rect2, delta_left, delta_top);
-		return buffer;
+			RectangleStruct box;
+			RectangleStruct* p_box=&box;
+
+			PUSH_VAR32(delta_top);
+			PUSH_VAR32(delta_left);
+			PUSH_VAR32(rect2);
+			SET_REG32(edx,rect1);
+			SET_REG32(ecx,p_box);
+			CALL(0x421B60);
+
+			return box;
 	}
 
 	//Stuff
+
+	// Converts an RGB color to a 16bit color value.
+	static WORD Color16bit(const ColorStruct& color) {
+		return static_cast<WORD>((color.B >> 3) | ((color.G >> 2) << 5) | ((color.R >> 3) << 11));
+	}
+
+	// Converts a 16bit color to an RGB color.
+	static ColorStruct WordColor(WORD bits) {
+		ColorStruct color;
+		color.R = static_cast<BYTE>(((bits & 0xF800) >> 11) << 3);
+		color.G = static_cast<BYTE>(((bits & 0x07E0) >> 5) << 2);
+		color.B = static_cast<BYTE>((bits & 0x001F) << 3);
+		return color;
+	}
 
 	/** Message is a vswprintf format specifier, ... is for any arguments needed */
 	static Point2D * __cdecl PrintUnicode(Point2D *Position1, wchar_t *Message, Surface *a3, RectangleStruct *Rect, Point2D *Position2,
@@ -67,36 +111,36 @@ public:
 
 class ABufferClass {
 public:
-	static constexpr reference<ABufferClass*, 0x87E8A4u> const ABuffer{};
+	static ABufferClass* &ABuffer;
 
 	ABufferClass(RectangleStruct rect)
 		{ JMP_THIS(0x410CE0); }
 
-	RectangleStruct Bounds;
+	RectangleStruct rect;
 	int field_10;
-	BSurface* Surface;
-	WORD* BufferStart;
-	WORD* BufferEnd;
-	int BufferSizeInBytes;
+	BSurface *Surface;
+	byte* BufferStart;
+	byte* BufferEndpoint;
+	int BufferSize;
 	int field_24;
-	int Width;
-	int Height;
+	int W;
+	int H;
 };
 
 class ZBufferClass {
 public:
-	static constexpr reference<ZBufferClass*, 0x887644u> const ZBuffer{};
+	static ZBufferClass* &ZBuffer;
 
 	ZBufferClass(RectangleStruct rect)
 		{ JMP_THIS(0x7BC970); }
 
-	RectangleStruct Bounds;
+	RectangleStruct rect;
 	int field_10;
-	BSurface* Surface;
-	WORD* BufferStart;
-	WORD* BufferEnd;
-	int BufferSizeInBytes;
+	BSurface *Surface;
+	byte* BufferStart;
+	byte* BufferEndpoint;
+	int BufferSize;
 	int field_24;
-	int Width;
-	int Height;
+	int W;
+	int H;
 };

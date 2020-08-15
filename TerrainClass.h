@@ -14,7 +14,7 @@ public:
 	static const AbstractType AbsID = AbstractType::Terrain;
 
 	//global array
-	static constexpr constant_ptr<DynamicVectorClass<TerrainClass*>, 0xA8E988u> const Array{};
+	static DynamicVectorClass<TerrainClass*>* Array;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

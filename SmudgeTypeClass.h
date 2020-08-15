@@ -12,7 +12,7 @@ public:
 	static const AbstractType AbsID = AbstractType::SmudgeType;
 
 	//Array
-	ABSTRACTTYPE_ARRAY(SmudgeTypeClass, 0xA8EC18u);
+	ABSTRACTTYPE_ARRAY(SmudgeTypeClass);
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

@@ -18,7 +18,7 @@ public:
 	static const AbstractType AbsID = AbstractType::VoxelAnim;
 
 	//Static
-	static constexpr constant_ptr<DynamicVectorClass<VoxelAnimClass*>, 0x887388u> const Array{};
+	static DynamicVectorClass<VoxelAnimClass*>* const Array;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

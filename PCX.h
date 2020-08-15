@@ -6,8 +6,6 @@
 #include <Surface.h>
 #include <GeneralDefinitions.h>
 
-#include <Helpers/CompileTime.h>
-
 class PCX
 {
 protected:
@@ -16,9 +14,10 @@ protected:
 			{ JMP_THIS(0x6B9D00); }
 
 public:
-	static constexpr reference<PCX, 0xAC4848u> const Instance{};
 
-	static WORD const DefaultTransparentColor = COLOR_PURPLE;
+	static PCX * const Instance;
+
+	static WORD DefaultTransparentColor;
 
 	//Load a PCX file
 	bool LoadFile(const char* pFileName, int flag1 = 2, int flag2 = 0)

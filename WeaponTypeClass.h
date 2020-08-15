@@ -18,7 +18,7 @@ public:
 	static const AbstractType AbsID = AbstractType::WeaponType;
 
 	//Array
-	ABSTRACTTYPE_ARRAY(WeaponTypeClass, 0x887568u);
+	ABSTRACTTYPE_ARRAY(WeaponTypeClass);
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

@@ -8,7 +8,8 @@ public:
 	//WIP: RadarClass::RTacticalClass goes HERE
 
 	//Static
-	static constexpr constant_ptr<RadarClass, 0x87F7E8u> const Instance{};
+	static RadarClass* Global()
+		{ return reinterpret_cast<RadarClass*>(0x87F7E8); }
 
 	//Destructor
 	virtual ~RadarClass() RX;

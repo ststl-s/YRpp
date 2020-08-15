@@ -28,9 +28,9 @@ public:
 	static const AbstractType AbsID = AbstractType::Bullet;
 
 	//Array
-	static constexpr constant_ptr<DynamicVectorClass<BulletClass*>, 0xA8ED40u> const Array{};
+	static DynamicVectorClass<BulletClass*>* const Array;
 
-	static constexpr reference<DynamicVectorClass<BulletClass*>, 0x89DE18u> const ScalableBullets{};
+	static DynamicVectorClass<BulletClass*>& ScalableBullets;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

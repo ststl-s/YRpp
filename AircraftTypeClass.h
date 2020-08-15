@@ -8,7 +8,7 @@ public:
 	static const AbstractType AbsID = AbstractType::AircraftType;
 
 	//Array
-	ABSTRACTTYPE_ARRAY(AircraftTypeClass, 0xA8B218u);
+	ABSTRACTTYPE_ARRAY(AircraftTypeClass);
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

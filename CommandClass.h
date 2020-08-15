@@ -15,13 +15,11 @@ NOTE:
 #include <GeneralDefinitions.h>
 #include <ArrayClasses.h>
 
-#include <Helpers/CompileTime.h>
-
 class NOVTABLE CommandClass
 {
 public:
 	// static
-	static constexpr constant_ptr<DynamicVectorClass<CommandClass*>, 0x87F658u> const Array{};
+	static DynamicVectorClass<CommandClass*>* const Array;
 
 	//CommandClass
 	virtual ~CommandClass() = default;

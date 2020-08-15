@@ -13,7 +13,7 @@ public:
 	static const AbstractType AbsID = AbstractType::Temporal;
 
 	//Static
-	static constexpr constant_ptr<DynamicVectorClass<TemporalClass*>, 0xB0EC60u> const Array{};
+	static DynamicVectorClass<TemporalClass*>* const Array;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

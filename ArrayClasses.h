@@ -42,17 +42,13 @@ public:
 		}
 	}
 
-	VectorClass(VectorClass &&other) noexcept :
-		Items(other.Items),
-		Capacity(other.Capacity),
-		IsInitialized(other.IsInitialized),
-		IsAllocated(std::exchange(other.IsAllocated, false))
-	{ }
+	VectorClass(VectorClass &&other) noexcept {
+		other.Swap(*this);
+	}
 
 	virtual ~VectorClass() noexcept {
-		if(this->IsAllocated) {
-			GameDeleteArray(this->Items, static_cast<size_t>(this->Capacity));
-		}
+		// not a virtual call
+		VectorClass::Clear();
 	}
 
 	VectorClass& operator = (const VectorClass &other) {
@@ -121,8 +117,11 @@ public:
 	}
 
 	virtual void Clear() {
-		VectorClass(std::move(*this));
-		this->Items = nullptr;
+		if(this->Items && this->IsAllocated) {
+			GameDeleteArray(this->Items, static_cast<size_t>(this->Capacity));
+			this->Items = nullptr;
+		}
+		this->IsAllocated = false;
 		this->Capacity = 0;
 	}
 
@@ -140,7 +139,7 @@ public:
 		return -1;
 	}
 
-	virtual int GetItemIndex(const T* pItem) const final {
+	virtual int GetItemIndex(const T* pItem) const {
 		if(!this->IsInitialized) {
 			return 0;
 		}
@@ -148,7 +147,7 @@ public:
 		return pItem - this->Items;
 	}
 
-	virtual T GetItem(int i) const final {
+	virtual T GetItem(int i) const {
 		return this->Items[i];
 	}
 
@@ -170,6 +169,12 @@ public:
 		}
 
 		return SetCapacity(capacity, nullptr);
+	}
+
+	void Purge() {
+		this->Items = nullptr;
+		this->IsAllocated = false;
+		this->Capacity = 0;
 	}
 
 	void Swap(VectorClass& other) noexcept {
@@ -213,10 +218,14 @@ public:
 		}
 	}
 
-	DynamicVectorClass(DynamicVectorClass &&other) noexcept
-		: VectorClass(std::move(other)), Count(other.Count),
-		CapacityIncrement(other.CapacityIncrement)
-	{ }
+	DynamicVectorClass(DynamicVectorClass &&other) noexcept {
+		other.Swap(*this);
+	}
+
+	// not needed. base class destructor will call base class Clear()
+	//virtual ~DynamicVectorClass() noexcept override {
+	//	Clear();
+	//}
 
 	DynamicVectorClass& operator = (const DynamicVectorClass &other) {
 		DynamicVectorClass(other).Swap(*this);
@@ -229,7 +238,7 @@ public:
 	}
 
 	virtual bool SetCapacity(int capacity, T* pMem = nullptr) override {
-		bool bRet = VectorClass::SetCapacity(capacity, pMem);
+		bool bRet = VectorClass<T>::SetCapacity(capacity, pMem);
 
 		if(this->Capacity < this->Count) {
 			this->Count = this->Capacity;
@@ -239,11 +248,11 @@ public:
 	}
 
 	virtual void Clear() override {
-		VectorClass::Clear();
 		this->Count = 0;
+		VectorClass<T>::Clear();
 	}
 
-	virtual int FindItemIndex(const T& item) const override final {
+	virtual int FindItemIndex(const T& item) const override {
 		if(!this->IsInitialized) {
 			return 0;
 		}
@@ -328,8 +337,13 @@ public:
 		return idx >= 0 && this->RemoveItem(idx);
 	}
 
+	void Purge() {
+		this->Count = 0;
+		VectorClass<T>::Purge();
+	}
+
 	void Swap(DynamicVectorClass& other) noexcept {
-		VectorClass::Swap(other);
+		VectorClass<T>::Swap(other);
 		using std::swap;
 		swap(this->Count, other.Count);
 		swap(this->CapacityIncrement, other.CapacityIncrement);
@@ -353,13 +367,14 @@ public:
 		: DynamicVectorClass(capacity, pMem)
 	{ }
 
-	TypeList(const TypeList &other)
-		: DynamicVectorClass(other), unknown_18(other.unknown_18) 
-	{ }
+	TypeList(const TypeList &other) {
+		this->unknown_18 = other.unknown_18;
+		DynamicVectorClass<T>::operator=(other);
+	}
 
-	TypeList(TypeList &&other) noexcept
-		: DynamicVectorClass(std::move(other)), unknown_18(other.unknown_18)
-	{ }
+	TypeList(TypeList &&other) noexcept {
+		other.Swap(*this);
+	}
 
 	TypeList& operator = (const TypeList &other) {
 		TypeList(other).Swap(*this);
@@ -372,7 +387,7 @@ public:
 	}
 
 	void Swap(TypeList& other) noexcept {
-		DynamicVectorClass::Swap(other);
+		DynamicVectorClass<T>::Swap(other);
 		using std::swap;
 		swap(this->unknown_18, other.unknown_18);
 	}
@@ -393,9 +408,15 @@ public:
 		: VectorClass(other), Total(other.Total)
 	{ }
 
-	CounterClass(CounterClass &&other) noexcept
-		: VectorClass(std::move(other)), Total(other.Total)
-	{ }
+	CounterClass(CounterClass &&other) noexcept {
+		other.Swap(*this);
+	}
+
+	// not needed. base class destructor will call base class Clear()
+	//virtual ~CounterClass() noexcept override {
+	//	VectorClass::Clear();
+	//	this->Total = 0;
+	//}
 
 	CounterClass& operator = (const CounterClass &other) {
 		CounterClass(other).Swap(*this);

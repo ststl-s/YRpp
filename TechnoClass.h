@@ -167,7 +167,7 @@ class NOVTABLE TechnoClass : public RadioClass
 public:
 	static const auto AbsDerivateID = AbstractFlags::Techno;
 
-	static constexpr constant_ptr<DynamicVectorClass<TechnoClass*>, 0xA8EC78u> const Array{};
+	static DynamicVectorClass<TechnoClass *>* const Array; // HAX to instantiate
 
 	//IPersistStream
 	virtual HRESULT __stdcall Load(IStream* pStm) R0;
@@ -300,7 +300,7 @@ public:
 	virtual void DrawHealthBar(Point2D *pLocation, RectangleStruct *pBounds, bool bUnk3) const RX;
 	virtual void DrawPipScalePips(Point2D *pLocation, Point2D *pOriginalLocation, RectangleStruct *pBounds) const RX;
 	virtual void DrawVeterancyPips(Point2D *pLocation, RectangleStruct *pBounds) const RX;
-	virtual void DrawExtraInfo(Point2D const& location, Point2D const& originalLocation, RectangleStruct const& bounds) const RX;
+	virtual void DrawExtraInfo(Point2D *pLocation, Point2D *pOriginalLocation, RectangleStruct *pBounds) const RX;
 	virtual void Uncloak(bool bPlaySound) RX;
 	virtual void Cloak(bool bPlaySound) RX;
 	virtual DWORD vt_entry_464(DWORD dwUnk) const R0;

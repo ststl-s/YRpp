@@ -30,7 +30,9 @@ public:
 	static const AbstractType AbsID = AbstractType::BuildingType;
 
 	//Array
-	ABSTRACTTYPE_ARRAY(BuildingTypeClass, 0xA83C68u);
+	ABSTRACTTYPE_ARRAY(BuildingTypeClass);
+
+	static int &HeightInLeptons;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
@@ -53,9 +55,6 @@ public:
 	virtual SHPStruct* LoadBuildup() R0;
 
 	//non-virtual
-	bool IsVehicle() const
-		{ JMP_THIS(0x465D40); }
-
 	short GetFoundationWidth() const
 		{ JMP_THIS(0x45EC90); }
 	short GetFoundationHeight(bool bIncludeBib) const

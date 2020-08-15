@@ -2,8 +2,6 @@
 
 #include <LoadOptionsClass.h>
 
-#include <Helpers/CompileTime.h>
-
 //Random map generator
 class MapSeedClass : public LoadOptionsClass
 {
@@ -12,8 +10,6 @@ protected:
 		{ JMP_THIS(0x595680); }
 
 public:
-	static constexpr reference<MapSeedClass, 0xABDFD8> const Instance{};
-
 	virtual ~MapSeedClass()
 		{ JMP_THIS(0x5AC270); }
 	
@@ -42,6 +38,9 @@ public:
 		
 	virtual const wchar_t* GetUIString_GameSaved() const
 		{ JMP_THIS(0x597FE0); }
+
+	static MapSeedClass* Global()
+		{ return reinterpret_cast<MapSeedClass*>(0xABDFD8); }
 	
 	//Properties
 public:

@@ -15,7 +15,7 @@ public:
 	static const AbstractType AbsID = AbstractType::AlphaShape;
 
 	//Static
-	static constexpr constant_ptr<DynamicVectorClass<AlphaShapeClass*>, 0x88A0F0u> const Array{};
+	static DynamicVectorClass<AlphaShapeClass*>* const Array;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

@@ -6,7 +6,8 @@ class NOVTABLE PowerClass : public RadarClass
 {
 public:
 	//Static
-	static constexpr constant_ptr<PowerClass, 0x87F7E8u> const Instance{};
+	static PowerClass* Global()
+		{ return reinterpret_cast<PowerClass*>(0x87F7E8); }
 
 	//Destructor
 	virtual ~PowerClass() RX;

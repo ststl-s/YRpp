@@ -3,7 +3,6 @@
 #include <AbstractClass.h>
 #include <ArrayClasses.h>
 #include <BombClass.h>
-#include <Helpers/CompileTime.h>
 
 //forward declarations
 class ObjectClass;
@@ -13,7 +12,7 @@ class TechnoClass;
 class BombListClass
 {
 public:
-	static constexpr reference<BombListClass, 0x87F5D8u> const Instance{};
+	static BombListClass* const Instance;
 
 	// draws all the visible bombs, expires the outdated ones
  	void Update()

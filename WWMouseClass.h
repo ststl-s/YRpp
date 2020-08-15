@@ -3,14 +3,13 @@
 #include <GeneralDefinitions.h>
 #include <GeneralStructures.h>
 #include <Drawing.h>
-#include <Helpers/CompileTime.h>
 
 struct SHPStruct;
 
 class WWMouseClass
 {
 public:
-	static constexpr reference<WWMouseClass*, 0x887640u> const Instance{};
+	static WWMouseClass *&Instance;
 
 	virtual ~WWMouseClass()
 		{ JMP_THIS(0x0); }

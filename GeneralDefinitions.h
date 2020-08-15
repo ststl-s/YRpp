@@ -588,12 +588,6 @@ enum class KickOutResult : int {
 	Succeeded = 2
 };
 
-enum class CanBuildResult : int {
-	TemporarilyUnbuildable = -1, // black out cameo
-	Unbuildable = 0, // permanently; remove cameo
-	Buildable = 1, // can build
-};
-
 class Direction {
 public:
 	typedef unsigned int Value;
@@ -1273,8 +1267,8 @@ enum class VoxPriority : int {
 
 enum class WaveType : int {
 	Sonic = 0,
-	BigLaser = 1,
-	Laser = 2,
+	Laser = 1,
+	BigLaser = 2,
 	Magnetron = 3
 };
 

@@ -20,7 +20,7 @@ public:
 	static const AbstractType AbsID = AbstractType::Aircraft;
 
 	//Static
-	static constexpr constant_ptr<DynamicVectorClass<AircraftClass*>, 0xA8E390u> const Array{};
+	static DynamicVectorClass<AircraftClass*>* const Array;
 
 	//IFlyControl
 	virtual int __stdcall Landing_Altitude() R0;

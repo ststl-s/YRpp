@@ -69,19 +69,20 @@ struct WeaponStruct
 class NOVTABLE TechnoTypeClass : public ObjectTypeClass
 {
 public:
-	static constexpr constant_ptr<DynamicVectorClass<TechnoTypeClass*>, 0xA8EB00u> const Array{};
 
-	static __declspec(noinline) TechnoTypeClass* __fastcall Find(const char* pID)
+	static DynamicVectorClass<TechnoTypeClass *>* const Array; // HAX to instantiate
+
+	static TechnoTypeClass* Find(const char* pID)
 	{
 		for(auto pItem : *Array) {
-			if(!_strcmpi(pItem->ID, pID)) {
+			if(!_strcmpi(pItem->get_ID(), pID)) {
 				return pItem;
 			}
 		}
 		return nullptr;
 	}
 
-	static __declspec(noinline) int __fastcall FindIndex(const char* pID)
+	static int FindIndex(const char* pID)
 	{
 		for(int i = 0; i < Array->Count; ++i) {
 			if(!_strcmpi(Array->Items[i]->get_ID(), pID)) {
@@ -114,9 +115,6 @@ public:
 	virtual int GetFlightLevel() const R0;
 
 	// non-virtual
-	static TechnoTypeClass* __fastcall GetByTypeAndIndex(AbstractType abs, int index)
-		{ JMP_THIS(0x48DCD0); }
-
 	bool HasMultipleTurrets() const
 	{
 		return this->TurretCount > 0;

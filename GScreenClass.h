@@ -2,13 +2,13 @@
 
 #include <YRPPCore.h>
 #include <Interfaces.h>
-#include <Helpers/CompileTime.h>
 
 class NOVTABLE GScreenClass : public IGameMap
 {
 public:
 	//Static
-	static constexpr constant_ptr<GScreenClass, 0x87F7E8u> const Instance{};
+	static GScreenClass* Global()
+		{ return reinterpret_cast<GScreenClass*>(0x87F7E8); }
 
 	//IUnknown
 	virtual HRESULT __stdcall QueryInterface(REFIID iid, void** ppvObject) R0;

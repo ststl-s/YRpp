@@ -25,7 +25,7 @@ public:
 	static const AbstractType AbsID = AbstractType::WarheadType;
 
 	//Array
-	ABSTRACTTYPE_ARRAY(WarheadTypeClass, 0x8874C0u);
+	ABSTRACTTYPE_ARRAY(WarheadTypeClass);
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

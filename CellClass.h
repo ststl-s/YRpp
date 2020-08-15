@@ -149,19 +149,17 @@ public:
 	void SetMapCoords(const CoordStruct& coords)
 		{ JMP_THIS(0x485240); }
 
-	int GetFloorHeight(Point2D const& subcoords) const
-		{ JMP_THIS(0x47B3A0); }
+	// in leptons
+	CoordStruct* Get3DCoords(CoordStruct* result)
+		{ JMP_THIS(0x486840); }
+
+	// depends on one of the cell flags being set
+	CoordStruct* Get3DCoords2(CoordStruct* result)
+		{ JMP_THIS(0x486890); }
 
 	// used by ambient waves and stuff
-	CoordStruct* GetCenterCoords(CoordStruct* pOutBuffer) const
+	CoordStruct* Get3DCoords3(CoordStruct* result)
 		{ JMP_THIS(0x480A30); }
-
-	CoordStruct GetCenterCoords() const
-	{
-		CoordStruct buffer;
-		GetCenterCoords(&buffer);
-		return buffer;
-	}
 
 	void ActivateVeins()
 		{ JMP_THIS(0x486920); }
