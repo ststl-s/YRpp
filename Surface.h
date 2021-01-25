@@ -251,7 +251,7 @@ public:
 	static DSurface *&Primary;
 	static DSurface *&Hidden;
 	static DSurface *&Alternate;
-	static DSurface *&Hidden_2;
+	static DSurface *&Temp;
 	static DSurface *&Composite;
 
 

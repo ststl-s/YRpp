@@ -105,7 +105,7 @@ ALIAS(DSurface *, DSurface::Sidebar, 0x887300);
 ALIAS(DSurface *, DSurface::Primary, 0x887308);
 ALIAS(DSurface *, DSurface::Hidden, 0x88730C);
 ALIAS(DSurface *, DSurface::Alternate, 0x887310);
-ALIAS(DSurface *, DSurface::Hidden_2, 0x887314);
+ALIAS(DSurface *, DSurface::Temp, 0x887314);
 ALIAS(DSurface *, DSurface::Composite, 0x88731C);
 
 #include <LoadProgressManager.h>
