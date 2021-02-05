@@ -4,6 +4,14 @@
 #include <GeneralStructures.h>
 #include <AbstractClass.h>
 #include <ColorScheme.h>
+#include <CellClass.h>
+
+struct TacticalSelectableStruct
+{
+	TechnoClass* Techno;
+	int X;
+	int Y;
+};
 
 class NOVTABLE TacticalClass : public AbstractClass
 {
@@ -63,81 +71,35 @@ public:
 		{ JMP_STD(0x64DB50); }
 
 public:
-
-	DWORD field_24;
-	DWORD field_28;
-	DWORD field_2C;
-	DWORD field_30;
-	DWORD field_34;
-	DWORD field_38;
-	DWORD field_3C;
-	DWORD field_40;
-	DWORD field_44;
-	DWORD field_48;
-	DWORD field_4C;
-	DWORD field_50;
-	DWORD field_54;
-	DWORD field_58;
-	DWORD field_5C;
-	DWORD field_60;
-	DWORD field_64;
-	DWORD field_68;
-	DWORD field_6C;
-	DWORD field_70;
-	DWORD field_74;
-	DWORD field_78;
-	DWORD field_7C;
-	DWORD field_80;
-	DWORD field_84;
-	DWORD field_88;
-	DWORD field_8C;
-	DWORD field_90;
-	DWORD field_94;
-	DWORD field_98;
-	DWORD field_9C;
-	DWORD field_A0;
-	DWORD field_A4;
-	DWORD field_A8;
-	bool field_AC;
-	bool field_AD;
-	RectangleStruct VisibleArea;
-	double ZoomInFactor;
-	DWORD field_C8;
-	DWORD field_CC;
-	DWORD field_D0;
-	DWORD field_D4;
-	DWORD field_D8;
-	DWORD field_DC;
+	__int16 __ScreenText[64];
+	DWORD endgamegraphicsframeA4;
+	DWORD LastAIFrame;
+	bool byteAC;
+	bool byteAD;
+	BYTE byteAE;
+	BYTE byteAF;
+	Point2D TacticalPos0;
+	Point2D field_B8;
+	__int64 ZoomFactor;
+	Point2D point_C8;
+	Point2D point_D0;
+	float floatD8;
+	float floatDC;
 	DWORD VisibleCellCount;
-	CellClass * VisibleCells [800];
-	DWORD field_D64;
-	DWORD field_D68;
-	DWORD field_D6C;
-	DWORD field_D70;
-	DWORD field_D74;
-	DWORD field_D78;
-	bool field_D7C;
-	bool Redrawing; // set while redrawing - cheap mutex
-	DWORD field_D80;
-	DWORD field_D84;
-	DWORD field_D88;
-	DWORD field_D8C;
-	DWORD field_D90;
-	DWORD field_D94;
-	DWORD field_D98;
-	DWORD field_D9C;
-	DWORD MouseFrameIndex;
-	DWORD StartTime;
-	DWORD field_DA8;
-	DWORD field_DAC;
-	float Floats [12];
-	RectangleStruct field_DE4;
-	DWORD field_DF4;
-	double field_DF8;
-	DWORD field_E00;
-	DWORD field_E04;
-	double field_E08;
-	DWORD field_E10;
-	DWORD field_E14;
-
+	void* VisibleCells[800];
+	Point2D TacticalCoord1;
+	Point2D dwordD6C;
+	Point2D TacticalCoord2;
+	BYTE byteD7C;
+	bool Redrawing; //TacticalPosUpdated;
+	BYTE byteD7E;
+	BYTE byteD7F;
+	RectangleStruct rectD80;
+	RectangleStruct Band;
+	DWORD __TimerIncriment;
+	TimerStruct StartTime;
+	int SelectableCount;
+	Matrix3DStruct unusedmatrix3d;
+	Matrix3DStruct matrix3d_DE4;
+	int field_E14;
 };
