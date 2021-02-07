@@ -2,6 +2,7 @@
 
 #include <ArrayClasses.h>
 #include <GeneralDefinitions.h>
+#include <TacticalClass.h>
 
 class SideClass;
 class ObjectClass;
@@ -68,6 +69,12 @@ public:
 
 	static void sub_53E6B0()
 		{ JMP_STD(0x53E6B0); }
+
+	static void __fastcall UICommands_TypeSelect_7327D0(char* iniName)
+	    { JMP_STD(0x7327D0); }
+
+	static bool IsTypeSelecting()
+	    { JMP_STD(0x732D00); }
 
 	static bool &bVideoBackBuffer;
 	static bool &bAllowVRAMSidebar;
@@ -499,6 +506,10 @@ namespace Unsorted
 	static byte &CTF = *reinterpret_cast<byte*>(0xA8B31E);
 	static byte &FOW = *reinterpret_cast<byte*>(0xA8B31F);
 	static byte &MCVRedeploy = *reinterpret_cast<byte*>(0xA8B320);
+
+	static TacticalSelectableStruct* const TacticalSelectables = reinterpret_cast<TacticalSelectableStruct*>(0xB0CEC8);
+	static bool& TypeSelecting = *reinterpret_cast<bool*>(0xB0FE65);
+
 
 
 struct ColorPacker

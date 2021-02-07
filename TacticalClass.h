@@ -80,7 +80,7 @@ public:
 	BYTE byteAF;
 	Point2D TacticalPos0;
 	Point2D field_B8;
-	__int64 ZoomFactor;
+	double ZoomFactor;
 	Point2D point_C8;
 	Point2D point_D0;
 	float floatD8;
@@ -95,7 +95,7 @@ public:
 	BYTE byteD7E;
 	BYTE byteD7F;
 	RectangleStruct rectD80;
-	RectangleStruct Band;
+	RECT Band;
 	DWORD __TimerIncriment;
 	TimerStruct StartTime;
 	int SelectableCount;
@@ -103,3 +103,5 @@ public:
 	Matrix3DStruct matrix3d_DE4;
 	int field_E14;
 };
+
+static_assert(sizeof(TacticalClass) == 0x0E18, "Wrong size");
