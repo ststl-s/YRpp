@@ -70,7 +70,7 @@ public:
 	static void sub_53E6B0()
 		{ JMP_STD(0x53E6B0); }
 
-	static void __fastcall UICommands_TypeSelect_7327D0(char* iniName)
+	static void __fastcall UICommands_TypeSelect_7327D0(const char* iniName)
 	    { JMP_STD(0x7327D0); }
 
 	static bool IsTypeSelecting()
