@@ -3,6 +3,7 @@
 #include <ArrayClasses.h>
 #include <GeneralDefinitions.h>
 #include <TacticalClass.h>
+#include <CCINIClass.h>
 
 class SideClass;
 class ObjectClass;
@@ -423,9 +424,6 @@ public:
 
 	typedef BOOL ( __stdcall * FP_RegisterHotKey)(HWND hWnd, int id, UINT fsModifiers, UINT vk);
 	static FP_RegisterHotKey &RegisterHotKey;
-
-
-
 };
 
 class MovieInfo
@@ -510,7 +508,7 @@ namespace Unsorted
 	static TacticalSelectableStruct* const TacticalSelectables = reinterpret_cast<TacticalSelectableStruct*>(0xB0CEC8);
 	static bool& TypeSelecting = *reinterpret_cast<bool*>(0xB0FE65);
 
-
+	static CCINIClass* const RA2MDINI = reinterpret_cast<CCINIClass*>(0x8870C0);
 
 struct ColorPacker
 {
