@@ -124,7 +124,7 @@ inline unsigned int TranslateFixedPoint(size_t bitsFrom, size_t bitsTo, unsigned
 	}
 }
 
-// like a compass with 2 ^ 16 units equalling 360?
+// like a compass with 2 ^ 16 units equalling 360 degrees
 struct DirStruct
 {
 	using value_type = short;
