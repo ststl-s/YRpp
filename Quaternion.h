@@ -1,6 +1,6 @@
 #pragma once
 
-// an imaginary³ world where only one quarter is real.
+// an imaginary?world where only one quarter is real.
 // obviously, this class needs some serious expansion
 // if it is to be used for serious stuff.
 
