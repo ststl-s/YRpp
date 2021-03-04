@@ -649,7 +649,7 @@ public:
 	                                       // the pointee will be marked as the killer of whatever the victim falls onto
 	HouseClass*      ChronoWarpedByHouse;
 	bool             unknown_bool_430;
-	bool             unknown_bool_431;
+	bool             IsMouseHovering;
 	bool             unknown_bool_432;
 	TeamClass*       OldTeam;
 	bool             CountedAsOwnedSpecial; // for absorbers, infantry uses this to manually control OwnedInfantry count
