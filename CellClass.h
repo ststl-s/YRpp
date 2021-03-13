@@ -5,6 +5,7 @@
 #pragma once
 
 #include <AbstractClass.h>
+#include <IsometricTileTypeClass.h>
 
 //forward declarations
 class ObjectClass;
@@ -284,6 +285,11 @@ public:
 	{
 		CoordStruct buffer =  this->GetCoords();
 		return FixHeight(buffer);
+	}
+
+	IsometricTileTypeClass* GetIsoTileType() const
+	{
+		return IsometricTileTypeClass::Array->GetItem(IsoTileTypeIndex);
 	}
 
 	void MarkForRedraw()
