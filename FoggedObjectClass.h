@@ -1,19 +1,26 @@
 #pragma once
 
 #include <AbstractClass.h>
+#include <Helpers/CompileTime.h>
+
+// Forward declarations
 class BuildingClass;
+class TerrainClass;
+class ObjectTypeClass;
 class BuildingTypeClass;
+class TerrainTypeClass;
+class AnimTypeClass;
 
 class NOVTABLE FoggedObjectClass : public AbstractClass
 {
 public:
 	static const AbstractType AbsID = AbstractType::FoggedObject;
 
-	static DynamicVectorClass<FoggedObjectClass*>* const Array;
+	static constexpr constant_ptr<DynamicVectorClass<FoggedObjectClass*>, 0x8B3D10> Array{};
 
 	struct DrawRecord
 	{
-		union{
+		union {
 			ObjectTypeClass* ObjectType;
 			BuildingTypeClass* BuildingType;
 			TerrainTypeClass* TerrainType;
@@ -56,12 +63,12 @@ public:
 	// for building
 	FoggedObjectClass(BuildingClass* pBuilding, bool translucent) noexcept
 		: FoggedObjectClass(noinit_t())
-	{ 	JMP_THIS(0x4D0EF0); }
+	{ JMP_THIS(0x4D0EF0); }
 
 	// for terrain
 	FoggedObjectClass(TerrainClass* pTerrain) noexcept
 		: FoggedObjectClass(noinit_t())
-	{ 	JMP_THIS(0x4D1370); }
+	{ JMP_THIS(0x4D1370); }
 
 	// for overlay
 	FoggedObjectClass(const CoordStruct& location, int overlayIndex, int powerup) noexcept
@@ -74,40 +81,40 @@ public:
 	{ JMP_THIS(0x4D0C40); }
 
 	// helper
-	FoggedObjectClass& operator=(FoggedObjectClass&& foggedObejct) noexcept
+	FoggedObjectClass& operator=(FoggedObjectClass&& foggedObject) noexcept
 	{
-		OverlayIndex = foggedObejct.OverlayIndex;
-		Owner = foggedObejct.Owner;
-		Powerup = foggedObejct.Powerup;
-		CoveredAbstractType = foggedObejct.CoveredAbstractType;
-		Location = foggedObejct.Location;
-		Bound = foggedObejct.Bound;
-		Level = foggedObejct.Level;
-		SmudgeIndex = foggedObejct.SmudgeIndex;
-		SmudgeFrameIndex = foggedObejct.SmudgeFrameIndex;
-		Translucent = foggedObejct.Translucent;
-		DrawRecords.Swap(foggedObejct.DrawRecords);
+		OverlayIndex = foggedObject.OverlayIndex;
+		Owner = foggedObject.Owner;
+		Powerup = foggedObject.Powerup;
+		CoveredAbstractType = foggedObject.CoveredAbstractType;
+		Location = foggedObject.Location;
+		Bound = foggedObject.Bound;
+		Level = foggedObject.Level;
+		SmudgeIndex = foggedObject.SmudgeIndex;
+		SmudgeFrameIndex = foggedObject.SmudgeFrameIndex;
+		Translucent = foggedObject.Translucent;
+		DrawRecords.Swap(foggedObject.DrawRecords);
 
 		return *this;
 	}
 
-	FoggedObjectClass(const FoggedObjectClass& foggedObejct) noexcept
+	FoggedObjectClass(const FoggedObjectClass& foggedObject) noexcept
 	{
-		*this = foggedObejct;
+		*this = foggedObject;
 	}
-	FoggedObjectClass& operator=(const FoggedObjectClass& foggedObejct) noexcept
+	FoggedObjectClass& operator=(const FoggedObjectClass& foggedObject) noexcept
 	{
-		OverlayIndex = foggedObejct.OverlayIndex;
-		Owner = foggedObejct.Owner;
-		Powerup = foggedObejct.Powerup;
-		CoveredAbstractType = foggedObejct.CoveredAbstractType;
-		Location = foggedObejct.Location;
-		Bound = foggedObejct.Bound;
-		Level = foggedObejct.Level;
-		SmudgeIndex = foggedObejct.SmudgeIndex;
-		SmudgeFrameIndex = foggedObejct.SmudgeFrameIndex;
-		Translucent = foggedObejct.Translucent;
-		DrawRecords = foggedObejct.DrawRecords;
+		OverlayIndex = foggedObject.OverlayIndex;
+		Owner = foggedObject.Owner;
+		Powerup = foggedObject.Powerup;
+		CoveredAbstractType = foggedObject.CoveredAbstractType;
+		Location = foggedObject.Location;
+		Bound = foggedObject.Bound;
+		Level = foggedObject.Level;
+		SmudgeIndex = foggedObject.SmudgeIndex;
+		SmudgeFrameIndex = foggedObject.SmudgeFrameIndex;
+		Translucent = foggedObject.Translucent;
+		DrawRecords = foggedObject.DrawRecords;
 		return *this;
 	}
 
