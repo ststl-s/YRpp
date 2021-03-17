@@ -29,7 +29,7 @@ public:
 	virtual DWORD GetOwners() const R0;
 	virtual int GetPipMax() const R0;
 	virtual void vt_entry_78(DWORD dwUnk) const RX;
-	virtual void vt_entry_7C(DWORD dwUnk) RX;
+	virtual CoordStruct* Dimension2(CoordStruct* pDest) RX;
 	virtual bool SpawnAtMapCoords(CellStruct* pMapCoords, HouseClass* pOwner) = 0;
 	virtual int GetActualCost(HouseClass* pHouse) const R0;
 	virtual int GetBuildSpeed() const R0;

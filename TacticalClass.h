@@ -33,8 +33,11 @@ public:
 		THISCALL_EX(pTactical, 0x6D2140);
 	}*/
 
+	Point2D* CoordsToScreen(Point2D* pDest, CoordStruct* pSource)
+		{ JMP_THIS(0x6D1F10); }
+
 	CoordStruct* ClientToCoords(Point2D* pClient, CoordStruct* pDest)
-			{ JMP_THIS(0x6D2280); }
+		{ JMP_THIS(0x6D2280); }
 	/*
 	static CoordStruct* ClientToCoords(Point2D* pPoint, CoordStruct* pCrd)
 	{

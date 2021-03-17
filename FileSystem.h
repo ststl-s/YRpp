@@ -36,11 +36,12 @@ public:
 	static SHPStruct *&POWEROFF_SHP;
 	static SHPStruct *&GRFXTXT_SHP;
 
-	static BytePalette *&TEMPERAT_PAL;
-	static BytePalette *&GRFXTXT_PAL;
+	static BytePalette *TEMPERAT_PAL;
+	static BytePalette *GRFXTXT_PAL;
 
 	static ConvertClass *&CAMEO_PAL;
 	static ConvertClass *&UNITx_PAL;
+	static ConvertClass *&PALETTE_PAL;
 	static ConvertClass *&x_PAL;
 	static ConvertClass *&GRFTXT_TIBERIUM_PAL;
 	static ConvertClass *&ANIM_PAL;
