@@ -235,6 +235,9 @@ public:
 	static int __fastcall GetTotalDamage(int damage, const WarheadTypeClass* pWarhead, Armor armor, int distance)
 		{ JMP_STD(0x489180); }
 
+	static int __fastcall GetTotalDamage(int damage, const WarheadTypeClass* pWarhead, signed int armor, int distance)
+		{ JMP_STD(0x489180); }
+
 	int GetCellFloorHeight(const CoordStruct& crd) const
 		{ JMP_THIS(0x578080); }
 
