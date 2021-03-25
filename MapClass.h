@@ -192,6 +192,12 @@ public:
 		return outBuffer;
 	}
 
+	static void __fastcall UnselectAll()
+		{ JMP_STD(0x48DC90); }
+
+	void CenterMap()
+		{ JMP_THIS(0x4AE290); }
+
 	void CellIteratorReset()
 		{ JMP_THIS(0x578350); }
 
@@ -383,6 +389,9 @@ public:
 	void RedrawSidebar(int mode)
 		{ JMP_THIS(0x4F42F0); }
 
+	ObjectClass* NextObject(ObjectClass* currentObject)
+		{ JMP_THIS(0x4AA2B0); }
+
 	void SetTogglePowerMode(int mode)
 		{ JMP_THIS(0x4AC820); }
 
@@ -391,6 +400,9 @@ public:
 
 	void SetSellMode(int mode)
 		{ JMP_THIS(0x4AC660); }
+	
+	void SetWaypointMode(int mode, bool somebool)
+		{ JMP_THIS(0x4AC700); }
 
 	void SetRepairMode(int mode)
 		{ JMP_THIS(0x4AC8C0); }
