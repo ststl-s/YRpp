@@ -289,7 +289,7 @@ public:
 
 	IsometricTileTypeClass* GetIsoTileType() const
 	{
-		return IsometricTileTypeClass::Array->GetItem(IsoTileTypeIndex);
+		return IsometricTileTypeClass::Array->GetItemOrDefault(IsoTileTypeIndex, nullptr);
 	}
 
 	void MarkForRedraw()

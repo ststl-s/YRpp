@@ -43,6 +43,9 @@ public:
 		: IsometricTileTypeClass(noinit_t())
 	{ JMP_THIS(0x5447C0); }
 
+	static LightConvertClass* __fastcall SetupLightConvert(int r, int g, int b)
+		{ JMP_STD(0x544E70); }
+
 protected:
 	explicit __forceinline IsometricTileTypeClass(noinit_t) noexcept
 		: ObjectTypeClass(noinit_t())
