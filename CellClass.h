@@ -22,6 +22,7 @@ class FootClass;
 class TubeClass;
 class FoggedObjectClass;
 class TagClass;
+class TiberiumClass;
 
 class NOVTABLE CellClass : public AbstractClass
 {
@@ -146,6 +147,9 @@ public:
 	// decreases thze tiberium in the cell
 	void ReduceTiberium(int amount)
 		{ JMP_THIS(0x480A80); }
+
+	bool CanTiberiumGerminate(TiberiumClass* tib)
+	    { JMP_THIS(0x4838E0); }
 
 	void SetMapCoords(const CoordStruct& coords)
 		{ JMP_THIS(0x485240); }
