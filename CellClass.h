@@ -140,6 +140,9 @@ public:
 	int GetContainedTiberiumValue() const
 		{ JMP_THIS(0x485020); }
 
+	bool SpreadTiberium(bool forced)
+		{ JMP_THIS(0x483780); }
+
 	// add or create tiberium of the specified type
 	bool IncreaseTiberium(int idxTiberium, int amount)
 		{ JMP_THIS(0x487190); }
