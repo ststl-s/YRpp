@@ -329,8 +329,14 @@ public:
 	void ReplaceTag(TagClass* pTag)
 		{ JMP_THIS(0x485250) }
 
-	void CellClass_CleanFog_CellClass_bitclear_0x400000()
+	void CleanFog()
 		{ JMP_THIS(0x486BF0) }
+
+	void ClearFoggedObjects()
+		{ JMP_THIS(0x486C50) }
+
+	void FogCell()
+		{ JMP_THIS(0x486A70) }
 
 protected:
 	//Constructor

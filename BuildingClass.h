@@ -161,6 +161,9 @@ public:
 	bool IsTraversable() const
 		{ JMP_THIS(0x4525F0); }
 
+	bool Is_Fogged() const
+		{ JMP_THIS(0x457A10); }
+
 	// helpers
 	bool HasSuperWeapon(int index) const {
 		if(this->Type->HasSuperWeapon(index)) {
