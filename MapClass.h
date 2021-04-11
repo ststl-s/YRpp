@@ -417,6 +417,9 @@ public:
 	bool reveal_check(CellClass* pCell, HouseClass* pHouse, char bUnk)
 		{ JMP_THIS(0x5865F0); }
 
+	bool IsLocationFogged(CoordStruct* pCoord)
+		{ JMP_THIS(0x5865E0); }
+
 protected:
 	//Constructor
 	MapClass() {}	//don't need this

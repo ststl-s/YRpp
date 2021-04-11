@@ -338,6 +338,9 @@ public:
 	void FogCell()
 		{ JMP_THIS(0x486A70) }
 
+	bool coord_4879B0()
+		{ JMP_THIS(0x4879B0) }
+
 protected:
 	//Constructor
 	CellClass() noexcept
