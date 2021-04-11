@@ -329,6 +329,9 @@ public:
 	void ReplaceTag(TagClass* pTag)
 		{ JMP_THIS(0x485250) }
 
+	void CellClass_CleanFog_CellClass_bitclear_0x400000()
+		{ JMP_THIS(0x486BF0) }
+
 protected:
 	//Constructor
 	CellClass() noexcept
