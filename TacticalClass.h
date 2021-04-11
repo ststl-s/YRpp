@@ -48,7 +48,7 @@ public:
 		THISCALL_EX(pTactical, 0x6D2280);
 	}*/
 
-	int GetOcclusion(const CellStruct& cell, bool fog) const
+	char GetOcclusion(const CellStruct& cell, bool fog) const
 		{ JMP_THIS(0x6D8700); }
 
 	Point2D * AdjustForZShapeMove(Point2D* pDest, Point2D* pClient)

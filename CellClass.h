@@ -116,7 +116,7 @@ public:
 	void CollectCrate(FootClass* pCollector)
 		{ JMP_THIS(0x481A00); }
 
-	void ProcessColourComponents(int* arg0, int* Intensity, int* Ambient, int* a5, int* a6, int* tintR, int* tintG, int* tintB)
+	void ProcessColourComponents(int* arg0, int* intensity, int* ambient, int* a5, int* a6, int* tintR, int* tintG, int* tintB)
 		{ JMP_THIS(0x484180); }
 
 	TubeClass* GetTunnel()
@@ -395,30 +395,30 @@ public:
 	double             RadLevel;	//The level of radiation on this Cell.
 	RadSiteClass*      RadSite;	//A pointer to the responsible RadSite.
 
-	DWORD              unknown_FC;
+	DWORD              PixelFX;
 	int                OccupyHeightsCoveringMe;
-	DWORD              unknown_104;
-	WORD               unknown_108;
-	WORD               unknown_10A;
-	WORD               unknown_10C;
-	WORD               unknown_10E;
-	WORD               unknown_110;
-	WORD               unknown_112;
-	WORD               unknown_114;
+	DWORD              Intensity;
+	WORD               Ambient;
+	WORD               Color1_Red;
+	WORD               Color1_Green;
+	WORD               Color1_Blue;
+	WORD               Color2_Red;
+	WORD               Color2_Green;
+	WORD               Color2_Blue;
 	signed short       TubeIndex; // !@#% Westwood braindamage, can't use > 127! (movsx eax, al)
 
-	char               unknown_118;
-	char               unknown_119;
-	char               Height;
+	char               RedrawCountMAYBE;
+	char               IsIceGrowthAllowed;
+	char               Tile;
 	char               Level;
 
-	BYTE               SlopeIndex;  // this + 2 == cell's slope shape as reflected by PLACE.SHP
-	BYTE               unknown_11D;
+	BYTE               Ramp;  // this + 2 == cell's slope shape as reflected by PLACE.SHP
+	BYTE               unknown_11D; // yoffset11D
 
-	unsigned char      Powerup;	//The crate type on this cell. Also indicates some other weird properties
+	unsigned char      OverlayData;	//The crate type on this cell. Also indicates some other weird properties
 
-	BYTE               unknown_11F;
-	char               Shroudedness; // trust me, you don't wanna know... if you do, see 0x7F4194 and cry
+	BYTE               SmudgeData;
+	char               Visibility; // trust me, you don't wanna know... if you do, see 0x7F4194 and cry
 	char               Foggedness; // same value as above: -2: Occluded completely, -1: Visible, 0...48: frame in fog.shp or shroud.shp
 	BYTE               BlockedNeighbours; // number of somehow occupied cells next to this
 	PROTECTED_PROPERTY(BYTE, align_123);

@@ -414,6 +414,9 @@ public:
 	bool MakeTraversable(ObjectClass const* pVisitor, CellStruct const& cell) const
 		{ JMP_THIS(0x578AD0); }
 
+	bool reveal_check(CellClass* pCell, HouseClass* pHouse, char bUnk)
+		{ JMP_THIS(0x5865F0); }
+
 protected:
 	//Constructor
 	MapClass() {}	//don't need this
