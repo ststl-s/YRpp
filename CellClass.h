@@ -341,6 +341,15 @@ public:
 	bool coord_4879B0()
 		{ JMP_THIS(0x4879B0) }
 
+	void InitDrawer(int color2red, int intensity, int ambient, int color1red, signed int color1green, int color1blue)
+		{ JMP_THIS(0x483E30) }
+
+	void DrawOverlay(Point2D* pLocation, RectangleStruct* pBound)
+		{ JMP_THIS(0x47F6A0) }
+
+	void DrawOverlayShadow(Point2D* pLocation, RectangleStruct* pRect)
+		{ JMP_THIS(0x47F510) }
+
 protected:
 	//Constructor
 	CellClass() noexcept
