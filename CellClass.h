@@ -122,6 +122,9 @@ public:
 	TubeClass* GetTunnel()
 		{ JMP_THIS(0x484F20); }
 
+	RectangleStruct* ShapeRect(RectangleStruct* pRect) const
+		{ JMP_THIS(0x47FDE0) }
+
 	RectangleStruct* GetContainingRect(RectangleStruct* dest) const
 		{ JMP_THIS(0x47FB90); }
 
@@ -320,10 +323,10 @@ public:
 	bool TryAssignJumpjet(FootClass* pObject)
 		{ JMP_THIS(0x487D70); }
 
-	void  AddContent(ObjectClass* Content, bool onBridge)
+	void AddContent(ObjectClass* Content, bool onBridge)
 		{ JMP_THIS(0x47E8A0); }
 
-	void  RemoveContent(ObjectClass* pContent, bool onBridge)
+	void RemoveContent(ObjectClass* pContent, bool onBridge)
 		{ JMP_THIS(0x47EA90); }
 
 	void ReplaceTag(TagClass* pTag)
