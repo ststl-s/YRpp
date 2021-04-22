@@ -102,6 +102,13 @@ public:
 		return static_cast<WORD>((color.B >> 3) | ((color.G >> 2) << 5) | ((color.R >> 3) << 11));
 	}
 
+    static DWORD __fastcall RGB2DWORD(int red, int green, int blue)
+        { JMP_STD(0x4355D0); }
+
+    static DWORD RGB2DWORD(const ColorStruct Color) {
+        return RGB2DWORD(Color.R, Color.G, Color.B);
+    }
+
 	// Converts a 16bit color to an RGB color.
 	static ColorStruct WordColor(WORD bits) {
 		ColorStruct color;
