@@ -141,6 +141,9 @@ public:
 	int SecondActiveSWIdx() const
 		{ JMP_THIS(0x457690); }
 
+	int CurrentFrame() const
+		{ JMP_THIS(0x43EF90); }
+
 	void FireLaser(CoordStruct Coords)
 		{ JMP_THIS(0x44ABD0); }
 

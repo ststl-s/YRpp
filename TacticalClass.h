@@ -89,7 +89,7 @@ public:
 	float floatD8;
 	float floatDC;
 	DWORD VisibleCellCount;
-	void* VisibleCells[800];
+	CellClass* VisibleCells[800];
 	Point2D TacticalCoord1;
 	Point2D dwordD6C;
 	Point2D TacticalCoord2;

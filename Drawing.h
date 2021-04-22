@@ -10,9 +10,27 @@
 #include "ColorScheme.h"
 #include <Surface.h>
 
+#include <Helpers/CompileTime.h>
+
+struct DirtyAreaStruct
+{
+	RectangleStruct Rect;
+	bool alphabool10;
+
+	bool operator==(const DirtyAreaStruct& another) const { 
+		return
+			Rect.X == another.Rect.X &&
+			Rect.Y == another.Rect.Y &&
+			Rect.Width == another.Rect.Width &&
+			Rect.Height == another.Rect.Height &&
+			alphabool10 == another.alphabool10;
+	};
+};
+
 class Drawing
 {
 public:
+	constexpr static reference<DynamicVectorClass<DirtyAreaStruct>, 0xB0CE78> DirtyAreas{};
 
 	static RectangleStruct &SurfaceDimensions_Hidden;
 

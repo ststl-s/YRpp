@@ -204,6 +204,9 @@ public:
 	CellClass* CellIteratorNext()
 		{ JMP_THIS(0x578290); }
 
+	CellClass* GetTargetCell(Point2D* pLocation)
+		{ JMP_THIS(0x565730); }
+
 // the key damage delivery
 /*! The key damage delivery function.
 	\param Coords Location of the impact/center of damage.
