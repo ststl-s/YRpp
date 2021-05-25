@@ -81,8 +81,7 @@ public:
 	bool byteAD;
 	BYTE byteAE;
 	BYTE byteAF;
-	Point2D TacticalPos0;
-	Point2D field_B8;
+	RectangleStruct VisibleArea;
 	double ZoomFactor;
 	Point2D point_C8;
 	Point2D point_D0;
