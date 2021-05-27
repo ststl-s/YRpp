@@ -422,7 +422,16 @@ public:
 
 	bool IsLocationFogged(CoordStruct* pCoord)
 		{ JMP_THIS(0x5865E0); }
+	
+    bool Place_Crate(CellStruct cell, int idxCrate)
+        { JMP_THIS(0x56BEC0); }
 
+    bool Remove_Crate(CellStruct* where)
+        { JMP_THIS(0x56C020); }
+		
+    bool Place_Random_Crate()
+        { JMP_THIS(0x56BD40); }
+		
 protected:
 	//Constructor
 	MapClass() {}	//don't need this
