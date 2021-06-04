@@ -460,6 +460,9 @@ public:
 		return ret;
 	}
 
+	int CombatDamage(int nWhich) const
+		{ JMP_THIS(0x6F3970); }
+
 	//Constructor
 	TechnoClass(HouseClass* pOwner) noexcept
 		: TechnoClass(noinit_t())
