@@ -460,7 +460,7 @@ public:
 		return ret;
 	}
 
-	int CombatDamage(int nWhich) const
+	int CombatDamage(int nWhich = -1) const
 		{ JMP_THIS(0x6F3970); }
 
 	//Constructor
