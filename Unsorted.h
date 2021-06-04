@@ -5,6 +5,8 @@
 #include <TacticalClass.h>
 #include <CCINIClass.h>
 
+#include <Helpers/CompileTime.h>
+
 class SideClass;
 class ObjectClass;
 
@@ -479,36 +481,35 @@ struct MovieUnlockableInfo {
 
 namespace Unsorted
 {
-	static DWORD &Savegame_Magic     = *reinterpret_cast<DWORD*>(0x83D560);
-
+	static constexpr reference<DWORD, 0x83D560> GameVersion {}; // Savegame_Magic
+	
 	// if != 0, EVA_SWxxxActivated is skipped
-	static int &MuteSWLaunches   = *reinterpret_cast<int*>(0xA8B538);
+	static constexpr reference<int, 0xA8B538> MuteSWLaunches {};
 
 	// skip unit selection and move command voices?
-	static bool &MoveFeedback    = *reinterpret_cast<bool*>(0x822CF2);
+	static constexpr reference<bool, 0x822CF2> MoveFeedback {};
 
-	static byte &ArmageddonMode  = *reinterpret_cast<byte*>(0xA8ED6B);
-	static byte &WTFMode  = *reinterpret_cast<byte*>(0xA8E9A0);
-
-	static DynamicVectorClass<ObjectClass*>* const vec_ObjectsInLayers = reinterpret_cast<DynamicVectorClass<ObjectClass *>*>(0x8A0360);
+	static constexpr reference<byte, 0xA8ED6B> ArmageddonMode {};
+	static constexpr reference<byte, 0xA8E9A0> WTFMode {};
+	static constexpr constant_ptr<DynamicVectorClass<ObjectClass*>, 0x8A0360> vec_ObjectsInLayers {};
 
 // checkbox states, afaik
-	static byte &Bases = *reinterpret_cast<byte*>(0xA8B258);
-	static byte &BridgeDestruction = *reinterpret_cast<byte*>(0xA8B260);
-	static byte &Crates = *reinterpret_cast<byte*>(0xA8B261);
-	static byte &ShortGame = *reinterpret_cast<byte*>(0xA8B262);
-	static byte &SWAllowed = *reinterpret_cast<byte*>(0xA8B263);
-	static byte &MultiEngineer = *reinterpret_cast<byte*>(0xA8B26C);
-	static byte &AlliesAllowed = *reinterpret_cast<byte*>(0xA8B31C);
-	static byte &HarvesterTruce = *reinterpret_cast<byte*>(0xA8B31D);
-	static byte &CTF = *reinterpret_cast<byte*>(0xA8B31E);
-	static byte &FOW = *reinterpret_cast<byte*>(0xA8B31F);
-	static byte &MCVRedeploy = *reinterpret_cast<byte*>(0xA8B320);
+	static constexpr reference<byte, 0xA8B258> Bases {};
+	static constexpr reference<byte, 0xA8B260> BridgeDestruction {};
+	static constexpr reference<byte, 0xA8B261> Crates {};
+	static constexpr reference<byte, 0xA8B262> ShortGame {};
+	static constexpr reference<byte, 0xA8B263> SWAllowed {};
+	static constexpr reference<byte, 0xA8B26C> MultiEngineer {};
+	static constexpr reference<byte, 0xA8B31C> AlliesAllowed {};
+	static constexpr reference<byte, 0xA8B31D> HarvesterTruce {};
+	static constexpr reference<byte, 0xA8B31E> CTF {};
+	static constexpr reference<byte, 0xA8B31F> FOW {};
+	static constexpr reference<byte, 0xA8B320> MCVRedeploy {};
+	
+	static constexpr reference<TacticalSelectableStruct, 0xB0CEC8, 500> TacticalSelectables {};
+	static constexpr reference<bool, 0xB0FE65> TypeSelecting {};
 
-	static TacticalSelectableStruct* const TacticalSelectables = reinterpret_cast<TacticalSelectableStruct*>(0xB0CEC8);
-	static bool& TypeSelecting = *reinterpret_cast<bool*>(0xB0FE65);
-
-	static CCINIClass* const RA2MDINI = reinterpret_cast<CCINIClass*>(0x8870C0);
+	static constexpr constant_ptr<CCINIClass, 0x8870C0> RA2MDINI {};
 
 struct ColorPacker
 {
@@ -520,14 +521,14 @@ struct ColorPacker
 	int _G_SHR;
 };
 
-	static ColorPacker* ColorPackData = reinterpret_cast<ColorPacker*>(0x8A0DD0);
+	static constexpr constant_ptr<ColorPacker, 0x8A0DD0> ColorPackData {};
 
-	static CellStruct* CellSpreadTable = reinterpret_cast<CellStruct*>(0xABD490);
+	static constexpr constant_ptr<CellStruct, 0xABD490> CellSpreadTable {};
 
-	static int &CurrentSWType = *reinterpret_cast<int*>(0x8809A0);
+	static constexpr reference<int, 0x8809A0> CurrentSWType {};
 
 	static const int except_txt_length = 0xFFFF;
-	static char* except_txt_content = reinterpret_cast<char*>(0x8A3A08);
+	static constexpr constant_ptr<char, 0x8A3A08> except_txt_content {};
 
 /*
  * This thing is ridiculous
@@ -586,7 +587,7 @@ struct ColorPacker
   and so on...
  */
 	// Note: SomeMutex has been renamed to this because it reflects the usage better
-	static int &IKnowWhatImDoing = *reinterpret_cast<int*>(0xA8E7AC); // h2ik
+	static constexpr reference<int, 0xA8E7AC> IKnowWhatImDoing {}; // h2ik
 };
 
 struct CheatData {
@@ -597,4 +598,4 @@ struct CheatData {
 };
 
 // this holds four original cheats, keep that limit in mind
-static CheatData *OriginalCheats = reinterpret_cast<CheatData*>(0x00825C28);
+static constexpr constant_ptr<CheatData, 0x825C28> OriginalCheats {};
