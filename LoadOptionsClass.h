@@ -48,12 +48,11 @@ enum class LoadOptionsMode : unsigned int {
 
 class LoadOptionsClass
 {
-protected:
+public:
 	// constructor
 	LoadOptionsClass()
 		{ JMP_THIS(0x558740); }
 
-public:
 	virtual ~LoadOptionsClass()
 		{ JMP_THIS(0x55A0D0); }
 
@@ -80,6 +79,9 @@ public:
 
 	virtual const wchar_t* GetUIString_GameSaved() const
 		{ JMP_THIS(0x55A0B0); }
+
+	LoadOptionsMode LoadDialog()
+		{ JMP_THIS(0x4F1371); }
 
 	//Properties
 	LoadOptionsMode Mode;
