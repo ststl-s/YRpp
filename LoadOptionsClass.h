@@ -81,7 +81,7 @@ public:
 		{ JMP_THIS(0x55A0B0); }
 
 	LoadOptionsMode LoadDialog()
-		{ JMP_THIS(0x4F1371); }
+		{ JMP_THIS(0x5587F0); }
 
 	//Properties
 	LoadOptionsMode Mode;
