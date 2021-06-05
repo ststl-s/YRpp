@@ -2,10 +2,13 @@
 
 #include <YRPPCore.h>
 #include <StringTable.h>
+#include <Helpers/CompileTime.h>
 
 class WWMessageBox
 {
 public:
+	static constexpr reference<WWMessageBox, 0x82083C> Instance {};
+
 	enum class Result : int
 	{
 		Button1 = 0, Button2, Button3,
