@@ -80,7 +80,7 @@ public:
 	virtual const wchar_t* GetUIString_GameSaved() const
 		{ JMP_THIS(0x55A0B0); }
 
-	LoadOptionsMode LoadDialog()
+	bool LoadDialog()
 		{ JMP_THIS(0x5587F0); }
 
 	//Properties
