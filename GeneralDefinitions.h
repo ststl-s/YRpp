@@ -1,7 +1,7 @@
 #pragma once
 
 #include <GeneralStructures.h>
-#include <Helpers\EnumFlags.h>
+#include <Helpers/EnumFlags.h>
 
 //Scalar Deleting Destructor Flags
 #define SDDTOR_NODELETE				0x00
@@ -427,7 +427,7 @@ enum class AITriggerCondition : int {
 	Pool = -1,
 	AIOwns = 0,
 	EnemyOwns = 1,
-	EnemyYellowPowe = 2,
+	EnemyYellowPower = 2,
 	EnemyRedPower = 3,
 	EnemyCashExceeds = 4,
 	IronCharged = 5,
@@ -703,7 +703,7 @@ enum class LandType : int {
  *  let W = a result of creepy maths = 104 (leptons)
  *  let GH = this->GetHeight()
  *
- *  ObjectClass::InWhichLayer, used by practically all ObjectClass derivates except Foot, returns
+ *  ObjectClass::InWhichLayer, used by practically all ObjectClass derivatives except Foot, returns
  *   Ground if GH < 2*W leptons
  *   Air if it returns < Rules->CruiseHeight leptons
  *   Top otherwise
@@ -717,7 +717,7 @@ enum class LandType : int {
  *  Mech          : Ground
  *  Rocket        : Air
  *  Ship          : Ground
- *  Subterrannean : Underground if really underground, Ground if on ground, diving or elevating
+ *  Subterranean : Underground if really underground, Ground if on ground, diving or elevating
  *  Walk          : Ground
  *
  */
@@ -793,7 +793,7 @@ enum class MovementZone : int {
 	AmphibiousDestroyer = 3,
 	AmphibiousCrusher = 4,
 	Amphibious = 5,
-	Subterrannean = 6,
+	Subterranean = 6,
 	Infantry = 7,
 	InfantryDestroyer = 8,
 	Fly = 9,
