@@ -10,14 +10,6 @@ class LoadProgressManager
 public:
 	static LoadProgressManager* &LPMgr;
 
-	static void DrawText(const wchar_t* pText,int X,int Y,DWORD dwColor) {
-		if(LoadProgressManager::LPMgr) {
-			if(Surface * S = LoadProgressManager::LPMgr->ProgressSurface) {
-				S->DrawText(pText, X, Y, dwColor);
-			}
-		}
-	}
-
 	LoadProgressManager()
 		{ JMP_THIS(0x552A40); }
 
