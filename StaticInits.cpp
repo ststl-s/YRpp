@@ -89,12 +89,6 @@ DECL(LightConvertClass, 0x87F698);
 #include <DiskLaserClass.h>
 DECL(DiskLaserClass, 0x8A0208);
 
-#include <Drawing.h>
-ALIAS(ABufferClass *, ABufferClass::ABuffer, 0x87E8A4);
-ALIAS(ZBufferClass *, ZBufferClass::ZBuffer, 0x887644);
-ALIAS(RectangleStruct, Drawing::SurfaceDimensions_Hidden, 0x886FA0);
-ALIAS(ColorStruct, Drawing::TooltipColor, 0xB0FA1C);
-
 #include <YRDDraw.h>
 ALIAS(DirectDrawWrap *, DirectDrawWrap::lpDD, 0x8A0094);
 ALIAS(byte, DirectDrawWrap::DoSmth, 0x8A0DEF);

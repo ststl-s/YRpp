@@ -31,10 +31,8 @@ class Drawing
 {
 public:
 	constexpr static reference<DynamicVectorClass<DirtyAreaStruct>, 0xB0CE78> DirtyAreas{};
-
-	static RectangleStruct &SurfaceDimensions_Hidden;
-
-	static ColorStruct &TooltipColor;
+	constexpr static reference<RectangleStruct, 0x886FA0> SurfaceDimensions_Hidden {};
+	constexpr static reference<ColorStruct, 0xB0FA1C> TooltipColor {};
 
 	//TextBox dimensions for tooltip-style boxes
 	static RectangleStruct GetTextBox(const wchar_t* pText, int nX, int nY, DWORD flags, int nMarginX, int nMarginY)
@@ -117,11 +115,6 @@ public:
 		color.B = static_cast<BYTE>((bits & 0x001F) << 3);
 		return color;
 	}
-
-	/** Message is a vswprintf format specifier, ... is for any arguments needed */
-	static Point2D * __cdecl PrintUnicode(Point2D *Position1, wchar_t *Message, Surface *a3, RectangleStruct *Rect, Point2D *Position2,
-			ColorScheme *a6, int a7, int a8, ...)
-		{ JMP_STD(0x4A61C0); };
 };
 
 //A few preset 16bit colors.
@@ -134,38 +127,54 @@ public:
 
 #define		COLOR_PURPLE (COLOR_RED | COLOR_BLUE)
 
-class ABufferClass {
+class NOVTABLE ABuffer
+{
 public:
-	static ABufferClass* &ABuffer;
+	static constexpr reference<ABuffer*, 0x87E8A4> Instance {};
 
-	ABufferClass(RectangleStruct rect)
-		{ JMP_THIS(0x410CE0); }
+	ABuffer(RectangleStruct Rect) { JMP_THIS(0x410CE0); }
+	bool BlitTo(Surface* pSurface, int X, int Y, int Offset, int Size) { JMP_THIS(0x410DC0); }
+	void ReleaseSurface() { JMP_THIS(0x410E50); }
+	void Blitter(unsigned short* Data, int Length, unsigned short Value) { JMP_THIS(0x410E70); }
+	void BlitAt(int X, int Y, COLORREF Color) { JMP_THIS(0x410ED0); }
+	bool Fill(unsigned short Color) { JMP_THIS(0x4112D0); }
+	bool FillRect(unsigned short Color, RectangleStruct Rect) { JMP_THIS(0x411310); }
+	void BlitRect(RectangleStruct Rect) { JMP_THIS(0x411330); }
+	void* GetBuffer(int X, int Y) { JMP_THIS(0x4114B0); }
 
-	RectangleStruct rect;
-	int field_10;
-	BSurface *Surface;
-	byte* BufferStart;
-	byte* BufferEndpoint;
+	RectangleStruct Bounds;
+	int BufferPosition;
+	BSurface* Surface;
+	int BufferHead;
+	int BufferTail;
 	int BufferSize;
-	int field_24;
-	int W;
-	int H;
+	int MaxValue;
+	int Width;
+	int Height;
 };
 
-class ZBufferClass {
+class NOVTABLE ZBuffer
+{
 public:
-	static ZBufferClass* &ZBuffer;
+	static constexpr reference<ZBuffer*, 0x887644> Instance {};
 
-	ZBufferClass(RectangleStruct rect)
-		{ JMP_THIS(0x7BC970); }
+	ZBuffer(RectangleStruct Rect) { JMP_THIS(0x7BC970); }
+	bool BlitTo(Surface* pSurface, int X, int Y, int Offset, int Size) { JMP_THIS(0x7BCA50); }
+	void ReleaseSurface() { JMP_THIS(0x7BCAE0); }
+	void Blitter(unsigned short* Data, int Length, unsigned short Value) { JMP_THIS(0x7BCAF0); }
+	void BlitAt(int X, int Y, COLORREF Color) { JMP_THIS(0x7BCB50); }
+	bool Fill(unsigned short Color) { JMP_THIS(0x7BCF50); }
+	bool FillRect(unsigned short Color, RectangleStruct Rect) { JMP_THIS(0x7BCF90); }
+	void BlitRect(RectangleStruct Rect) { JMP_THIS(0x7BCFB0); }
+	void* GetBuffer(int X, int Y) { JMP_THIS(0x7BD130); }
 
-	RectangleStruct rect;
-	int field_10;
-	BSurface *Surface;
-	byte* BufferStart;
-	byte* BufferEndpoint;
+	RectangleStruct Bounds;
+	int BufferOffset;
+	BSurface* Surface;
+	int BufferHead;
+	int BufferTail;
 	int BufferSize;
-	int field_24;
-	int W;
-	int H;
+	int MaxValue;
+	int Width;
+	int Height;
 };
