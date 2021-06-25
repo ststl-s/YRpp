@@ -15,11 +15,11 @@ class NOVTABLE Surface
 {
 public:
 	virtual ~Surface() { PUSH_IMM(SDDTOR_NODELETE); THISCALL(0x4115D0); }
-	
-	//Surface
-	virtual bool CopyFrom(Surface* pSrc, bool bUnk1, bool bUnk2) R0;
 
-	virtual bool CopyFrom(
+	//Surface
+	virtual bool CopyFromWhole(Surface* pSrc, bool bUnk1, bool bUnk2) R0;
+
+	virtual bool CopyFromPart(
 		RectangleStruct* pClipRect, //ignored and retrieved again...
 		Surface* pSrc,
 		RectangleStruct* pSrcRect,	//desired source rect of pSrc ?
@@ -35,7 +35,7 @@ public:
 		bool bUnk1,
 		bool bUnk2) R0;
 
-	virtual bool FillRect(RectangleStruct* pClipRect, RectangleStruct* pFillRect, COLORREF nColor) R0;
+	virtual bool FillRectEx(RectangleStruct* pClipRect, RectangleStruct* pFillRect, COLORREF nColor) R0;
 
 	virtual bool FillRect(RectangleStruct* pFillRect, COLORREF nColor) R0;
 
@@ -50,7 +50,7 @@ public:
 
 	virtual COLORREF GetPixel(Point2D* pPoint) R0;
 
-	virtual bool DrawLine(RectangleStruct* pClipRect, Point2D* pStart, Point2D* pEnd, COLORREF nColor) R0;
+	virtual bool DrawLineEx(RectangleStruct* pClipRect, Point2D* pStart, Point2D* pEnd, COLORREF nColor) R0;
 
 	virtual bool DrawLine(Point2D* pStart, Point2D* pEnd, COLORREF nColor) R0;
 
@@ -80,9 +80,9 @@ public:
 	virtual bool DrawDashedLine(
 		Point2D* pStart, Point2D* pEnd, int nColor, bool* Pattern, int nOffset, bool bUkn) R0;
 
-	virtual bool DrawLine(Point2D* pStart, Point2D* pEnd, int nColor, bool bUnk) R0;
+	virtual bool DrawLine_(Point2D* pStart, Point2D* pEnd, int nColor, bool bUnk) R0;
 
-	virtual bool DrawRect(RectangleStruct* pClipRect, RectangleStruct* pDrawRect, int nColor) R0;
+	virtual bool DrawRectEx(RectangleStruct* pClipRect, RectangleStruct* pDrawRect, int nColor) R0;
 
 	virtual bool DrawRect(RectangleStruct* pDrawRect, DWORD dwColor) R0;
 
@@ -176,8 +176,7 @@ static void __fastcall CC_Draw_Shape(Surface* Surface, ConvertClass* Palette, SH
 	int Brightness, // 0~2000. Final color = saturate(OriginalColor * Brightness / 1000.0f)
 	int TintColor, SHPStruct* ZShape, int ZShapeFrame, int XOffset, int YOffset)
 {
-	__asm { mov esi, 0x4AED70};
-	__asm { call esi };
+	JMP_STD(0x4AED70);
 }
 
 static Point2D* Fancy_Text_Print_Wide(Point2D* RetVal, const wchar_t* Text, Surface* Surface, RectangleStruct* Bounds,
@@ -189,8 +188,7 @@ static Point2D* Fancy_Text_Print_Wide(Point2D* RetVal, const wchar_t* Text, Surf
 //static Point2D* __fastcall Simple_Text_Print_Wide(Point2D* RetVal, const wchar_t* Text, Surface* Surface, RectangleStruct* Bounds,
 //	Point2D* Location, COLORREF ForeColor, COLORREF BackColor, TextPrintType Flag, bool bUkn)
 //{
-//	__asm { mov esi, 0x4A5EB0};
-//	__asm { call esi };
+//	JMP_STD(0x4A5EB0);
 //}
 
 class NOVTABLE DSurface : public XSurface
@@ -229,19 +227,19 @@ public:
 		Fancy_Text_Print_Wide(&tmp, pText, this, pBounds, pLocation, ForeColor, BackColor, Flag);
 	}
 
-	void DrawText(const wchar_t* pText, Point2D* pLoction, DWORD dwColor)
+	void DrawText(const wchar_t* pText, Point2D* pLoction, COLORREF Color)
 	{
 		RectangleStruct rect = { 0, 0, 0, 0 };
 		this->GetRect(&rect);
 
 		Point2D tmp { 0,0 };
-		Fancy_Text_Print_Wide(&tmp, pText, this, &rect, pLoction, dwColor, 0, TextPrintType::TPF_NOSHADOW);
+		Fancy_Text_Print_Wide(&tmp, pText, this, &rect, pLoction, Color, 0, TextPrintType::TPF_NOSHADOW);
 	}
 
-	void DrawText(const wchar_t* pText, int X, int Y, DWORD dwColor)
+	void DrawText(const wchar_t* pText, int X, int Y, COLORREF Color)
 	{
 		Point2D P = { X ,Y };
-		DrawText(pText, &P, dwColor);
+		DrawText(pText, &P, Color);
 	}
 
 	void* Buffer;
