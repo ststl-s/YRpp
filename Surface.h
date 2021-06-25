@@ -126,7 +126,7 @@ public:
 class NOVTABLE BSurface : public XSurface
 {
 public:
-	static constexpr constant_ptr<DSurface, 0xB2D928> VoxelSurface {};
+	static constexpr constant_ptr<BSurface, 0xB2D928> VoxelSurface {};
 
 	MemoryBuffer Buffer;
 };
