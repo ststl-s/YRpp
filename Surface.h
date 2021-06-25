@@ -77,7 +77,7 @@ public:
 	virtual bool DrawDashedLine(
 		Point2D* pStart, Point2D* pEnd, int nColor, bool* Pattern, int nOffset) R0;
 
-	virtual bool DrawDashedLine(
+	virtual bool DrawDashedLine_(
 		Point2D* pStart, Point2D* pEnd, int nColor, bool* Pattern, int nOffset, bool bUkn) R0;
 
 	virtual bool DrawLine_(Point2D* pStart, Point2D* pEnd, int nColor, bool bUnk) R0;
@@ -126,6 +126,8 @@ public:
 class NOVTABLE BSurface : public XSurface
 {
 public:
+	static constexpr constant_ptr<DSurface, 0xB2D928> VoxelSurface {};
+
 	MemoryBuffer Buffer;
 };
 
