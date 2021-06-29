@@ -4,6 +4,7 @@
 #include <GeneralDefinitions.h>
 #include <Helpers/CompileTime.h>
 
+struct TacticalSelectableStruct;
 class SideClass;
 class ObjectClass;
 
@@ -68,6 +69,12 @@ public:
 
 	static void sub_53E6B0()
 		{ JMP_STD(0x53E6B0); }
+
+	static void __fastcall UICommands_TypeSelect_7327D0(const char* iniName)
+		{ JMP_STD(0x7327D0); }
+
+	static bool IsTypeSelecting()
+		{ JMP_STD(0x732D00); }
 };
 
 // this fake class contains the IIDs used by the game
@@ -449,27 +456,30 @@ struct MovieUnlockableInfo
 namespace Unsorted
 {
 	// if != 0, EVA_SWxxxActivated is skipped
-	static int &MuteSWLaunches   = *reinterpret_cast<int*>(0xA8B538);
+	static constexpr reference<int, 0xA8B538> MuteSWLaunches {};
 
 	// skip unit selection and move command voices?
-	static bool &MoveFeedback    = *reinterpret_cast<bool*>(0x822CF2);
+	static constexpr reference<bool, 0x822CF2> MoveFeedback {};
 
-	static byte &ArmageddonMode  = *reinterpret_cast<byte*>(0xA8ED6B);
-	static byte &WTFMode  = *reinterpret_cast<byte*>(0xA8E9A0);
+	static constexpr reference<byte, 0xA8ED6B> ArmageddonMode {};
+	static constexpr reference<byte, 0xA8E9A0> WTFMode {};
+	static constexpr constant_ptr<DynamicVectorClass<ObjectClass*>, 0x8A0360> ObjectsInLayers {};
 
 // checkbox states, afaik
-	static byte &Bases = *reinterpret_cast<byte*>(0xA8B258);
-	static byte &BridgeDestruction = *reinterpret_cast<byte*>(0xA8B260);
-	static byte &Crates = *reinterpret_cast<byte*>(0xA8B261);
-	static byte &ShortGame = *reinterpret_cast<byte*>(0xA8B262);
-	static byte &SWAllowed = *reinterpret_cast<byte*>(0xA8B263);
-	static byte &MultiEngineer = *reinterpret_cast<byte*>(0xA8B26C);
-	static byte &AlliesAllowed = *reinterpret_cast<byte*>(0xA8B31C);
-	static byte &HarvesterTruce = *reinterpret_cast<byte*>(0xA8B31D);
-	static byte &CTF = *reinterpret_cast<byte*>(0xA8B31E);
-	static byte &FOW = *reinterpret_cast<byte*>(0xA8B31F);
-	static byte &MCVRedeploy = *reinterpret_cast<byte*>(0xA8B320);
+	static constexpr reference<byte, 0xA8B258> Bases {};
+	static constexpr reference<byte, 0xA8B260> BridgeDestruction {};
+	static constexpr reference<byte, 0xA8B261> Crates {};
+	static constexpr reference<byte, 0xA8B262> ShortGame {};
+	static constexpr reference<byte, 0xA8B263> SWAllowed {};
+	static constexpr reference<byte, 0xA8B26C> MultiEngineer {};
+	static constexpr reference<byte, 0xA8B31C> AlliesAllowed {};
+	static constexpr reference<byte, 0xA8B31D> HarvesterTruce {};
+	static constexpr reference<byte, 0xA8B31E> CTF {};
+	static constexpr reference<byte, 0xA8B31F> FOW {};
+	static constexpr reference<byte, 0xA8B320> MCVRedeploy {};
 
+	static constexpr reference<TacticalSelectableStruct, 0xB0CEC8, 500> TacticalSelectables {};
+	static constexpr reference<bool, 0xB0FE65> TypeSelecting {};
 
 struct ColorPacker
 {
@@ -481,12 +491,14 @@ struct ColorPacker
 	int _G_SHR;
 };
 
-	static ColorPacker* ColorPackData = reinterpret_cast<ColorPacker*>(0x8A0DD0);
+static constexpr constant_ptr<ColorPacker, 0x8A0DD0> ColorPackData {};
 
-	static int &CurrentSWType = *reinterpret_cast<int*>(0x8809A0);
+static constexpr constant_ptr<CellStruct, 0xABD490> CellSpreadTable {};
 
-	static const int except_txt_length = 0xFFFF;
-	static char* except_txt_content = reinterpret_cast<char*>(0x8A3A08);
+static constexpr reference<int, 0x8809A0> CurrentSWType {};
+
+static const int except_txt_length = 0xFFFF;
+static constexpr constant_ptr<char, 0x8A3A08> except_txt_content {};
 
 /*
  * This thing is ridiculous
@@ -545,7 +557,7 @@ struct ColorPacker
   and so on...
  */
 	// Note: SomeMutex has been renamed to this because it reflects the usage better
-	static int &IKnowWhatImDoing = *reinterpret_cast<int*>(0xA8E7AC); // h2ik
+static constexpr reference<int, 0xA8E7AC> IKnowWhatImDoing {}; // h2ik
 };
 
 struct CheatData {
@@ -556,4 +568,4 @@ struct CheatData {
 };
 
 // this holds four original cheats, keep that limit in mind
-static CheatData *OriginalCheats = reinterpret_cast<CheatData*>(0x00825C28);
+static constexpr constant_ptr<CheatData, 0x825C28> OriginalCheats {};

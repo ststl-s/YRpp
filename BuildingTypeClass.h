@@ -64,6 +64,9 @@ public:
 	bool CanPlaceHere(CellStruct* cell, HouseClass* owner) const
 		{ JMP_THIS(0x464AC0); }
 
+	bool IsUndeployable() const
+		{ JMP_THIS(0x465D40); }
+
 	// helpers
 	bool HasSuperWeapon(int index) const {
 		return (this->SuperWeapon == index || this->SuperWeapon2 == index);

@@ -269,7 +269,7 @@ public:
 	bool HasEngineer; // used to pass the NeedsEngineer check
 	TimerStruct CashProductionTimer;
 	bool unknown_bool_6DC;
-	bool unknown_bool_6DD;
+	bool IsReadyToCommence;
 	bool NeedsRepairs; // AI handholder for repair logic,
 	bool C4Applied;
 	bool NoCrew;

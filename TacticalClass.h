@@ -6,6 +6,13 @@
 #include <ColorScheme.h>
 #include <Helpers/CompileTime.h>
 
+struct TacticalSelectableStruct
+{
+	TechnoClass* Techno;
+	int X;
+	int Y;
+};
+
 class NOVTABLE TacticalClass : public AbstractClass
 {
 public:
@@ -14,6 +21,9 @@ public:
 	// returns whether coords are visible at the moment
 	bool CoordsToClient(CoordStruct const& coords, Point2D* pOutClient) const
 		{ JMP_THIS(0x6D2140); }
+	
+	Point2D* CoordsToScreen(Point2D* pDest, CoordStruct* pSource)
+		{ JMP_THIS(0x6D1F10); }
 
 	CoordStruct* ClientToCoords(CoordStruct* pOutBuffer, Point2D const& client) const
 		{ JMP_THIS(0x6D2280); }
@@ -51,80 +61,35 @@ public:
 
 public:
 
-	DWORD field_24;
-	DWORD field_28;
-	DWORD field_2C;
-	DWORD field_30;
-	DWORD field_34;
-	DWORD field_38;
-	DWORD field_3C;
-	DWORD field_40;
-	DWORD field_44;
-	DWORD field_48;
-	DWORD field_4C;
-	DWORD field_50;
-	DWORD field_54;
-	DWORD field_58;
-	DWORD field_5C;
-	DWORD field_60;
-	DWORD field_64;
-	DWORD field_68;
-	DWORD field_6C;
-	DWORD field_70;
-	DWORD field_74;
-	DWORD field_78;
-	DWORD field_7C;
-	DWORD field_80;
-	DWORD field_84;
-	DWORD field_88;
-	DWORD field_8C;
-	DWORD field_90;
-	DWORD field_94;
-	DWORD field_98;
-	DWORD field_9C;
-	DWORD field_A0;
-	DWORD field_A4;
-	DWORD field_A8;
+	wchar_t ScreenText[64];
+	int EndGameGraphicsFrame;
+	int LastAIFrame;
 	bool field_AC;
 	bool field_AD;
-	RectangleStruct VisibleArea;
+	PROTECTED_PROPERTY(char, gap_AE[2]);
+	Point2D TacticalPos;
+	Point2D LastTacticalPos;
 	double ZoomInFactor;
-	DWORD field_C8;
-	DWORD field_CC;
-	DWORD field_D0;
-	DWORD field_D4;
-	DWORD field_D8;
-	DWORD field_DC;
-	DWORD VisibleCellCount;
+	Point2D Point_C8;
+	Point2D Point_D0;
+	float field_D8;
+	float field_DC;
+	int VisibleCellCount;
 	CellClass * VisibleCells [800];
-	DWORD field_D64;
-	DWORD field_D68;
+	Point2D TacticalCoord1;
 	DWORD field_D6C;
 	DWORD field_D70;
-	DWORD field_D74;
-	DWORD field_D78;
+	Point2D TacticalCoord2;
 	bool field_D7C;
-	bool Redrawing; // set while redrawing - cheap mutex
-	DWORD field_D80;
-	DWORD field_D84;
-	DWORD field_D88;
-	DWORD field_D8C;
-	DWORD field_D90;
-	DWORD field_D94;
-	DWORD field_D98;
-	DWORD field_D9C;
+	bool Redrawing; // set while redrawing - cheap mutex // TacticalPosUpdated
+	PROTECTED_PROPERTY(char, gap_D7E[2]);
+	RectangleStruct Rectangle_D80;
+	LTRBStruct Band;
 	DWORD MouseFrameIndex;
-	DWORD StartTime;
-	DWORD field_DA8;
-	DWORD field_DAC;
-	float Floats [12];
-	RectangleStruct field_DE4;
-	DWORD field_DF4;
-	double field_DF8;
-	DWORD field_E00;
-	DWORD field_E04;
-	double field_E08;
-	DWORD field_E10;
+	TimerStruct StartTime;
+	int SelectableCount;
+	Matrix3DStruct Unused_Matrix3D;
+	Matrix3DStruct Matrix3D_DE4;
 	DWORD field_E14;
 
 };

@@ -455,7 +455,7 @@ public:
 	static constexpr reference<DSurface*, 0x887308u> const Primary{};
 	static constexpr reference<DSurface*, 0x88730Cu> const Hidden{};
 	static constexpr reference<DSurface*, 0x887310u> const Alternate{};
-	static constexpr reference<DSurface*, 0x887314u> const Hidden_2{};
+	static constexpr reference<DSurface*, 0x887314u> const Temp{};
 	static constexpr reference<DSurface*, 0x88731Cu> const Composite{};
 
 	static constexpr reference<RectangleStruct, 0x886F90u> const SidebarBounds{};

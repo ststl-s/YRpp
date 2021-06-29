@@ -22,7 +22,7 @@ class TimerStruct
 {
 public:
 	int StartTime{ -1 };
-	int : 32;
+	int : 32; // timer
 	int TimeLeft{ 0 };
 
 	constexpr TimerStruct() = default;
@@ -124,7 +124,7 @@ inline unsigned int TranslateFixedPoint(size_t bitsFrom, size_t bitsTo, unsigned
 	}
 }
 
-// like a compass with 2 ^ 16 units equalling 360°
+// like a compass with 2 ^ 16 units equalling 360?
 struct DirStruct
 {
 	using value_type = short;

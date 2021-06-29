@@ -2,6 +2,10 @@
 
 // this file contains a few structures representing function arguments on the stack (normally all except `this`)
 
+class WarheadTypeClass;
+class TechnoClass;
+class HouseClass;
+
 // i.e. this struct can be used to read the args to ObjectClass::ReceiveDamage
 struct args_ReceiveDamage {
 	int *Damage;
