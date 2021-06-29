@@ -1,453 +1,197 @@
-// --- WORK IN PROGRESS ---
-// --- WORK IN PROGRESS ---
-// --- WORK IN PROGRESS --- i need some sleep now
-
-/*
-	DirectDraw Surface classes
-	Note: dwColor is always given as a 16bit color value (high word should be zero)
-*/
-
 #pragma once
 
 #include <GeneralStructures.h>
-#include <YRAllocator.h>
 #include <YRDDraw.h>
-#include <Helpers/CompileTime.h>
+#include <YRAllocator.h>
 
-#include <utility>
+#include <Helpers/CompileTime.h>
 
 class ConvertClass;
 struct SHPStruct;
 
-// once the meaning is known, replace
-#define SURFACE_SETTING_ONE bOption1
-#define SURFACE_SETTING_TWO bOption2
-#define SURFACE_SETTING_THREE dwUnknown
-
-// abstract surface
-class Surface
+class NOVTABLE Surface
 {
 public:
-	// Constructor
-	//Surface(int width, int height) noexcept
-	// { JMP_THIS(0x4AEC60); }
+	virtual ~Surface() { PUSH_IMM(SDDTOR_NODELETE); THISCALL(0x4115D0); }
 
-	Surface(int width, int height) noexcept
-		: Width(width), Height(height)
-	{ }
+	//Surface
+	virtual bool CopyFromWhole(Surface* pSrc, bool bUnk1, bool bUnk2) R0;
 
-protected:
-	explicit __forceinline Surface(noinit_t) noexcept
-	{ }
-
-public:
-	// Destructor
-	virtual ~Surface() RX;
-
-	// Surface
-	virtual bool BlitWhole(
+	virtual bool CopyFromPart(
+		RectangleStruct* pClipRect, //ignored and retrieved again...
 		Surface* pSrc,
-		bool SURFACE_SETTING_ONE,
-		bool SURFACE_SETTING_TWO) = 0;
+		RectangleStruct* pSrcRect,	//desired source rect of pSrc ?
+		bool bUnk1,
+		bool bUnk2) R0;
 
-	virtual bool BlitPart(
-		RectangleStruct const& rectDest,
+	virtual bool CopyFrom(
+		RectangleStruct* pClipRect,
+		RectangleStruct* pClipRect2,	//again? hmm
 		Surface* pSrc,
-		RectangleStruct const& rectSrc,
-		bool SURFACE_SETTING_ONE,
-		bool SURFACE_SETTING_TWO) = 0;
+		RectangleStruct* pDestRect,	//desired dest rect of pSrc ? (stretched? clipped?)
+		RectangleStruct* pSrcRect,	//desired source rect of pSrc ?
+		bool bUnk1,
+		bool bUnk2) R0;
 
-	virtual bool Blit(
-		RectangleStruct const& rectClip,
-		RectangleStruct const& rectClip2,	//again? hmm
-		Surface* pSrc,
-		RectangleStruct const& rectDest,	//desired dest rect of pSrc ? (stretched? clipped?)
-		RectangleStruct const& rectSrc,	//desired source rect of pSrc ?
-		bool SURFACE_SETTING_ONE,
-		bool SURFACE_SETTING_TWO) = 0;
+	virtual bool FillRectEx(RectangleStruct* pClipRect, RectangleStruct* pFillRect, COLORREF nColor) R0;
 
-	virtual bool FillRectEx(
-		RectangleStruct const& rectClip,
-		RectangleStruct const& rectFill,
-		DWORD dwColor) = 0;
+	virtual bool FillRect(RectangleStruct* pFillRect, COLORREF nColor) R0;
 
-	virtual bool FillRect(
-		RectangleStruct const& rectFill,
-		DWORD dwColor) = 0;
+	virtual bool Fill(COLORREF nColor) R0;
 
-	virtual bool Fill(
-		DWORD dwColor) = 0;
+	virtual bool FillRectTrans(RectangleStruct* pClipRect, ColorStruct Color, COLORREF nUnknown) R0;
 
-	virtual bool vt_entry_1C(
-		RectangleStruct const& rectClip,
-		ColorStruct Color,
-		int nUnknown) = 0;
+	virtual bool DrawEllipse(
+		int XOff, int YOff, int CenterX, int CenterY, RectangleStruct Rect, COLORREF nColor) R0;
 
-	virtual bool vt_entry_20(	//No visible results :(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7, DWORD dwUnk8,
-		DWORD dwUnk9) = 0;
+	virtual bool SetPixel(Point2D* pPoint, COLORREF nColor) R0;
 
-	virtual bool SetPixel(
-		Point2D const& point,
-		DWORD dwColor) = 0;
+	virtual COLORREF GetPixel(Point2D* pPoint) R0;
 
-	virtual DWORD GetPixel(
-		Point2D const& point) = 0;
+	virtual bool DrawLineEx(RectangleStruct* pClipRect, Point2D* pStart, Point2D* pEnd, COLORREF nColor) R0;
 
-	virtual bool DrawLineEx(
-		RectangleStruct const& rectClip,
-		Point2D const& point1,
-		Point2D const& point2,
-		DWORD dwColor) = 0;
+	virtual bool DrawLine(Point2D* pStart, Point2D* pEnd, COLORREF nColor) R0;
 
-	virtual bool DrawLine(
-		Point2D const& point1,
-		Point2D const& point2,
-		DWORD dwColor) = 0;
+	virtual bool DrawLineColor_AZ(
+		RectangleStruct* pRect, Point2D* pStart, Point2D* pEnd, COLORREF nColor,
+		DWORD dwUnk1, DWORD dwUnk2, bool bUnk) R0;
 
-	virtual bool vt_entry_34(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7) = 0;
+	virtual bool DrawMultiplyingLine_AZ(
+		RectangleStruct* pRect, Point2D* pStart, Point2D* pEnd, DWORD dwMultiplier,
+		DWORD dwUnk1, DWORD dwUnk2, bool bUnk) R0;
 
-	virtual bool vt_entry_38(	//similar to 34
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7) = 0;
+	virtual bool DrawSubtractiveLine_AZ(
+		RectangleStruct* pRect, Point2D* pStart, Point2D* pEnd, ColorStruct* pColor,
+		DWORD dwUnk1, DWORD dwUnk2, bool bUnk1, bool bUnk2,
+		bool bUkn3, bool bUkn4, float fUkn) R0;
 
-	virtual bool vt_entry_3C(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7, DWORD dwUnk8,
-		DWORD dwUnk9, DWORD dwUnk10, DWORD dwUnk11) = 0;
+	virtual bool DrawRGBMultiplyingLine_AZ(
+		RectangleStruct* pRect, Point2D* pStart, Point2D* pEnd, ColorStruct* pColor,
+		float Intensity, DWORD dwUnk1, DWORD dwUnk2) R0;
 
-	virtual bool vt_entry_40(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7) = 0;
+	virtual bool PlotLine(
+		RectangleStruct* pRect, Point2D* pStart, Point2D* pEnd, bool(__fastcall* fpDrawCallback)(int*)) R0;
 
-	virtual bool vt_entry_44(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4) = 0;
+	virtual bool DrawDashedLine(
+		Point2D* pStart, Point2D* pEnd, int nColor, bool* Pattern, int nOffset) R0;
 
-	virtual bool vt_entry_48(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4) = 0;
+	virtual bool DrawDashedLine_(
+		Point2D* pStart, Point2D* pEnd, int nColor, bool* Pattern, int nOffset, bool bUkn) R0;
 
-	virtual bool vt_entry_4C(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6) = 0;
+	virtual bool DrawLine_(Point2D* pStart, Point2D* pEnd, int nColor, bool bUnk) R0;
 
-	virtual bool vt_entry_50(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4) = 0;
+	virtual bool DrawRectEx(RectangleStruct* pClipRect, RectangleStruct* pDrawRect, int nColor) R0;
 
-	virtual bool DrawRectEx(
-		RectangleStruct const& rectClip,
-		RectangleStruct const& rectDraw,
-		DWORD dwColor) = 0;
+	virtual bool DrawRect(RectangleStruct* pDrawRect, DWORD dwColor) R0;
 
-	virtual bool DrawRect(
-		RectangleStruct const& rectDraw,
-		DWORD dwColor) = 0;
+	virtual void* Lock(int X, int Y) R0;
 
-	virtual void* Lock(int X, int Y) = 0;
+	virtual bool Unlock() R0;
 
-	virtual bool Unlock() = 0;
+	virtual bool CanLock(DWORD dwUkn1 = 0, DWORD dwUkn2 = 0) R0;
 
-	virtual bool CanLock(DWORD dwUnk1, DWORD dwUnk2) R0;
+	virtual bool vt_entry_68(DWORD dwUnk1, DWORD dwUnk2) R0; // {JMP_THIS(0x411500);}
 
-	virtual bool vt_entry_68(DWORD dwUnk1, DWORD dwUnk2) const final
-	{
-		return true;
-	}
+	virtual bool IsLocked() R0;
 
-	virtual bool IsLocked() const = 0;
+	virtual int GetBytesPerPixel() R0;
 
-	virtual int GetBytesPerPixel() const = 0;
+	virtual int GetPitch() R0;	//Bytes per scanline
 
-	virtual int GetPitch() const = 0;	//Bytes per scanline
+	virtual RectangleStruct* GetRect(RectangleStruct* pRect) R0;
 
-	virtual RectangleStruct* GetRect(RectangleStruct* pRect) const final
-	{
-		pRect->X = 0;
-		pRect->Y = 0;
-		pRect->Width = Width;
-		pRect->Height = Height;
-		return pRect;
-	}
+	virtual int GetWidth() R0;
 
-	virtual int GetWidth() const final
-	{
-		return Width;
-	}
+	virtual int GetHeight() R0;
 
-	virtual int GetHeight() const final
-	{
-		return Height;
-	}
+	virtual bool IsDSurface() R0; // guessed - secsome
 
-	virtual bool IsDSurface() const
-	{
-		return false;
-	}
-
-	//Helper functions
-	RectangleStruct GetRect() const
-	{
-		RectangleStruct buffer;
-		this->GetRect(&buffer);
-		return buffer;
-	}
-
-	void DrawSHP(
-		ConvertClass* pPalette, SHPStruct* pSHP, int idxFrame, Point2D location)
-	{
-		DrawSHP(
-			pPalette, pSHP, idxFrame, location, this->GetRect(),
-			BlitterFlags::None, 0, 0, 0, 1000, 0, nullptr, 0, 0, 0);
-	}
-
-	void __fastcall DrawSHP(
-		ConvertClass* pPalette, SHPStruct* pSHP, int idxFrame,
-		Point2D const& pos, RectangleStruct const& bounds, BlitterFlags flags,
-		DWORD arg7, int arg8, DWORD arg9, DWORD argA, int TintColor,
-		SHPStruct* BUILDINGZ_SHA, DWORD argD, int ZS_X, int ZS_Y)
-			{ JMP_STD(0x4AED70); }
-
-	/**
-	 * Text drawing
-	 */
-	static Point2D* __fastcall DrawText(
-		Point2D* pOutBuffer, wchar_t const* pText, Surface* pSurface,
-		RectangleStruct const& bounds, Point2D const& location, WORD color,
-		DWORD SURFACE_SETTING_THREE, DWORD flags, DWORD unknown9)
-			{ JMP_STD(0x4A5EB0); }
-
-	static Point2D DrawText(
-		wchar_t const* pText, Surface* pSurface, RectangleStruct const& bounds,
-		Point2D const& location, WORD color, DWORD SURFACE_SETTING_THREE,
-		DWORD flags, DWORD unknown9)
-	{
-		Point2D buffer;
-		Surface::DrawText(
-			&buffer, pText, pSurface, bounds, location, color,
-			SURFACE_SETTING_THREE, flags, unknown9);
-		return buffer;
-	}
-
-	static Point2D* __stdcall DrawFormattedText(
-		Point2D* pOutBuffer, wchar_t const* pText, Surface* pSurface,
-		RectangleStruct const& bounds, Point2D const& location, WORD color,
-		DWORD SURFACE_SETTING_THREE, DWORD flags, ...)
-			{ JMP_STD(0x4A60E0); }
-
-	template <typename... Args>
-	static Point2D DrawFormattedText(
-		const wchar_t* pText, Surface* pSurface, RectangleStruct const& bounds,
-		Point2D const& location, WORD color, DWORD SURFACE_SETTING_THREE,
-		DWORD flags, Args&&... args)
-	{
-		Point2D buffer;
-		Surface::DrawFormattedText(
-			&buffer, pText, pSurface, bounds, location, color,
-			SURFACE_SETTING_THREE, flags, std::forward<Args>(args)...);
-		return buffer;
-	}
-
-	Point2D DrawText(
-		const wchar_t* pText, RectangleStruct const& bounds,
-		Point2D const& location, WORD color, DWORD SURFACE_SETTING_THREE = 0,
-		DWORD flags = 0x16)
-	{
-		return DrawText(
-			pText, this, bounds, location, color, SURFACE_SETTING_THREE,
-			flags, 1);
-	}
-
-	Point2D DrawText(
-		const wchar_t* pText, Point2D location, WORD dwColor,
-		DWORD SURFACE_SETTING_THREE = 0, DWORD flags = 0x16)
-	{
-		return DrawText(
-			pText, this->GetRect(), location, dwColor,
-			SURFACE_SETTING_THREE, flags);
-	}
-
-	//Properties
 	int Width;
 	int Height;
 };
 
-// another abstract surface
-class XSurface : public Surface
+class NOVTABLE XSurface : public Surface
 {
 public:
-	// Constructor
-	//XSurface(int width, int height) noexcept : XSurface(noinit_t())
-	//	{ JMP_THIS(0x5FE020); }
+	virtual bool PutPixelClip(Point2D* pPoint, short nUkn, RectangleStruct* pRect) R0;
 
-	XSurface(int width, int height) noexcept
-		: Surface(width, height), LockCount(0)
-	{ }
+	virtual short GetPixelClip(Point2D* pPoint, RectangleStruct* pRect) R0;
 
-protected:
-	explicit __forceinline XSurface(noinit_t) noexcept
-		: Surface(noinit_t())
-	{ }
-
-public:
-	// Destructor
-	virtual ~XSurface() override RX;
-
-	virtual bool BlitWhole(
-		Surface* pSrc,
-		bool SURFACE_SETTING_ONE,
-		bool SURFACE_SETTING_TWO) override R0;
-
-	virtual bool BlitPart(
-		RectangleStruct const& rectDest,
-		Surface* pSrc,
-		RectangleStruct const& rectSrc,
-		bool SURFACE_SETTING_ONE,
-		bool SURFACE_SETTING_TWO) override R0;
-
-	virtual bool Blit(
-		RectangleStruct const& rectClip,
-		RectangleStruct const& rectClip2,	//again? hmm
-		Surface* pSrc,
-		RectangleStruct const& rectDest,	//desired dest rect of pSrc ? (stretched? clipped?)
-		RectangleStruct const& rectSrc,	//desired source rect of pSrc ?
-		bool SURFACE_SETTING_ONE,
-		bool SURFACE_SETTING_TWO) override R0;
-
-	virtual bool FillRectEx(
-		RectangleStruct const& rectClip,
-		RectangleStruct const& rectFill,
-		DWORD dwColor) override R0;
-
-	virtual bool FillRect(
-		RectangleStruct const& rectFill,
-		DWORD dwColor) override R0;
-
-	virtual bool Fill(
-		DWORD dwColor) override R0;
-
-	virtual bool vt_entry_1C(
-		RectangleStruct const& rectClip,
-		ColorStruct Color,
-		int nUnknown) override R0;
-
-	virtual bool vt_entry_20(	//No visible results :(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7, DWORD dwUnk8,
-		DWORD dwUnk9) override R0;
-
-	virtual bool SetPixel(
-		Point2D const& point,
-		DWORD dwColor) override R0;
-
-	virtual DWORD GetPixel(
-		Point2D const& point) override R0;
-
-	virtual bool DrawLineEx(
-		RectangleStruct const& rectClip,
-		Point2D const& point1,
-		Point2D const& point2,
-		DWORD dwColor) override R0;
-
-	virtual bool DrawLine(
-		Point2D const& point1,
-		Point2D const& point2,
-		DWORD dwColor) override R0;
-
-	virtual bool vt_entry_34(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7) override R0;
-
-	virtual bool vt_entry_38(	//similar to 34
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7) override R0;
-
-	virtual bool vt_entry_3C(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7, DWORD dwUnk8,
-		DWORD dwUnk9, DWORD dwUnk10, DWORD dwUnk11) override R0;
-
-	virtual bool vt_entry_40(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7) override R0;
-
-	virtual bool vt_entry_44(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4) override R0;
-
-	virtual bool vt_entry_48(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4) override R0;
-
-	virtual bool vt_entry_4C(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6) override R0;
-
-	virtual bool vt_entry_50(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4) override R0;
-
-	virtual bool DrawRectEx(
-		RectangleStruct const& rectClip,
-		RectangleStruct const& rectDraw,
-		DWORD dwColor) override R0;
-
-	virtual bool DrawRect(
-		RectangleStruct const& rectDraw,
-		DWORD dwColor) override R0;
-
-	virtual void* Lock(int X, int Y) override R0;
-
-	virtual bool Unlock() override R0;
-
-	virtual bool IsLocked() const override final R0;
-
-	virtual bool IsDSurface() const override
-	{
-		return false;
-	}
-
-	// Properties
-	int LockCount;
+	int LockLevel;
+	int BytesPerPixel;
 };
 
-// buffered surface
-class BSurface : public XSurface
+class NOVTABLE BSurface : public XSurface
 {
 public:
-	//Constructor
-	BSurface(int width, int height, int bytesPerPixel) noexcept :
-		XSurface(width, height),
-		BytesPerPixel(bytesPerPixel),
-		Buffer(bytesPerPixel * width * height)
-	{ }
+	static constexpr constant_ptr<BSurface, 0xB2D928> VoxelSurface {};
 
-protected:
-	explicit __forceinline BSurface(noinit_t) noexcept
-		: XSurface(noinit_t())
-	{ }
-
-public:
-	// Destructor
-	virtual ~BSurface() RX;
-
-	virtual void* Lock(int x, int y) override R0;
-
-	virtual int GetBytesPerPixel() const override R0;
-
-	virtual int GetPitch() const override R0;
-
-	virtual bool IsDSurface() const override final
-	{
-		return XSurface::IsDSurface();
-	}
-
-	// Properties
-	int BytesPerPixel;
 	MemoryBuffer Buffer;
 };
 
-//WIP - Will the define these properly some other time
-//actual DirectDraw surfaces
-class DSurface : public XSurface
+enum class ZGradientDescIndex : unsigned int
+{
+	Flat = 0,
+	Not_Common = 1,
+	Vertical = 2,
+	Not_Common_2 = 3
+};
+
+enum class TextPrintType : int
+{
+	TPF_LASTPOINT = 0x0, //*
+	TPF_LASTSHADOW = 0x0, //*
+	TPF_6POINT = 0x1, //*
+	TPF_8POINT = 0x2,
+	TPF_3POINT = 0x3, //*
+	TPF_LED = 0x4, //*
+	TPF_VCR = 0x5, //*
+	TPF_6PT_GRAD = 0x6,
+	TPF_MAP = 0x7, //*
+	TPF_METAL12 = 0x8,
+	TPF_EFNT = 0x9, //*
+	TPF_TYPE = 0xA, //*
+	TPF_SCORE = 0xB, //*
+	TPF_FONTS = 0xF, //*
+	TPF_NOSHADOW = 0x10,
+	TPF_DROPSHADOW = 0x20,
+	TPF_FULLSHADOW = 0x40,
+	TPF_LIGHTSHADOW = 0x80,
+	TPF_CENTER = 0x100,
+	TPF_RIGHT = 0x200,
+	TPF_MEDIUM_COLOR = 0x1000,
+	TPF_BRIGHT_COLOR = 0x2000,
+	TPF_USE_GRAD_PAL = 0x4000,
+	TPF_UNK_COLOR = 0x8000,
+	TPF_GRAD_ALL = 0xF000,
+};
+MAKE_ENUM_FLAGS(TextPrintType);
+
+// Comments from thomassneddon
+static void __fastcall CC_Draw_Shape(Surface* Surface, ConvertClass* Palette, SHPStruct* SHP, int FrameIndex,
+	const Point2D* const Position, const RectangleStruct* const Bounds, BlitterFlags Flags,
+	int Remap,
+	int ZAdjust, // + 1 = sqrt(3.0) pixels away from screen
+	ZGradientDescIndex ZGradientDescIndex,
+	int Brightness, // 0~2000. Final color = saturate(OriginalColor * Brightness / 1000.0f)
+	int TintColor, SHPStruct* ZShape, int ZShapeFrame, int XOffset, int YOffset)
+{
+	JMP_STD(0x4AED70);
+}
+
+static Point2D* Fancy_Text_Print_Wide(Point2D* RetVal, const wchar_t* Text, Surface* Surface, RectangleStruct* Bounds,
+	Point2D* Location, COLORREF ForeColor, COLORREF BackColor, TextPrintType Flag, ...)
+{
+	JMP_STD(0x4A60E0);
+}
+
+//static Point2D* __fastcall Simple_Text_Print_Wide(Point2D* RetVal, const wchar_t* Text, Surface* Surface, RectangleStruct* Bounds,
+//	Point2D* Location, COLORREF ForeColor, COLORREF BackColor, TextPrintType Flag, bool bUkn)
+//{
+//	JMP_STD(0x4A5EB0);
+//}
+
+class NOVTABLE DSurface : public XSurface
 {
 public:
 	static constexpr reference<DSurface*, 0x8872FCu> const Tile{};
@@ -462,95 +206,50 @@ public:
 	static constexpr reference<RectangleStruct, 0x886FA0u> const ViewBounds{};
 	static constexpr reference<RectangleStruct, 0x886FB0u> const WindowBounds{};
 
-	DSurface(int width, int height, bool backBuffer, bool force3D) noexcept
-		: DSurface(noinit_t())
-	{ JMP_THIS(0x4BA5A0); }
+	virtual bool DrawGradientLine(RectangleStruct* pRect, Point2D* pStart, Point2D* pEnd,
+		ColorStruct* pStartColor, ColorStruct* pEndColor, float fStep, int nColor) R0;
 
-protected:
-	explicit __forceinline DSurface(noinit_t) noexcept : XSurface(noinit_t())
-	{ }
+	virtual bool CanBlit() R0;
 
-public:
-	virtual bool BlitWhole(
-		Surface* pSrc,
-		bool SURFACE_SETTING_ONE,
-		bool SURFACE_SETTING_TWO) override R0;
-
-	virtual bool BlitPart(
-		RectangleStruct const& rectDest,
-		Surface* pSrc,
-		RectangleStruct const& rectSrc,
-		bool SURFACE_SETTING_ONE,
-		bool SURFACE_SETTING_TWO) override R0;
-
-	virtual bool Blit(
-		RectangleStruct const& rectClip,
-		RectangleStruct const& rectClip2,	//again? hmm
-		Surface* pSrc,
-		RectangleStruct const& rectDest,	//desired dest rect of pSrc ? (stretched? clipped?)
-		RectangleStruct const& rectSrc,	//desired source rect of pSrc ?
-		bool SURFACE_SETTING_ONE,
-		bool SURFACE_SETTING_TWO) override R0;
-
-	virtual bool FillRectEx(
-		RectangleStruct const& rectClip,
-		RectangleStruct const& rectFill,
-		DWORD dwColor) override R0;
-
-	virtual bool FillRect(
-		RectangleStruct const& rectFill,
-		DWORD dwColor) override R0;
-
-	virtual bool vt_entry_1C(
-		RectangleStruct const& rectClip,
-		ColorStruct Color,
-		int nUnknown) override R0;
-
-	virtual bool vt_entry_34(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7) override R0;
-
-	virtual bool vt_entry_38(	//similar to 34
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7) override R0;
-
-	virtual bool vt_entry_3C(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7, DWORD dwUnk8,
-		DWORD dwUnk9, DWORD dwUnk10, DWORD dwUnk11) override R0;
-
-	virtual bool vt_entry_40(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6, DWORD dwUnk7) override R0;
-
-	virtual bool vt_entry_4C(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4,
-		DWORD dwUnk5, DWORD dwUnk6) override R0;
-
-	virtual bool vt_entry_50(
-		DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4) override R0;
-
-	virtual void* Lock(int X, int Y) override R0;
-
-	virtual bool Unlock() override R0;
-
-	virtual bool CanLock(DWORD dwUnk1, DWORD dwUnk2) override R0;
-
-	virtual int GetBytesPerPixel() const override R0;
-
-	virtual int GetPitch() const override R0;
-
-	virtual bool IsDSurface() const override final
+	// Comments from thomassneddon
+	void DrawSHP(ConvertClass* Palette, SHPStruct* SHP, int FrameIndex,
+		const Point2D* const Position, const RectangleStruct* const Bounds, BlitterFlags Flags, int Remap,
+		int ZAdjust, // + 1 = sqrt(3.0) pixels away from screen
+		ZGradientDescIndex ZGradientDescIndex,
+		int Brightness, // 0~2000. Final color = saturate(OriginalColor * Brightness / 1000.0f)
+		int TintColor, SHPStruct* ZShape, int ZShapeFrame, int XOffset, int YOffset)
 	{
-		return true;
+		CC_Draw_Shape(this, Palette, SHP, FrameIndex, Position, Bounds, Flags, Remap, ZAdjust,
+			ZGradientDescIndex, Brightness, TintColor, ZShape, ZShapeFrame, XOffset, YOffset);
 	}
 
-	// Properties
-	int BytesPerPixel;
-	LPVOID LockedSurface; // pointing to SurfaceDesc->lpSurface if locked
-	bool Allocated;
-	bool VRAMmed;
-	PROTECTED_PROPERTY(BYTE, align_1A[2]);
-	IDirectDrawSurface* Surface;
-	DDSURFACEDESC2* SurfaceDesc;
+	void DrawText(const wchar_t* pText, RectangleStruct* pBounds, Point2D* pLocation,
+		COLORREF ForeColor, COLORREF BackColor, TextPrintType Flag)
+	{
+		Point2D tmp = { 0, 0 };
+
+		Fancy_Text_Print_Wide(&tmp, pText, this, pBounds, pLocation, ForeColor, BackColor, Flag);
+	}
+
+	void DrawText(const wchar_t* pText, Point2D* pLoction, COLORREF Color)
+	{
+		RectangleStruct rect = { 0, 0, 0, 0 };
+		this->GetRect(&rect);
+
+		Point2D tmp { 0,0 };
+		Fancy_Text_Print_Wide(&tmp, pText, this, &rect, pLoction, Color, 0, TextPrintType::TPF_NOSHADOW);
+	}
+
+	void DrawText(const wchar_t* pText, int X, int Y, COLORREF Color)
+	{
+		Point2D P = { X ,Y };
+		DrawText(pText, &P, Color);
+	}
+
+	void* Buffer;
+	bool IsAllocated;
+	bool IsInVideoRam;
+	PROTECTED_PROPERTY(char, field_1A[2]);
+	IDirectDrawSurface* VideoSurfacePtr;
+	DDSURFACEDESC2* VideoSurfaceDescription;
 };

@@ -151,7 +151,7 @@ public:
 	DWORD           unknown_52C;	//unused?
 	DWORD           unknown_530;
 	DWORD           unknown_534;
-	DWORD           unknown_538;
+	int				WalkedFramesSoFar;
 	bool            unknown_bool_53C;
 	DWORD           unknown_540;
 
