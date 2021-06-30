@@ -110,7 +110,7 @@ public:
 	//===========================================================================
 	BytePalette const* UsedPalette1;
 	BytePalette const* UsedPalette2;
-	BYTE* unknown_buffer_190;
+	BYTE* IndexesToIgnore;
 	int UsageCount;
 	TintStruct Color1;
 	TintStruct Color2;

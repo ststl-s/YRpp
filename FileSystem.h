@@ -33,6 +33,7 @@ public:
 	static constexpr reference<SHPStruct*, 0xB1CF98u> OREGATH_SHP{};
 
 	static constexpr reference<BytePalette, 0x885780u> TEMPERAT_PAL{};
+	static constexpr reference<BytePalette, 0xABBED0u> ISOx_PAL {};
 	static constexpr reference<BytePalette*, 0xA8F790u> GRFXTXT_PAL{};
 
 	static constexpr reference<ConvertClass*, 0x87F6B0u> CAMEO_PAL{};

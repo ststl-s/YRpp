@@ -53,7 +53,26 @@ struct BytePalette {
 //used for light colors
 struct TintStruct
 {
+	TintStruct() = default;
+
+	TintStruct(int r, int g, int b) :Red { r }, Green { g }, Blue { b }{}
+
 	int Red, Green, Blue;
+
+	bool operator == (TintStruct const rhs) const
+	{
+		return Red == rhs.Red && Green == rhs.Green && Blue == rhs.Blue;
+	}
+
+	bool operator != (TintStruct const rhs) const
+	{
+		return !(*this == rhs);
+	}
+
+	bool operator < (TintStruct const rhs) const
+	{
+		return *(int*)this < *(int*)(&rhs);
+	}
 };
 
 //16bit colors
