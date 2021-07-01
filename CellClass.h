@@ -325,6 +325,12 @@ public:
 	void ReplaceTag(TagClass* pTag)
 		{ JMP_THIS(0x485250) }
 
+	void DrawOverlay(Point2D& const Location, RectangleStruct& const Bound)
+		{ JMP_THIS(0x47F6A0); }
+
+	void DrawOverlayShadow(Point2D& const Location, RectangleStruct& const Bound)
+		{ JMP_THIS(0x47F510); }
+
 protected:
 	//Constructor
 	CellClass() noexcept
