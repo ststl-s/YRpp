@@ -325,6 +325,9 @@ public:
 	void ReplaceTag(TagClass* pTag)
 		{ JMP_THIS(0x485250) }
 
+	void InitLightConvert(int Red2, int Intensity, int Ambient, int Red1, int Green1, int Blue1)
+		{ JMP_THIS(0x483E30); }
+
 	void DrawOverlay(Point2D& const Location, RectangleStruct& const Bound)
 		{ JMP_THIS(0x47F6A0); }
 
