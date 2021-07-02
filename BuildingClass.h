@@ -137,6 +137,9 @@ public:
 	int FirstActiveSWIdx() const
 		{ JMP_THIS(0x457630); }
 
+	int GetShapeNumber() const
+		{ JMP_THIS(0x43EF90); }
+
 	// returns Type->SuperWeapon2, if its AuxBuilding is satisfied
 	int SecondActiveSWIdx() const
 		{ JMP_THIS(0x457690); }
@@ -211,8 +214,8 @@ public:
 	BuildingTypeClass* Type;
 	FactoryClass* Factory;
 	TimerStruct C4Timer;
-	int unknown_int_534;
-	int unknown_int_538;
+	int BState;
+	int QueueBState;
 	DWORD OwnerCountryIndex;
 	InfantryClass* C4AppliedBy;
 	DWORD unknown_544;

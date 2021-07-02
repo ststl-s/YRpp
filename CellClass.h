@@ -401,12 +401,8 @@ public:
 	int                OccupyHeightsCoveringMe;
 	DWORD              unknown_104;
 	WORD               unknown_108;
-	WORD               unknown_10A;
-	WORD               unknown_10C;
-	WORD               unknown_10E;
-	WORD               unknown_110;
-	WORD               unknown_112;
-	WORD               unknown_114;
+	ColorStruct        Color1;
+	ColorStruct        Color2;
 	signed short       TubeIndex; // !@#% Westwood braindamage, can't use > 127! (movsx eax, al)
 
 	char               unknown_118;

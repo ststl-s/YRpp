@@ -97,7 +97,7 @@ public:
 	virtual CoordStruct* GetDockCoords(CoordStruct* pCrd, TechnoClass* docker) const R0;
 
 	// stupid! guess what happens again?
-	virtual CoordStruct* GetPosition_2(CoordStruct* pCrd) const R0;
+	virtual CoordStruct* GetCenterCoord(CoordStruct* pCrd) const R0;
 	virtual CoordStruct* GetFLH(CoordStruct *pDest, int idxWeapon, CoordStruct BaseCoords) const R0;
 	virtual CoordStruct* GetExitCoords(CoordStruct* pCrd, DWORD dwUnk) const R0;
 	virtual int GetYSort() const R0;
@@ -139,7 +139,7 @@ public:
 	virtual void See(DWORD dwUnk, DWORD dwUnk2) RX;
 	virtual bool UpdatePlacement(PlacementType value) R0;
 	virtual RectangleStruct* vt_entry_128(RectangleStruct* pRect) const R0;
-	virtual RectangleStruct* vt_entry_12C(RectangleStruct* pRect) R0;
+	virtual RectangleStruct* GetRenderDimensions(RectangleStruct* pRect) R0;
 	virtual void DrawRadialIndicator(DWORD dwUnk) RX;
 	virtual void MarkForRedraw() RX;
 	virtual bool CanBeSelected() const R0;
