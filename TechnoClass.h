@@ -441,6 +441,9 @@ public:
 	bool HasAbility(Ability ability) const
 		{ JMP_THIS(0x70D0D0); }
 
+	void ClearSidebarTabObject() const
+		{ JMP_THIS(0x734270); }
+
 	int GetIonCannonValue(AIDifficulty difficulty) const;
 
 	int GetIonCannonValue(AIDifficulty difficulty, int maxHealth) const {
