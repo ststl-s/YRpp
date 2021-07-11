@@ -47,6 +47,14 @@ public:
 		return buffer;
 	}
 
+	static DWORD __fastcall RGB2DWORD(int red, int green, int blue)
+	{ JMP_STD(0x4355D0); }
+
+	static DWORD RGB2DWORD(const ColorStruct Color)
+	{
+		return RGB2DWORD(Color.R, Color.G, Color.B);
+	}
+
 	//Stuff
 
 	/** Message is a vswprintf format specifier, ... is for any arguments needed */
