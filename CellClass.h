@@ -22,6 +22,7 @@ class TubeClass;
 class FoggedObjectClass;
 class TagClass;
 class TiberiumClass;
+class PixelFXClass;
 
 class NOVTABLE CellClass : public AbstractClass
 {
@@ -87,6 +88,15 @@ public:
 	void Unshroud()
 		{ JMP_THIS(0x4876F0); }
 
+	bool IsFogged() // Check Fog maybe?
+		{ JMP_THIS(0x4879B0); }
+
+	void CleanFog()
+		{ JMP_THIS(0x486BF0); }
+
+	void ClearFoggedObjects()
+		{ JMP_THIS(0x486C50); }
+
 	// adjusts LAT
 	void SetupLAT()
 		{ JMP_THIS(0x47CA80); }
@@ -115,7 +125,7 @@ public:
 	void CollectCrate(FootClass* pCollector)
 		{ JMP_THIS(0x481A00); }
 
-	void ProcessColourComponents(int* arg0, int* Intensity, int* Ambient, int* a5, int* a6, int* tintR, int* tintG, int* tintB)
+	void ProcessColourComponents(int* arg0, int* pIntensity, int* pAmbient, int* a5, int* a6, int* tintR, int* tintG, int* tintB)
 		{ JMP_THIS(0x484180); }
 
 	TubeClass* GetTunnel()
@@ -325,7 +335,7 @@ public:
 	void ReplaceTag(TagClass* pTag)
 		{ JMP_THIS(0x485250) }
 
-	void InitLightConvert(int Red2, int Intensity, int Ambient, int Red1, int Green1, int Blue1)
+	void InitLightConvert(int Red2, int nIntensity, int nAmbient, int Red1, int Green1, int Blue1)
 		{ JMP_THIS(0x483E30); }
 
 	void DrawOverlay(Point2D& Location, RectangleStruct& Bound)
@@ -361,18 +371,15 @@ public:
 	int                OverlayTypeIndex;	//What Overlay lies on this Cell?
 	int                SmudgeTypeIndex;	//What Smudge lies on this Cell?
 
-	DWORD              unknown_4C;
+	DWORD              Passability;
 	int                WallOwnerIndex; // Which House owns the wall placed in this Cell?
 	                                              // Determined by finding the nearest BuildingType and taking its owner
 	int                InfantryOwnerIndex;
 	int                AltInfantryOwnerIndex;
 	DWORD              unknown_5C;
 	DWORD              unknown_60;
-	DWORD              unknown_64;
-	DWORD              unknown_68;
-	DWORD              unknown_6C;
-	DWORD              unknown_70;
-	DWORD              unknown_74;
+	DWORD              RedrawFrame;
+	RectangleStruct    InViewportRect;
 	DWORD              CloakedByHouses;	//Is this cell in a cloak generator's radius? One bit per House.
 
 	// Is this cell in range of some SensorsSight= equipment? One Word(!) per House, ++ and -- per unit.
@@ -397,16 +404,16 @@ public:
 	double             RadLevel;	//The level of radiation on this Cell.
 	RadSiteClass*      RadSite;	//A pointer to the responsible RadSite.
 
-	DWORD              unknown_FC;
+	PixelFXClass*      PixelFX;
 	int                OccupyHeightsCoveringMe;
-	DWORD              unknown_104;
-	WORD               unknown_108;
+	DWORD              Intensity;
+	WORD               Ambient;
 	ColorStruct        Color1;
 	ColorStruct        Color2;
 	signed short       TubeIndex; // !@#% Westwood braindamage, can't use > 127! (movsx eax, al)
 
 	char               unknown_118;
-	char               unknown_119;
+	char               IsIceGrowthAllowed;
 	char               Height;
 	char               Level;
 
@@ -415,8 +422,8 @@ public:
 
 	unsigned char      Powerup;	//The crate type on this cell. Also indicates some other weird properties
 
-	BYTE               unknown_11F;
-	char               Shroudedness; // trust me, you don't wanna know... if you do, see 0x7F4194 and cry
+	BYTE               SmudgeData;
+	char               Visibility; // trust me, you don't wanna know... if you do, see 0x7F4194 and cry
 	char               Foggedness; // same value as above: -2: Occluded completely, -1: Visible, 0...48: frame in fog.shp or shroud.shp
 	BYTE               BlockedNeighbours; // number of somehow occupied cells next to this
 	PROTECTED_PROPERTY(BYTE, align_123);

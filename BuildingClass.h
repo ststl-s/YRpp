@@ -160,6 +160,9 @@ public:
 	bool MakeTraversable()
 		{ JMP_THIS(0x452540); }
 
+	bool CheckFog()
+		{ JMP_THIS(0x457A10); }
+
 	// returns false if this is a gate that is closed, true otherwise
 	bool IsTraversable() const
 		{ JMP_THIS(0x4525F0); }

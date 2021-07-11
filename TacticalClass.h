@@ -34,7 +34,7 @@ public:
 		return buffer;
 	}
 
-	int GetOcclusion(const CellStruct& cell, bool fog) const
+	char GetOcclusion(const CellStruct& cell, bool fog) const
 		{ JMP_THIS(0x6D8700); }
 
 	Point2D * AdjustForZShapeMove(Point2D* pDest, Point2D* pClient)

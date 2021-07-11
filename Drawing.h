@@ -11,9 +11,26 @@
 #include <Helpers/CompileTime.h>
 #include <Surface.h>
 
+struct DirtyAreaStruct
+{
+	RectangleStruct Rect;
+	bool alphabool10;
+
+	bool operator==(const DirtyAreaStruct& another) const
+	{
+		return
+			Rect.X == another.Rect.X &&
+			Rect.Y == another.Rect.Y &&
+			Rect.Width == another.Rect.Width &&
+			Rect.Height == another.Rect.Height &&
+			alphabool10 == another.alphabool10;
+	};
+};
+
 class Drawing
 {
 public:
+	constexpr static reference<DynamicVectorClass<DirtyAreaStruct>, 0xB0CE78> DirtyAreas {};
 	static constexpr reference<ColorStruct, 0xB0FA1Cu> const TooltipColor{};
 
 	//TextBox dimensions for tooltip-style boxes
@@ -44,6 +61,23 @@ public:
 	{
 		RectangleStruct buffer;
 		Intersect(&buffer, rect1, rect2, delta_left, delta_top);
+		return buffer;
+	}
+
+	// Rect1 will be changed, notice that - secsome
+	static RectangleStruct* __fastcall Union(
+		RectangleStruct* pOutBuffer,
+		RectangleStruct& rect1,
+		RectangleStruct& rect2)
+			{ JMP_STD(0x487F40); }
+
+	// Rect1 will be changed, notice that - secsome
+	static RectangleStruct __fastcall Union(
+		RectangleStruct& rect1,
+		RectangleStruct& rect2)
+	{
+		RectangleStruct buffer;
+		Union(&buffer, rect1, rect2);
 		return buffer;
 	}
 
