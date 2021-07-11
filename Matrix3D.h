@@ -13,10 +13,11 @@ public:
 	//no constructor, so this class stays aggregate and can be initialized using the curly braces {}
 	T X, Y, Z, W;
 
-	//methods are WIP
+	// TODO add Vector4 methods
 };
-template<typename T> 
-Vector4D<T> const Vector4D<T>::Empty { T(),T(),T(),T() };
+
+template <typename T>
+const Vector4D<T> Vector4D<T>::Empty = { T(), T(), T(), T() };
 
 class NOVTABLE Matrix3D
 {
@@ -95,15 +96,15 @@ public:
 	void LookAt1(Vector3D<float>& p, Vector3D<float>& t, float roll) { JMP_THIS(0x5AF550); }
 	void LookAt2(Vector3D<float>& p, Vector3D<float>& t, float roll) { JMP_THIS(0x5AF710); }
 
-	static Matrix3D* __fastcall MatrixMultiply(Matrix3D* ret, Matrix3D* A, Matrix3D* B) { JMP_STD(0x5AF980); }
-	static Matrix3D MatrixMultiply(Matrix3D& A, Matrix3D& B)
+	static Matrix3D* __fastcall MatrixMultiply(Matrix3D* ret, const Matrix3D* A, const Matrix3D* B) { JMP_STD(0x5AF980); }
+	static Matrix3D MatrixMultiply(const Matrix3D& A, const Matrix3D& B)
 	{
 		Matrix3D buffer;
 		MatrixMultiply(&buffer, &A, &B);
 		return buffer;
 	}
-	static Vector3D<float>* __fastcall MatrixMultiply(Vector3D<float>* ret, Matrix3D* mat, Vector3D<float>* vec) { JMP_STD(0x5AFB80); }
-	static Vector3D<float> MatrixMultiply(Matrix3D& mat, Vector3D<float>& vec)
+	static Vector3D<float>* __fastcall MatrixMultiply(Vector3D<float>* ret, const Matrix3D* mat, const Vector3D<float>* vec) { JMP_STD(0x5AFB80); }
+	static Vector3D<float> MatrixMultiply(const Matrix3D& mat, const Vector3D<float>& vec)
 	{
 		Vector3D<float> buffer;
 		MatrixMultiply(&buffer, &mat, &vec);

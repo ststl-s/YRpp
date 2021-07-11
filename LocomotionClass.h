@@ -74,10 +74,10 @@ public:
 	virtual bool __stdcall Is_To_Have_Shadow()
 		{ return true; }
 
-	virtual Matrix3DStruct* __stdcall Draw_Matrix(Matrix3DStruct* pMatrix, int* key)
+	virtual Matrix3D __stdcall Draw_Matrix(int* key)
 		{ JMP_STD(0x55A730); }
 
-	virtual Matrix3DStruct* __stdcall Shadow_Matrix(Matrix3DStruct* pMatrix, int* key)
+	virtual Matrix3D __stdcall Shadow_Matrix(int* key)
 		{ JMP_STD(0x55A7D0); }
 
 	virtual Point2D* __stdcall Draw_Point(Point2D* pPoint)

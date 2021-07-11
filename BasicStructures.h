@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Matrix3D.h>
+
 struct Color16Struct;
 
 //used for most colors
@@ -9,6 +11,10 @@ struct ColorStruct
 
 	ColorStruct(BYTE const r, BYTE const g, BYTE const b)
 		: R(r), G(g), B(b)
+	{ }
+
+	ColorStruct(const ColorStruct& c)
+		: R(c.R), G(c.G), B(c.B)
 	{ }
 
 	inline explicit ColorStruct(Color16Struct const color);
@@ -137,12 +143,6 @@ ColorStruct::operator WORD() const {
 struct RandomStruct
 {
 	int Min, Max;
-};
-
-//3D Matrix
-struct Matrix3DStruct
-{
-	float Data[12];
 };
 
 //obvious

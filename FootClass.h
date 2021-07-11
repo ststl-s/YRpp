@@ -53,7 +53,7 @@ public:
 
 	virtual void Draw_A_VXL(
 		VoxelStruct *VXL, int HVAFrameIndex, int Flags, SomeVoxelCache *Cache, RectangleStruct *Rectangle,
-		Point2D *CenterPoint, Matrix3DStruct *Matrix, DWORD dwUnk8, DWORD DrawFlags, DWORD dwUnk10) RX;
+		Point2D *CenterPoint, Matrix3D *Matrix, DWORD dwUnk8, DWORD DrawFlags, DWORD dwUnk10) RX;
 
 	virtual void vt_entry_514() RX;
 	virtual void Panic() RX;

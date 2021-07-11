@@ -88,8 +88,8 @@ public:
 	DWORD MouseFrameIndex;
 	TimerStruct StartTime;
 	int SelectableCount;
-	Matrix3DStruct Unused_Matrix3D;
-	Matrix3DStruct Matrix3D_DE4;
+	Matrix3D Unused_Matrix3D;
+	Matrix3D Matrix3D_DE4;
 	DWORD field_E14;
 
 };

@@ -39,11 +39,11 @@ public:
 		return buffer;
 	}
 
-	Matrix3DStruct* GetDrawingMatrix(Matrix3DStruct* pBuffer) const
+	Matrix3D* GetDrawingMatrix(Matrix3D* pBuffer) const
 		{ JMP_THIS(0x4399E0); }
 
-	Matrix3DStruct GetDrawingMatrix() const {
-		Matrix3DStruct buffer;
+	Matrix3D GetDrawingMatrix() const {
+		Matrix3D buffer;
 		this->GetDrawingMatrix(&buffer);
 		return buffer;
 	}

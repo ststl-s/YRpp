@@ -186,7 +186,7 @@ public:
 	virtual bool vt_entry_29C() R0;
 	virtual bool ShouldBeCloaked() const R0;
 	virtual bool ShouldNotBeCloaked() const R0;
-	virtual DirStruct* GetFacing(DirStruct* pBuffer) const R0;
+	virtual DirStruct* TurretFacing(DirStruct* pBuffer) const R0;
 	virtual bool IsArmed() const R0; // GetWeapon(primary) && GetWeapon(primary)->WeaponType
 	virtual void vt_entry_2B0() const RX;
 	virtual double GetStoragePercentage() const R0;
@@ -455,9 +455,9 @@ public:
 		return this->GetIonCannonValue(difficulty);
 	}
 
-	DirStruct GetFacing() const {
+	DirStruct TurretFacing() const {
 		DirStruct ret;
-		this->GetFacing(&ret);
+		this->TurretFacing(&ret);
 		return ret;
 	}
 
@@ -618,8 +618,8 @@ public:
 	TransitionTimer  UnloadTimer; // times the deploy, unload, etc. cycles
 
 	FacingStruct     BarrelFacing;
-	FacingStruct     Facing;
-	FacingStruct     TurretFacing;
+	FacingStruct     PrimaryFacing;
+	FacingStruct     SecondaryFacing;
 	int              CurrentBurstIndex;
 	TimerStruct      TargetLaserTimer;
 	short            unknown_short_3C8;
