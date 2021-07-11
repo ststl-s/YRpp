@@ -35,7 +35,7 @@ public:
 	//MissionClass
 	//TechnoClass
 	virtual void Destroyed(ObjectClass* Killer) RX;
-	virtual void vt_entry_490(DWORD dwUnk, DWORD dwUnk2) RX;
+	virtual bool ForceOccupiersLeave(CoordStruct& coord, DWORD dwUnk = 0) R0;
 
 	//BuildingClass
 	virtual CellStruct* vt_entry_4D4(CellStruct* pCellStruct, DWORD dwUnk, DWORD dwUnk2) const R0;

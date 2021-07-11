@@ -314,7 +314,7 @@ public:
 	virtual bool vt_entry_484(DWORD dwUnk, DWORD dwUnk2) R0;
 	virtual void UpdateSight(DWORD dwUnk, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4, DWORD dwUnk5) RX;
 	virtual void vt_entry_48C(DWORD dwUnk, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4) RX;
-	virtual void vt_entry_490(DWORD dwUnk, DWORD dwUnk2) = 0; //pure virtual
+	virtual bool ForceOccupiersLeave(CoordStruct& coord, DWORD dwUnk = 0) R0;
 	virtual void RadarTrackingStart() RX;
 	virtual void RadarTrackingStop() RX;
 	virtual void RadarTrackingFlash() RX;
