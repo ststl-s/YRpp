@@ -40,10 +40,11 @@ public:
 	[[noreturn]] static void RaiseError(HRESULT err)
 		{ JMP_STD(0x7DC720); }
 
+	// actually is SessionClass::Callback
 	static void SetProgress(int progress)
 		{ SET_REG32(ECX, 0xA8B238); JMP_STD(0x69AE90); }
 
-	static void UnknownCall()
+	static void CallBack()
 		{ JMP_STD(0x48D080); }
 
 	static int __fastcall GetResource(int ID, int Type)
@@ -58,16 +59,16 @@ public:
 	static void __fastcall sub_53E3C0(HWND hWindow)
 		{ JMP_STD(0x53E3C0); }
 
-	static void __fastcall sub_776D80(tagRECT *Rect)
+	static void __stdcall OnWindowMoving(tagRECT *Rect)
 		{ JMP_STD(0x776D80); }
 
-	static void __stdcall sub_63AB00(Point2D XY)
+	static void __stdcall PlanningManager_WM_RBUTTONUP_63AB00(Point2D XY)
 		{ JMP_STD(0x63AB00); }
 
 	static HRESULT __fastcall Save_Sides(LPSTREAM pStm, DynamicVectorClass<SideClass *>* pVector)
 		{ JMP_STD(0x6805F0); }
 
-	static void sub_53E6B0()
+	static void StreamerThreadFlush()
 		{ JMP_STD(0x53E6B0); }
 
 	static void __fastcall UICommands_TypeSelect_7327D0(const char* iniName)
@@ -75,6 +76,9 @@ public:
 
 	static bool IsTypeSelecting()
 		{ JMP_STD(0x732D00); }
+
+	static double GetFloaterGravity()
+		{ JMP_STD(0x48ACF0); }
 };
 
 // this fake class contains the IIDs used by the game
