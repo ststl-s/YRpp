@@ -4,6 +4,7 @@
 #include <GenericList.h>
 #include <ArrayClasses.h>
 #include <CCFileClass.h>
+#include <IndexClass.h>
 #include <Helpers/CompileTime.h>
 
 struct ColorStruct;
@@ -13,6 +14,12 @@ class TechnoTypeClass;
 class INIClass
 {
 public:
+	struct INIComment
+	{
+		char* Value;
+		INIComment* Next;
+	};
+
 	class INIEntry : public Node<INIEntry*>
 	{
 		public:
@@ -20,38 +27,23 @@ public:
 
 			char* Key;
 			char* Value;
-			DWORD unknown_14;
-			DWORD unknown_18;
-			DWORD unknown_1C;
-			DWORD unknown_20;
-			DWORD unknown_24;
+			INIComment* Comments;
+			char* CommentString;
+			int PreIndentCursor;
+			int PostIndentCursor;
+			int CommentCursor;
 	};
 
 	class INISection : public Node<INISection*>
 	{
 		public:
-			struct CheckedEntry
-			{
-				unsigned int Checksum; //CRC32 of Entry's vaue
-				INIEntry* Entry;
-			};
-
-			struct CheckedEntryList //instead of using another list class, WW decided to create this...
-			{
-				CheckedEntry* Entries;
-				int Count;
-				int Capacity;
-				unsigned char Unknown_0C;
-				unsigned int Unknown_10;
-			};
 
 			virtual ~INISection() {}
 
 			char* Name;
 			List<INIEntry*> Entries;
-			CheckedEntryList CheckedEntries;
-
-			unsigned int Unknown_40;
+			IndexClass <unsigned int, INIEntry*> EntryIndex;
+			INIComment* Comments;
 	};
 
 	INIClass()
@@ -265,15 +257,12 @@ public:
 
 public:
 
-	DWORD unknown_4;
-	DWORD unknown_8;
+	char* CurrentSectionName;
+	INISection* CurrentSection;
 	List<INISection> Sections;
-	DWORD unknown_28;
-	DWORD unknown_2C;
-	DWORD unknown_30;
-	bool unknown_bool_34;
-	DWORD unknown_38;
-	DWORD unknown_3C;
+	IndexClass<char*, INISection*> SectionIndex;
+	INIComment* LineComments;
+	// The following two should be in CCINIClass - secsome
 	bool Digested;
 	byte Digest[20];
 };
