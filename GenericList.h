@@ -4,82 +4,98 @@
 
 #include <YRPPCore.h>
 
+class GenericList;
 class GenericNode
 {
 public:
-	//Destructor
-	virtual ~GenericNode() RX;
+	GenericNode() : NextNode(nullptr), PrevNode(nullptr) { }
+	~GenericNode() { Unlink(); }
+	GenericNode(GenericNode& node) { node.Link(this); }
+	GenericNode& operator = (GenericNode& node)
+	{
+		if (&node != this)
+			node.Link(this);
 
-	//Constructor
-	GenericNode()
-		: GenericNode(noinit_t())
-	{ JMP_THIS(0x40E320); }
+		return *this;
+	}
+
+	void Unlink()
+	{
+		if (this->IsValid())
+		{
+			this->PrevNode->NextNode = this->NextNode;
+			this->NextNode->PrevNode = this->PrevNode;
+			this->PrevNode = nullptr;
+			this->NextNode = nullptr;
+		}
+	}
+
+	GenericList* MainList() const
+	{
+		GenericNode const* node = this;
+
+		while (node->PrevNode)
+			node = this->PrevNode;
+
+		return (GenericList*)this;
+	}
+	void Link(GenericNode* pNode)
+	{
+		pNode->Unlink();
+		pNode->NextNode = this->NextNode;
+		pNode->PrevNode = this;
+		if (this->NextNode) this->NextNode->PrevNode = pNode;
+		this->NextNode = pNode;
+	}
+
+	GenericNode* Next() const { return this->NextNode; }
+	GenericNode* Prev() const { return this->PrevNode; }
+	bool IsValid() const { return this && this->NextNode && this->PrevNode; }
 
 protected:
-	explicit __forceinline GenericNode(noinit_t)
-	{ }
-
-	//Properties
-
-public:
-
-	GenericNode* Next;
-	GenericNode* Previous;
-};
-
-template <typename T> class Node : public GenericNode
-{
-public:
-	//Destructor
-	virtual ~Node() RX;
-
-	//Constructor
-	Node()
-		: Node(noinit_t())
-	{ JMP_THIS(0x40E320); }
-
-protected:
-	explicit __forceinline Node(noinit_t)
-		: GenericNode(noinit_t())
-	{ }
+	GenericNode* NextNode;
+	GenericNode* PrevNode;
 };
 
 class GenericList
 {
 public:
-	//Destructor
-	virtual ~GenericList() RX;
-
-	//Constructor
 	GenericList()
-		: GenericList(noinit_t())
-	{ JMP_THIS(0x52ACE0); }
+	{
+		FirstNode.Link(&LastNode);
+	}
+
+	GenericNode* First() const { return FirstNode.Next(); }
+	GenericNode* Last() const { return LastNode.Prev(); }
+	bool IsEmpty() const { return !FirstNode.Next()->IsValid(); }
+	void AddHead(GenericNode* pNode) { FirstNode.Link(pNode); }
+	void AddTail(GenericNode* pNode) { LastNode.Prev()->Link(pNode); }
+	void Delete() { while (this->FirstNode.Next()->IsValid()) GameDelete(this->FirstNode.Next()); }
 
 protected:
-	explicit __forceinline GenericList(noinit_t)
-	{ }
+	GenericNode FirstNode;
+	GenericNode LastNode;
 
-	//Properties
-
-public:
-
-	GenericNode First;
-	GenericNode Last;
+private:
+	GenericList(GenericList& list);
+	GenericList& operator = (GenericList const&) = delete;
 };
 
-template <typename T> class List : public GenericList
+template<class T> class List;
+template<class T>
+class Node : public GenericNode
 {
 public:
-	//Destructor
-	virtual ~List() RX;
+	List<T>* MainList() const { return (List<T> *)GenericNode::MainList(); }
+	T* Next() const { return (T*)GenericNode::Next(); }
+	T* Prev() const { return (T*)GenericNode::Prev(); }
+	bool IsValid() const { return GenericNode::IsValid(); }
+};
 
-	//Constructor
-	List()
-		: List(noinit_t())
-	{ JMP_THIS(0x52ACE0); }
-
-protected:
-	explicit __forceinline List(noinit_t)
-		: GenericList(noinit_t())
-	{ }
+template<class T>
+class List : public GenericList
+{
+public:
+	T* First() const { return (T*)GenericList::First(); }
+	T* Last() const { return (T*)GenericList::Last(); }
 };

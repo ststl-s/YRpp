@@ -11,7 +11,7 @@ struct MixHeaderData
 	DWORD Size;
 };
 
-class MixFileClass : public Node<MixFileClass*>
+class MixFileClass : public Node<MixFileClass>
 {
 	struct GenericMixFiles
 	{
@@ -68,7 +68,7 @@ public:
 	virtual ~MixFileClass() RX;
 
 	MixFileClass(const char* pFileName)
-		: Node<MixFileClass*>(noinit_t())
+		: Node<MixFileClass>()
 	{
 		PUSH_IMM(0x886980);
 		PUSH_VAR32(pFileName);

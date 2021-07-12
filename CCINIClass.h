@@ -20,7 +20,7 @@ public:
 		INIComment* Next;
 	};
 
-	class INIEntry : public Node<INIEntry*>
+	class INIEntry : public Node<INIEntry>
 	{
 		public:
 			virtual ~INIEntry() {}
@@ -34,7 +34,7 @@ public:
 			int CommentCursor;
 	};
 
-	class INISection : public Node<INISection*>
+	class INISection : public Node<INISection>
 	{
 		public:
 
@@ -262,9 +262,6 @@ public:
 	List<INISection> Sections;
 	IndexClass<int, INISection*> SectionIndex; // <CRCValue of the Name, Pointer to the section>
 	INIComment* LineComments;
-	// The following two should be in CCINIClass - secsome
-	bool Digested;
-	byte Digest[20];
 };
 
 //Extended INI class specified for C&C use
@@ -317,4 +314,10 @@ public:
 	DWORD GetCRC()
 		{ JMP_THIS(0x476D80); }
 
+	//Properties
+
+public:
+
+	bool Digested : 1;
+	byte Digest[20];
 };
