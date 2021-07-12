@@ -260,7 +260,7 @@ public:
 	char* CurrentSectionName;
 	INISection* CurrentSection;
 	List<INISection> Sections;
-	IndexClass<char*, INISection*> SectionIndex;
+	IndexClass<int, INISection*> SectionIndex; // <CRCValue of the Name, Pointer to the section>
 	INIComment* LineComments;
 	// The following two should be in CCINIClass - secsome
 	bool Digested;
