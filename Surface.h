@@ -106,6 +106,17 @@ public:
 
 	virtual bool IsDSurface() R0; // guessed - secsome
 
+	// Helper
+	RectangleStruct GetRect()
+	{
+		RectangleStruct ret;
+		this->GetRect(&ret);
+		return ret;
+	}
+
+
+	// Properties
+
 	int Width;
 	int Height;
 };
