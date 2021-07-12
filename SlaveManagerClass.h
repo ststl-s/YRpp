@@ -64,6 +64,9 @@ public:
 	void LostSlave(InfantryClass *Slave)
 		{ JMP_THIS(0x6B0A20); }
 
+	void Deploy2()
+		{ JMP_THIS(0x6B0D60); }
+
 	// switches the slaves to the killer house with cheers and hoorahs
 	// note that this->Owner will be NULL once this function is done
 	void Killed(TechnoClass *Killer, HouseClass * ForcedOwnerHouse = nullptr)

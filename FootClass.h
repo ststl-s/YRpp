@@ -28,7 +28,7 @@ public:
 	//MissionClass
 	//TechnoClass
 	virtual void Destroyed(ObjectClass *Killer) RX;
-	virtual bool ForceOccupiersLeave(CoordStruct& coord, DWORD dwUnk = 0) R0;
+	virtual bool ForceCreate(CoordStruct& coord, DWORD dwUnk = 0) R0;
 
 	//FootClass
 	virtual void ReceiveGunner(FootClass* Gunner) RX;

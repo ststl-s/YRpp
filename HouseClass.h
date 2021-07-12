@@ -251,6 +251,9 @@ public:
 	BYTE Lose(bool bSavourSomething)
 		{ JMP_THIS(0x4FCBD0); }
 
+	void RegisterJustBuilt(TechnoClass* pTechno)
+		{ JMP_THIS(0x4FB6B0); }
+
 	bool CanAlly(HouseClass* pOther) const
 		{ JMP_THIS(0x501540); }
 
@@ -646,6 +649,9 @@ public:
 	bool IsPlayer() const {
 		return this == Player;
 	}
+
+	bool IsPlayerControl() const
+		{ JMP_THIS(0x50B730); }
 
 	// whether this house is equal to Observer
 	bool IsObserver() const {

@@ -461,6 +461,12 @@ public:
 	bool MakeTraversable(ObjectClass const* pVisitor, CellStruct const& cell) const
 		{ JMP_THIS(0x578AD0); }
 
+	void BuildingToFirestormWall(CellStruct const& cell,HouseClass* pHouse,BuildingTypeClass* pBldType)
+		{ JMP_THIS(0x588570); }
+
+	void BuildingToWall(CellStruct const& cell, HouseClass* pHouse, BuildingTypeClass* pBldType)
+		{ JMP_THIS(0x588750); }
+
 protected:
 	//Constructor
 	MapClass() {}	//don't need this
