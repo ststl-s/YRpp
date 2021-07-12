@@ -54,6 +54,9 @@ public:
 
 	// non-vt
 
+	void SetRallypoint(CellStruct* pTarget,bool bPlayEVA)
+		{ JMP_THIS(0x443860); }
+
 	// power up
 	void GoOnline()
 		{ JMP_THIS(0x452260); }
