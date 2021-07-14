@@ -148,36 +148,6 @@ enum class ZGradientDescIndex : unsigned int
 	Not_Common_2 = 3
 };
 
-enum class TextPrintType : int
-{
-	TPF_LASTPOINT = 0x0, //*
-	TPF_LASTSHADOW = 0x0, //*
-	TPF_6POINT = 0x1, //*
-	TPF_8POINT = 0x2,
-	TPF_3POINT = 0x3, //*
-	TPF_LED = 0x4, //*
-	TPF_VCR = 0x5, //*
-	TPF_6PT_GRAD = 0x6,
-	TPF_MAP = 0x7, //*
-	TPF_METAL12 = 0x8,
-	TPF_EFNT = 0x9, //*
-	TPF_TYPE = 0xA, //*
-	TPF_SCORE = 0xB, //*
-	TPF_FONTS = 0xF, //*
-	TPF_NOSHADOW = 0x10,
-	TPF_DROPSHADOW = 0x20,
-	TPF_FULLSHADOW = 0x40,
-	TPF_LIGHTSHADOW = 0x80,
-	TPF_CENTER = 0x100,
-	TPF_RIGHT = 0x200,
-	TPF_MEDIUM_COLOR = 0x1000,
-	TPF_BRIGHT_COLOR = 0x2000,
-	TPF_USE_GRAD_PAL = 0x4000,
-	TPF_UNK_COLOR = 0x8000,
-	TPF_GRAD_ALL = 0xF000,
-};
-MAKE_ENUM_FLAGS(TextPrintType);
-
 // Comments from thomassneddon
 static void __fastcall CC_Draw_Shape(Surface* Surface, ConvertClass* Palette, SHPStruct* SHP, int FrameIndex,
 	const Point2D* const Position, const RectangleStruct* const Bounds, BlitterFlags Flags,
@@ -248,7 +218,7 @@ public:
 		this->GetRect(&rect);
 
 		Point2D tmp { 0,0 };
-		Fancy_Text_Print_Wide(&tmp, pText, this, &rect, pLoction, Color, 0, TextPrintType::TPF_NOSHADOW);
+		Fancy_Text_Print_Wide(&tmp, pText, this, &rect, pLoction, Color, 0, TextPrintType::NoShadow);
 	}
 
 	void DrawText(const wchar_t* pText, int X, int Y, COLORREF Color)
