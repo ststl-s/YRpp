@@ -408,8 +408,14 @@ public:
 	int                OccupyHeightsCoveringMe;
 	DWORD              Intensity;
 	WORD               Ambient;
-	ColorStruct        Color1;
-	ColorStruct        Color2;
+	//ColorStruct      Color1; //10A-10E
+	WORD               unknown_10A;
+	WORD               unknown_10C;
+	WORD               unknown_10E;
+	//ColorStruct      Color2; //110-114
+	WORD               unknown_110;
+	WORD               unknown_112;
+	WORD               unknown_114;
 	signed short       TubeIndex; // !@#% Westwood braindamage, can't use > 127! (movsx eax, al)
 
 	char               unknown_118;
