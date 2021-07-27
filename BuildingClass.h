@@ -66,7 +66,11 @@ public:
 
 	// non-vt
 
-	void SetRallypoint(CellStruct* pTarget,bool bPlayEVA)
+	int GetCurrentFrame() { JMP_THIS(0x43EF90); }
+
+	bool IsBuildingFogged() { JMP_THIS(0x457A10); }
+
+	void SetRallypoint(CellStruct* pTarget, bool bPlayEVA)
 		{ JMP_THIS(0x443860); }
 
 	// power up

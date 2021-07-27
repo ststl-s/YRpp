@@ -88,6 +88,9 @@ public:
 	void Unshroud()
 		{ JMP_THIS(0x4876F0); }
 
+	RectangleStruct* ShapeRect(RectangleStruct* pRet)
+		{ JMP_THIS(0x47FDE0); }
+
 	bool IsFogged() // Check Fog maybe?
 		{ JMP_THIS(0x4879B0); }
 
@@ -409,13 +412,13 @@ public:
 	DWORD              Intensity;
 	WORD               Ambient;
 	//ColorStruct      Color1; //10A-10E
-	WORD               unknown_10A;
-	WORD               unknown_10C;
-	WORD               unknown_10E;
+	WORD               Color1_Red;
+	WORD               Color1_Green;
+	WORD               Color1_Blue;
 	//ColorStruct      Color2; //110-114
-	WORD               unknown_110;
-	WORD               unknown_112;
-	WORD               unknown_114;
+	WORD               Color2_Red;
+	WORD               Color2_Green;
+	WORD               Color2_Blue;
 	signed short       TubeIndex; // !@#% Westwood braindamage, can't use > 127! (movsx eax, al)
 
 	char               unknown_118;
