@@ -517,7 +517,7 @@ static constexpr constant_ptr<char, 0x8A3A08> except_txt_content {};
   // XXX do not do this if you aren't sure if the object can exist in this place
   // - this flag overrides any placement checks so you can put Terror Drones into trees and stuff
   ++SomeMutex;
-  obj->Put(blah);
+  obj->Unlimbo(blah);
   --SomeMutex;
 
   AI base node generation uses it:

@@ -383,7 +383,7 @@ public:
  * AircraftClass::See - reveal shroud when on the ground (arg,arg,0,1,x), and fog always (0,0,1,(height < flightlevel/2),x)
  * AnimClass::AnimClass - reveal area to player if anim->Type = [General]DropZoneAnim= (radius = Rules->DropZoneRadius /256) (0,0,0,1,x)
  * BuildingClass::Place - reveal (r = 1) to player if this is ToTile and owned by player (0,0,0,1,x)
- * BuildingClass::Put - reveal (radius = this->Type->Sight ) to owner (0,0,0,1,x)
+ * BuildingClass::Unlimbo - reveal (radius = this->Type->Sight ) to owner (0,0,0,1,x)
  * PsychicReveal launch - reveal to user (0,0,0,0,x)
  * ActionClass::RevealWaypoint - reveal RevealTriggerRadius= to player (0,0,0,1,x)
  * ActionClass::RevealZoneOfWaypoint - reveal (r = 2) to player (0,0,0,1,x)
@@ -407,7 +407,7 @@ public:
  * Foot/Infantry Class::Update/UpdatePosition
  * MapClass::RevealArea0 calls this to do the work
  * ParasiteClass::Infect/PointerGotInvalid
- * TechnoClass::Put
+ * TechnoClass::Unlimbo
  * TechnoClass::Fire uses this (r = 4) right after using RevealArea0, wtfcock
  */
 	void RevealArea3(CoordStruct *Coords, int Height, int Radius, bool SkipReveal)
