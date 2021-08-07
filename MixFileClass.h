@@ -1,7 +1,7 @@
 #pragma once
 
 #include <GenericList.h>
-
+#include <ArrayClasses.h>
 #include <Helpers/CompileTime.h>
 
 struct MixHeaderData
