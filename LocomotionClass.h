@@ -31,12 +31,12 @@ public:
 	virtual ULONG __stdcall Release() R0;
 
 	//IPersist
-	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) = 0;
+	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;
 
 	//IPersistStream
 	virtual HRESULT __stdcall IsDirty() R0;
-	virtual HRESULT __stdcall Load(IStream* pStm) = 0;
-	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) = 0;
+	virtual HRESULT __stdcall Load(IStream* pStm) R0;
+	virtual HRESULT __stdcall Save(IStream* pStm, BOOL fClearDirty) R0;
 
 	virtual HRESULT __stdcall GetSizeMax(ULARGE_INTEGER* pcbSize) R0;
 
