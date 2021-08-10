@@ -1,13 +1,16 @@
 #pragma once
 
+// HVA file
+
 class CCFileClass;
+class Matrix3D;
 
 class MotLib {
 public:
-	DWORD f_0;
-	DWORD f_4;
-	DWORD f_8;
-	void* f_C;
+	bool LoadedFailed;
+	int LayerCount;
+	int FrameCount;
+	Matrix3D* Matrixes;
 
 	MotLib(CCFileClass *Source)
 		{ JMP_THIS(0x5BD570); }
