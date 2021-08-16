@@ -31,6 +31,7 @@ public:
 	static constexpr reference<SHPStruct*, 0x89DDC4u> POWEROFF_SHP{};
 	static constexpr reference<SHPStruct*, 0xA8F794u> GRFXTXT_SHP{};
 	static constexpr reference<SHPStruct*, 0xB1CF98u> OREGATH_SHP{};
+	static constexpr reference<SHPStruct*, 0x89DDBCu> BUILDINGZ_SHA {};
 
 	static constexpr reference<BytePalette, 0x885780u> TEMPERAT_PAL{};
 	static constexpr reference<BytePalette, 0xABBED0u> ISOx_PAL {};

@@ -419,7 +419,7 @@ public:
 		{ JMP_THIS(0x70C610); }
 
 	void DrawObject(SHPStruct* pSHP, int nFrame, Point2D* pLocation, RectangleStruct* pBounds,
-		int, int, int nZAdjust, ZGradientDescIndex eZGradientDescIdx, int, int nBrightness, int TintColor,
+		int, int, int nZAdjust, ZGradient eZGradientDescIdx, int, int nBrightness, int TintColor,
 		SHPStruct* pZShape, int nZFrame, int nZOffsetX, int nZOffsetY, int);
 
 	int sub_70DE00(int State)

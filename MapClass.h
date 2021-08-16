@@ -201,6 +201,9 @@ public:
 		return GetCellAt(cell);
 	}
 
+	CellClass* GetTargetCell(Point2D& location)
+		{ JMP_THIS(0x565730); }
+
 	bool CellExists(const CellStruct &MapCoords) const {
 		return TryGetCellAt(MapCoords) != nullptr;
 	}

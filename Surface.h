@@ -140,20 +140,12 @@ public:
 	MemoryBuffer Buffer;
 };
 
-enum class ZGradientDescIndex : unsigned int
-{
-	Flat = 0,
-	Not_Common = 1,
-	Vertical = 2,
-	Not_Common_2 = 3
-};
-
 // Comments from thomassneddon
 static void __fastcall CC_Draw_Shape(Surface* Surface, ConvertClass* Palette, SHPStruct* SHP, int FrameIndex,
 	const Point2D* const Position, const RectangleStruct* const Bounds, BlitterFlags Flags,
 	int Remap,
 	int ZAdjust, // + 1 = sqrt(3.0) pixels away from screen
-	ZGradientDescIndex ZGradientDescIndex,
+	ZGradient ZGradientDescIndex,
 	int Brightness, // 0~2000. Final color = saturate(OriginalColor * Brightness / 1000.0f)
 	int TintColor, SHPStruct* ZShape, int ZShapeFrame, int XOffset, int YOffset)
 {
@@ -196,7 +188,7 @@ public:
 	void DrawSHP(ConvertClass* Palette, SHPStruct* SHP, int FrameIndex,
 		const Point2D* const Position, const RectangleStruct* const Bounds, BlitterFlags Flags, int Remap,
 		int ZAdjust, // + 1 = sqrt(3.0) pixels away from screen
-		ZGradientDescIndex ZGradientDescIndex,
+		ZGradient ZGradientDescIndex,
 		int Brightness, // 0~2000. Final color = saturate(OriginalColor * Brightness / 1000.0f)
 		int TintColor, SHPStruct* ZShape, int ZShapeFrame, int XOffset, int YOffset)
 	{
