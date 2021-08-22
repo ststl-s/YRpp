@@ -46,7 +46,7 @@ enum class LoadOptionsMode : unsigned int {
 	Delete = 3
 };
 
-class LoadOptionsClass
+class NOVTABLE LoadOptionsClass
 {
 public:
 	// constructor
