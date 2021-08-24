@@ -28,7 +28,7 @@ public:
 	virtual void __stdcall Do_Turn(DirStruct coord) RX;
 	virtual Layer __stdcall In_Which_Layer() RT(Layer);
 	virtual void __stdcall Mark_All_Occupation_Bits(int mark) RX;
-	virtual void __stdcall ILocomotion_B8() RX;
+	virtual void __stdcall Clear_Coords() RX;
 
 	//IPersist
 	virtual HRESULT __stdcall GetClassID(CLSID* pClassID) R0;

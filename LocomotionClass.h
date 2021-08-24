@@ -88,9 +88,9 @@ public:
 	virtual bool __stdcall Will_Jump_Tracks() R0;
 	virtual bool __stdcall Is_Really_Moving_Now() R0;
 	virtual void __stdcall Stop_Movement_Animation() RX;
+	virtual void __stdcall Clear_Coords() RX;
 	virtual void __stdcall Lock() RX;
 	virtual void __stdcall Unlock() RX;
-	virtual void __stdcall ILocomotion_B8() RX;
 	virtual int __stdcall Get_Track_Number() R0;
 	virtual int __stdcall Get_Track_Index() R0;
 	virtual int __stdcall Get_Speed_Accum() R0;
