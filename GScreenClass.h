@@ -39,6 +39,8 @@ public:
 	virtual bool RestoreCursor() = 0;
 	virtual void UpdateCursorMinimapState(bool miniMap) = 0;
 
+	void Render() { JMP_THIS(0x4F4480); }
+
 protected:
 	//Constuctor
 	GScreenClass() {}	//don't need this
