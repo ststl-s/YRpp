@@ -71,6 +71,9 @@ public:
 	static void __fastcall RecalcLighting(int R, int G, int B, DWORD dwUnk)
 		{ JMP_STD(0x53AD00); }
 
+	static bool __fastcall SaveGame(const char* FileName, const wchar_t* Description, bool BarGraph = false)
+		{ JMP_STD(0x67CEF0); }
+
 	// valid range [0..701]
 	bool IsDefinedWaypoint(int idx)
 		{ JMP_THIS(0x68BD80); }
@@ -103,7 +106,7 @@ public:
 	TimerStruct ElapsedTimer;
 	TimerStruct PauseTimer;
 	DWORD unknown_62C;
-	WORD unknown_630;
+	bool IsGamePaused;
 	CellStruct Waypoints [702];
 
 	//Map Header
