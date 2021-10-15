@@ -87,8 +87,8 @@ public:
 
 	//Constructor
 	LightConvertClass(
-		BytePalette const& palette1,
-		BytePalette const& palette2,
+		BytePalette* palette1,
+		BytePalette* palette2,
 		Surface* pSurface,
 		int color_R,
 		int color_G,

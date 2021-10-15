@@ -77,7 +77,13 @@ struct TintStruct
 
 	bool operator < (TintStruct const rhs) const
 	{
-		return *(int*)this < *(int*)(&rhs);
+		if (Red < rhs.Red)
+			return true;
+		if (Green < rhs.Green)
+			return true;
+		if (Blue < rhs.Blue)
+			return true;
+		return false;
 	}
 };
 
