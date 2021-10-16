@@ -188,31 +188,17 @@ public:
 	virtual AbstractType WhatAmI() const RT(AbstractType);
 	virtual int	Size() const R0;
 
-	bool IsAlliedWith(int idxHouse) const {
-		//JMP_THIS(0x4F9A10);
-		if(idxHouse == this->ArrayIndex) {
-			return true;
-		}
-		if(idxHouse != -1) {
-			return ((1u << idxHouse) & this->Allies) != 0u;
-		}
-		return false;
-	}
+	bool IsAlliedWith(int idxHouse) const 
+		{ JMP_THIS(0x4F9A10); }
 
-	bool IsAlliedWith(HouseClass const* pHouse) const {
-		//JMP_THIS(0x4F9A50);
-		return pHouse && (pHouse == this || this->IsAlliedWith(pHouse->ArrayIndex));
-	}
+	bool IsAlliedWith(HouseClass const* pHouse) const 
+		{ JMP_THIS(0x4F9A50); }
 
-	bool IsAlliedWith(ObjectClass const* pObject) const {
-		//JMP_THIS(0x4F9A90);
-		return pObject && this->IsAlliedWith(pObject->GetOwningHouse());
-	}
+	bool IsAlliedWith(ObjectClass const* pObject) const
+		{ JMP_THIS(0x4F9A90); }
 
-	bool IsAlliedWith(AbstractClass const* pAbstract) const {
-		//JMP_THIS(0x4F9AF0);
-		return this->IsAlliedWith(abstract_cast<const ObjectClass*>(pAbstract));
-	}
+	bool IsAlliedWith(AbstractClass const* pAbstract) const 
+		{ JMP_THIS(0x4F9AF0); }
 
 	void MakeAlly(int iHouse, bool bAnnounce)
 		{ JMP_THIS(0x4F9B50); }
@@ -220,6 +206,12 @@ public:
 		{ JMP_THIS(0x4F9B70); }
 	void MakeEnemy(HouseClass* pWho, bool bAnnounce)
 		{ JMP_THIS(0x4F9F90); }
+
+	void AdjustThreats()
+		{ JMP_THIS(0x509400); }
+	void UpdateAngerNodes(int nScoreAdd, HouseClass* pHouse)
+		{ JMP_THIS(0x4FA0DF); }
+
 
 	void AllyAIHouses()
 		{ JMP_THIS(0x501640); }
