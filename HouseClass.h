@@ -210,7 +210,7 @@ public:
 	void AdjustThreats()
 		{ JMP_THIS(0x509400); }
 	void UpdateAngerNodes(int nScoreAdd, HouseClass* pHouse)
-		{ JMP_THIS(0x4FA0DF); }
+		{ JMP_THIS(0x504790); }
 
 
 	void AllyAIHouses()
