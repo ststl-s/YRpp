@@ -338,7 +338,13 @@ public:
 	void ReplaceTag(TagClass* pTag)
 		{ JMP_THIS(0x485250) }
 
-	void InitLightConvert(int Red2, int nIntensity, int nAmbient, int Red1, int Green1, int Blue1)
+	void UpdateCellLighting()
+		{ JMP_THIS(0x484680); }
+
+	void CalculateLightSourceLighting(int& nIntensity, int& nAmbient, int& Red1, int& Green1, int& Blue1, int& Red2, int& Green2, int& Blue2)
+		{ JMP_THIS(0x484180); }
+
+	void InitLightConvert(LightConvertClass* pDrawer, int nIntensity, int nAmbient, int Red1, int Green1, int Blue1)
 		{ JMP_THIS(0x483E30); }
 
 	void DrawOverlay(Point2D& Location, RectangleStruct& Bound)

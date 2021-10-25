@@ -246,10 +246,10 @@ public:
 		{ JMP_THIS(0x4AE290); }
 
 	void CellIteratorReset()
-		{ JMP_THIS(0x578350); }
+		{ CALL(0x578350); }
 
 	CellClass* CellIteratorNext()
-		{ JMP_THIS(0x578290); }
+		{ CALL(0x578290); }
 
 // the key damage delivery
 /*! The key damage delivery function.

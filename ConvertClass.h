@@ -85,6 +85,11 @@ public:
 	virtual void UpdateColors(int red, int green, int blue, bool tinted) final
 		{ JMP_THIS(0x556090); }
 
+	static LightConvertClass* __fastcall InitLightConvert(int red, int green, int blue)
+	{
+		JMP_STD(0x544E70);
+	}
+
 	//Constructor
 	LightConvertClass(
 		BytePalette* palette1,

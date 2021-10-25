@@ -173,6 +173,9 @@ public:
 
 	static void PrintMessage()
 		{ CALL(0x53AE00); }
+
+	static void Init()
+		{ JMP_STD(0x53AB50); }
 };
 
 class PsyDom
