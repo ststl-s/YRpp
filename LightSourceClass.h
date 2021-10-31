@@ -37,6 +37,11 @@ public:
 
 	//Constructor
 	LightSourceClass(
+		int X, int Y, int Z, int nVisibility, int nIntensity, int Red, int Green, int Blue) noexcept
+		: LightSourceClass(noinit_t())
+	{ JMP_THIS(0x554760); }
+
+	LightSourceClass(
 		CoordStruct Crd, int nVisibility, int nIntensity, TintStruct Tint) noexcept
 		: LightSourceClass(noinit_t())
 	{ JMP_THIS(0x554760); }

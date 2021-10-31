@@ -344,7 +344,8 @@ public:
 	void CalculateLightSourceLighting(int& nIntensity, int& nAmbient, int& Red1, int& Green1, int& Blue1, int& Red2, int& Green2, int& Blue2)
 		{ JMP_THIS(0x484180); }
 
-	void InitLightConvert(LightConvertClass* pDrawer, int nIntensity, int nAmbient, int Red1, int Green1, int Blue1)
+	void InitLightConvert(LightConvertClass* pDrawer = nullptr, int nIntensity = 0x10000, 
+		int nAmbient = 0, int Red1 = 1000, int Green1 = 1000, int Blue1 = 1000)
 		{ JMP_THIS(0x483E30); }
 
 	void DrawOverlay(Point2D& Location, RectangleStruct& Bound)
