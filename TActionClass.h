@@ -286,7 +286,17 @@ public:
 	TActionClass*      NextAction;
 	TriggerAction      ActionKind;
 	TeamTypeClass*     TeamType;
-	RectangleStruct    Bounds; // map bounds for use with action 40
+	union
+	{
+		RectangleStruct    Bounds; // map bounds for use with action 40
+		struct
+		{
+			int Param3;
+			int Param4;
+			int Param5;
+			int Param6;
+		};
+	}; // It's enough for calling Bounds.X, just use a union here now. - secsome
 	int                Waypoint;
 	int                Value2; // multipurpose
 	TagTypeClass*      TagType;

@@ -80,7 +80,7 @@ public:
 	TEventClass*      NextEvent;
 	TriggerEvent      EventKind;
 	void*             TeamType; // AITeamTypeClass*, really
-	int               arg;
+	int               Value;
 	char TechnoName [0x1C]; // YR introduced this sort of referencing
 	                                   // must've been to hard to follow the old convention of simple indexing
 	HouseClass*       House;
