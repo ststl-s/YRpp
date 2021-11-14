@@ -35,6 +35,9 @@ public:
 	void ChangeLevels(int nIntensity, TintStruct Tint, char mode)
 		{ JMP_THIS(0x554AA0); }
 
+	static void __fastcall UpdateLightConverts(int value)
+		{ JMP_STD(0x554D50); }
+
 	//Constructor
 	LightSourceClass(
 		int X, int Y, int Z, int nVisibility, int nIntensity, int Red, int Green, int Blue) noexcept
