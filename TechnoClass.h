@@ -347,6 +347,9 @@ public:
 		return pType ? pType->get_ID() : nullptr;
 	}
 
+	int TimeToBuild() const
+		{ JMP_THIS(0x6F47A0); }
+
 	bool IsMindControlled() const
 		{ JMP_THIS(0x7105E0); }
 
