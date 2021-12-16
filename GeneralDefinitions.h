@@ -575,19 +575,24 @@ enum class Category : int {
 
 typedef int eCellFlags;
 
+#define cf_CenterRevealed	0x01
+#define cf_EdgeRevealed		0x02
 #define	cf_IsWaypoint		0x04
 #define	cf_Explored			0x08 //this means no shroud
 #define	cf_FlagPresent		0x10
+#define cf_HasShroudCounter	0x20
+#define cf_IsPlot			0x40
 #define cf_Bridge			0x100
 #define	cf_VeinsPresent		0x20000
 #define	cf_EMPPresent		0x80000
-#define	cf_Fogged		0x400000
+#define	cf_Fogged			0x400000
 
 
 typedef int eCellFlags_12C;
 
-#define cf2_ContainsBuilding	0x02
+#define cf2_ContainsBuilding	0x02 // ?
 #define	cf2_NoShadow			0x08 //else tooltip is TXT_SHADOW
+#define cf2_NoFog				0x10
 
 
 enum class CloakState : int {

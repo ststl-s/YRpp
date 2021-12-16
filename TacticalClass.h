@@ -18,6 +18,9 @@ class NOVTABLE TacticalClass : public AbstractClass
 public:
 	static constexpr reference<TacticalClass*, 0x887324u> const Instance{};
 
+	CellStruct* CoordsToCell(CellStruct* pDest, CoordStruct* pSource)
+		{ JMP_THIS(0x6D6590); }
+
 	// returns whether coords are visible at the moment
 	bool CoordsToClient(CoordStruct const& coords, Point2D* pOutClient) const
 		{ JMP_THIS(0x6D2140); }

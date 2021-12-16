@@ -443,8 +443,11 @@ public:
 	char               Foggedness; // same value as above: -2: Occluded completely, -1: Visible, 0...48: frame in fog.shp or shroud.shp
 	BYTE               BlockedNeighbours; // number of somehow occupied cells next to this
 	PROTECTED_PROPERTY(BYTE, align_123);
-	DWORD              OccupationFlags; // 0x1F: infantry subpositions: center, TL, TR, BL, BR
-	DWORD              AltOccupationFlags; // 0x20: Units, 0x40: Objects, Aircraft, Overlay, 0x80: Building
+
+	// SubOccupations - 0x1 Center 0x2 Top(Abandoned) 0x4 Right 0x8 Left 0x10 Down / Terrains
+	// 0x20 Units 0x40 Aircrafts 0x80 Buildings
+	DWORD              OccupationFlags;
+	DWORD              AltOccupationFlags;
 
 	eCellFlags_12C     CopyFlags;	// related to Flags below
 	int                ShroudCounter;

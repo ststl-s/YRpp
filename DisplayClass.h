@@ -32,12 +32,12 @@ public:
 	virtual const wchar_t* GetToolTip(UINT nDlgID) R0;
 	virtual void CloseWindow() RX; //prolly wrong naming
 	virtual void vt_entry_8C() RX;
-	virtual bool vt_entry_90(const CellStruct& cell, HouseClass* pHouse) R0;
-	virtual bool vt_entry_94(const CellStruct& cell, HouseClass* pHouse, bool bUnk) R0;
-	virtual bool vt_entry_98(const CellStruct& cell, HouseClass* pHouse) R0;
-	virtual bool vt_entry_9C(const CellStruct& cell, HouseClass* pHouse) R0;
+	virtual bool MapCell(CellStruct* pMapCoord, HouseClass* pHouse) R0;
+	virtual bool RevealFogShroud(CellStruct* pMapCoord, HouseClass* pHouse, bool bIncreaseShroudCounter) R0;
+	virtual bool MapCellFoggedness(CellStruct* pMapCoord, HouseClass* pHouse) R0;
+	virtual bool MapCellVisibility(CellStruct* pMapCoord, HouseClass* pHouse) R0;
 	virtual MouseCursorType GetLastMouseCursor() = 0;
-	virtual bool vt_entry_A4(DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3) R0;
+	virtual bool ScrollMap(DWORD dwUnk1, DWORD dwUnk2, DWORD dwUnk3) R0;
 	virtual void Set_View_Dimensions(const RectangleStruct& rect) RX;
 	virtual void vt_entry_AC(DWORD dwUnk) RX;
 	virtual void vt_entry_B0(DWORD dwUnk) RX;
