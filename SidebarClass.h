@@ -6,8 +6,8 @@
 class ColorScheme;
 class FactoryClass;
 
-// sizeof() == 0x34
-struct CameoDataStruct
+// SidebarClass::StripClass::BuildType
+struct BuildType
 {
 	int               ItemIndex{ -1 };
 	AbstractType      ItemType{ AbstractType::None };
@@ -17,22 +17,22 @@ struct CameoDataStruct
 	ProgressTimer     Progress{}; // 0 to 54, how much of this object is constructed (gclock anim level)
 	int               FlashEndFrame{ 0 };
 
-	CameoDataStruct() = default;
+	BuildType() = default;
 
-	CameoDataStruct(int itemIndex, AbstractType itemType) :
+	BuildType(int itemIndex, AbstractType itemType) :
 		ItemIndex(itemIndex),
 		ItemType(itemType)
 	{ /*JMP_THIS(0x6AC7C0);*/ }
 
-	bool operator == (const CameoDataStruct &rhs) const {
+	bool operator == (const BuildType& rhs) const {
 		return ItemIndex == rhs.ItemIndex && ItemType == rhs.ItemType;
 	}
 
-	bool operator != (const CameoDataStruct &rhs) const {
+	bool operator != (const BuildType& rhs) const {
 		return ItemIndex != rhs.ItemIndex || ItemType != rhs.ItemType;
 	}
 
-	bool operator < (const CameoDataStruct &rhs) const {
+	bool operator < (const BuildType& rhs) const {
 		return SortsBefore(this->ItemType, this->ItemIndex, rhs.ItemType, rhs.ItemIndex);
 	}
 
@@ -40,8 +40,8 @@ struct CameoDataStruct
 		{ JMP_STD(0x6A8420); }
 };
 
-// sizeof() == 0xF94
-struct TabDataStruct
+// SidebarClass::StripClass
+struct StripClass
 {
 	ProgressTimer     Progress;
 	bool              AllowedToDraw; // prevents redrawing when layouting the list
@@ -59,7 +59,7 @@ struct TabDataStruct
 	DWORD             unknown_4C;
 	DWORD             unknown_50;
 	int               CameoCount; // filled cameos
-	CameoDataStruct   Cameos[75];
+	BuildType         Cameos[75];
 };
 
 class NOVTABLE SidebarClass : public PowerClass
@@ -113,13 +113,13 @@ protected:
 	//===========================================================================
 
 public:
-	TabDataStruct Tabs[0x4];
+	StripClass Tabs[0x4];
 	DWORD unknown_5394;
 	DWORD unknown_5398;
 	int ActiveTabIndex;
 	DWORD unknown_53A0;
 	bool HideObjectNameInTooltip; // see 0x6A9343
-	bool unknown_bool_53A5;
+	bool IsSidebarActive;
 	bool SidebarNeedsRedraw;
 	bool SidebarBackgroundNeedsRedraw;
 	bool unknown_bool_53A8;

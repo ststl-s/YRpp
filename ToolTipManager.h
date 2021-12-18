@@ -17,7 +17,7 @@ struct ToolTip
 
 struct ToolTipManagerData
 {
-	LTRBStruct Dimension;
+	RectangleStruct Dimension;
 	union // I'm not sure...
 	{
 		wchar_t AsWideChar[0x100];
