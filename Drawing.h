@@ -53,13 +53,13 @@ public:
 		ratio &= 0x00FF;
 
 		int value = (int)rgb.Red - (int)Red;
-		Red = (int)Red + (value * ratio) / 256;
+		Red = static_cast<unsigned char>((int)Red + (value * ratio) / 256);
 
 		value = (int)rgb.Green - (int)Green;
-		Green = (int)Green + (value * ratio) / 256;
+		Green = static_cast<unsigned char>((int)Green + (value * ratio) / 256);
 
 		value = (int)rgb.Blue - (int)Blue;
-		Blue = (int)Blue + (value * ratio) / 256;
+		Blue = static_cast<unsigned char>((int)Blue + (value * ratio) / 256);
 	}
 
 	int Difference(RGBClass const& rgb) const
