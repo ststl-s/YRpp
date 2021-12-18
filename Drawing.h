@@ -11,6 +11,81 @@
 #include <Helpers/CompileTime.h>
 #include <Surface.h>
 
+#pragma pack(push, 1)
+class RGBClass
+{
+public:
+	static constexpr reference<RGBClass, 0xA80220> White {};
+	static constexpr reference<int, 0x8A0DD0> RedShiftLeft {};
+	static constexpr reference<int, 0x8A0DD4> RedShiftRight {};
+	static constexpr reference<int, 0x8A0DE0> GreenShiftLeft {};
+	static constexpr reference<int, 0x8A0DE4> GreenShiftRight {};
+	static constexpr reference<int, 0x8A0DD8> BlueShiftLeft {};
+	static constexpr reference<int, 0x8A0DDC> BlueShiftRight {};
+
+	unsigned char Red;
+	unsigned char Green;
+	unsigned char Blue;
+
+	RGBClass()
+	{
+		Red = Green = Blue = 0;
+	}
+
+	RGBClass(int rgb, bool wordcolor = false)
+	{
+		if (!wordcolor)
+		{
+			Red = GetRValue(rgb);
+			Green = GetGValue(rgb);
+			Blue = GetBValue(rgb);
+		}
+		else
+		{
+			Red = (unsigned char)((unsigned short)rgb >> RedShiftLeft) << RedShiftRight;
+			Green = (unsigned char)((unsigned short)rgb>> GreenShiftLeft) << GreenShiftRight;
+			Blue = (unsigned char)((unsigned short)rgb>> BlueShiftLeft) << BlueShiftRight;
+		}
+	}
+
+	void Adjust(int ratio, RGBClass const& rgb)
+	{
+		ratio &= 0x00FF;
+
+		int value = (int)rgb.Red - (int)Red;
+		Red = (int)Red + (value * ratio) / 256;
+
+		value = (int)rgb.Green - (int)Green;
+		Green = (int)Green + (value * ratio) / 256;
+
+		value = (int)rgb.Blue - (int)Blue;
+		Blue = (int)Blue + (value * ratio) / 256;
+	}
+
+	int Difference(RGBClass const& rgb) const
+	{
+		int r = (int)Red - (int)rgb.Red;
+		if (r < 0) r = -r;
+
+		int g = (int)Green - (int)rgb.Green;
+		if (g < 0) g = -g;
+
+		int b = (int)Blue - (int)rgb.Blue;
+		if (b < 0) b = -b;
+
+		return(r * r + g * g + b * b);
+	}
+
+	int ToInt()
+	{
+		return
+			(Red >> RedShiftRight << RedShiftLeft) |
+			(Green >> GreenShiftRight << GreenShiftLeft) |
+			(Blue >> BlueShiftRight << BlueShiftLeft) ;
+	}
+};
+#pragma pack(pop)
+
 struct DirtyAreaStruct
 {
 	RectangleStruct Rect;

@@ -8,6 +8,7 @@
 
 //forward declarations
 class WarheadTypeClass;
+class RGBClass;
 
 class NOVTABLE ParticleTypeClass : public ObjectTypeClass
 {

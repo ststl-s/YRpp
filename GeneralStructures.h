@@ -14,9 +14,6 @@ using CellStruct = Vector2D<short>;
 using Point2D = Vector2D<int>;
 using CoordStruct = Vector3D<int>;
 
-// used for particle ColorList
-using RGBClass = Vector3D<BYTE>; // <pd> wuhaha
-
 //used for timed events, time measured in frames!
 class TimerStruct
 {
