@@ -14,7 +14,7 @@ private:
 public:
 	virtual ~BitText() RX;
 
-
+	// Seems like draw in a single line
 	void Print(BitFont* pFont, Surface* pSurface, const wchar_t* pWideString, int X, int Y, int W, int H)
 	{
 		JMP_THIS(0x434B90);

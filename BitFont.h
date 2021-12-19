@@ -13,7 +13,7 @@ public:
 	virtual ~BitFont() RX;
 
 	bool GetTextDimension(const wchar_t* pText, int& Width, int& Height, int nMaxWidth) { JMP_THIS(0x433CF0); }
-	int Blit(wchar_t wch, int X, int Y, int Color) { JMP_THIS(0x434120); }
+	int Blit(wchar_t wch, int X, int Y, int nColor) { JMP_THIS(0x434120); }
 
 	bool Lock(Surface* pSurface) { JMP_THIS(0x4348F0); }
 	bool UnLock(Surface* pSurface) { JMP_THIS(0x434990); }
