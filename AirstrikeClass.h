@@ -6,6 +6,7 @@
 class AircraftTypeClass;
 class ObjectClass;
 class TechnoClass;
+class FootClass;
 
 //The AirstrikeClass handles the airstrikes Boris calls in.
 class NOVTABLE AirstrikeClass : public AbstractClass
