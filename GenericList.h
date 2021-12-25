@@ -9,7 +9,7 @@ class GenericNode
 {
 public:
 	GenericNode() : NextNode(nullptr), PrevNode(nullptr) { }
-	~GenericNode() { Unlink(); }
+	virtual ~GenericNode() { Unlink(); }
 	GenericNode(GenericNode& node) { node.Link(this); }
 	GenericNode& operator = (GenericNode& node)
 	{
@@ -65,6 +65,8 @@ public:
 		FirstNode.Link(&LastNode);
 	}
 
+	virtual ~GenericList() { }
+
 	GenericNode* First() const { return FirstNode.Next(); }
 	GenericNode* Last() const { return LastNode.Prev(); }
 	bool IsEmpty() const { return !FirstNode.Next()->IsValid(); }
@@ -86,6 +88,8 @@ template<class T>
 class Node : public GenericNode
 {
 public:
+	virtual ~Node(){ }
+
 	List<T>* MainList() const { return (List<T> *)GenericNode::MainList(); }
 	T* Next() const { return (T*)GenericNode::Next(); }
 	T* Prev() const { return (T*)GenericNode::Prev(); }
@@ -96,6 +100,8 @@ template<class T>
 class List : public GenericList
 {
 public:
+	virtual ~List(){ }
+
 	T* First() const { return (T*)GenericList::First(); }
 	T* Last() const { return (T*)GenericList::Last(); }
 };

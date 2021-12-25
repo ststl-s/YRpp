@@ -13,10 +13,16 @@ struct TacticalSelectableStruct
 	int Y;
 };
 
+class DSurface;
+class CellClass;
+
 class NOVTABLE TacticalClass : public AbstractClass
 {
 public:
 	static constexpr reference<TacticalClass*, 0x887324u> const Instance{};
+
+	void SetTacticalPosition(CoordStruct* pCoord)
+		{ JMP_THIS(0x6D6070); }
 
 	CellStruct* CoordsToCell(CellStruct* pDest, CoordStruct* pSource)
 		{ JMP_THIS(0x6D6590); }
@@ -62,6 +68,17 @@ public:
 	static int DrawTimer(int index, ColorScheme *Scheme, int Time, wchar_t *Text, Point2D *someXY1, Point2D *someXY2)
 		{ JMP_STD(0x64DB50); }
 
+	/*
+	*   TacticalRenderMode_0_ALL = 0x0,
+	*	TacticalRenderMode_TERRAIN = 0x1,
+	*	TacticalRenderMode_MOVING_ANIMATING = 0x2,
+	*	TacticalRenderMode_3_ALL = 0x3,
+	*	TacticalRenderMode_STOPDRAWING = 0x4,
+	*	TacticalRenderMode_5 = 0x5,
+	*/
+	void Render(DSurface* pSurface, bool flag, int eMode)
+		{ JMP_THIS(0x6D3D10); }
+
 public:
 
 	wchar_t ScreenText[64];
@@ -86,13 +103,13 @@ public:
 	bool field_D7C;
 	bool Redrawing; // set while redrawing - cheap mutex // TacticalPosUpdated
 	PROTECTED_PROPERTY(char, gap_D7E[2]);
-	RectangleStruct Rectangle_D80;
+	RectangleStruct ContainingMapCoords;
 	LTRBStruct Band;
 	DWORD MouseFrameIndex;
 	TimerStruct StartTime;
 	int SelectableCount;
 	Matrix3D Unused_Matrix3D;
-	Matrix3D Matrix3D_DE4;
+	Matrix3D IsoTransformMatrix;
 	DWORD field_E14;
 
 };
