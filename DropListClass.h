@@ -30,7 +30,7 @@ public:
 	//Statics
 
 	//Constructors
-	DropListClass(unsigned int nID, wchar_t* pText, int nMaxLength, TextPrintType eTextFlag, int nX, int nY, 
+	DropListClass(unsigned int nID, wchar_t* pText, int nMaxLength, TextPrintType eTextFlag, int nX, int nY,
 		int nWidth, int nHeight, EditFlag eEditFlag,int nSomeHeight, SHPStruct* UpSHP, SHPStruct* DownSHP) noexcept
 		: DropListClass(noinit_t()) { JMP_THIS(0x4B4E10); }
 

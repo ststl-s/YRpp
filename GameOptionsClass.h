@@ -49,17 +49,17 @@ public:
 	int unknown_int_8C;
 	int unknown_int_90;
 	int unknown_int_94;
-	
+
 	// virtual key constants, each of them doubled
 	// defaulting to VK_MENU, VK_CONTROL and VK_SHIFT
-	
+
 	int KeyForceMove1;
-	int KeyForceMove2; 
+	int KeyForceMove2;
 	int KeyForceFire1;
 	int KeyForceFire2;
 	int KeyForceSelect1;
 	int KeyForceSelect2;
-	
+
 	int unknown_int_B0;
 	int unknown_int_B4;
 };

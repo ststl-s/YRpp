@@ -13,7 +13,7 @@ template <typename T>
 class VectorClass
 {
 public:
-	// the hidden element count messes with alignment. only applies to align 8, 16, ... 
+	// the hidden element count messes with alignment. only applies to align 8, 16, ...
 	static_assert(!needs_vector_delete<T>::value || (__alignof(T) <= 4), "Alignment of T needs to be less than or equal to 4.");
 
 	constexpr VectorClass() noexcept = default;
@@ -354,7 +354,7 @@ public:
 	{ }
 
 	TypeList(const TypeList &other)
-		: DynamicVectorClass(other), unknown_18(other.unknown_18) 
+		: DynamicVectorClass(other), unknown_18(other.unknown_18)
 	{ }
 
 	TypeList(TypeList &&other) noexcept

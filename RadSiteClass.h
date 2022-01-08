@@ -119,7 +119,7 @@ public:
 	CellStruct        BaseCell; // center cell
 	int               Spread; // range in cells
 	int               SpreadInLeptons; // range in leptons
-	int               RadLevel; // the radiation level, 
+	int               RadLevel; // the radiation level,
 	int               LevelSteps; // cell's rad level reduced by (RadLevel/LevelSteps) every time RadLevelTimer elapses
 	int               Intensity; // the intensity at the beginning
 	TintStruct        Tint; // RadColor at the current level

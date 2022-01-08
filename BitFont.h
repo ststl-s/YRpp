@@ -35,17 +35,17 @@ public:
 		}
 	}
 	void SetColor(WORD nColor)
-	{ 
-		this->Color = nColor; 
+	{
+		this->Color = nColor;
 	}
-	
+
 	void SetField20(int x)
 	{
 		this->field_20 = x;
 	}
 
-	void SetField41(char flag) 
-	{ 
+	void SetField41(char flag)
+	{
 		this->field_41 = flag;
 	}
 

@@ -30,7 +30,7 @@ public:
 	// returns whether coords are visible at the moment
 	bool CoordsToClient(CoordStruct const& coords, Point2D* pOutClient) const
 		{ JMP_THIS(0x6D2140); }
-	
+
 	Point2D* CoordsToScreen(Point2D* pDest, CoordStruct* pSource)
 		{ JMP_THIS(0x6D1F10); }
 

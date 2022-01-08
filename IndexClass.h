@@ -219,7 +219,7 @@ typename IndexClass<TKey, TValue>::NodeElement const* IndexClass<TKey, TValue>::
 	NodeElement node;
 	node.ID = id;
 	return(
-			(NodeElement const*)bsearch(&node, &this->IndexTable[0], this->IndexCount, 
+			(NodeElement const*)bsearch(&node, &this->IndexTable[0], this->IndexCount,
 			sizeof(this->IndexTable[0]), this->search_compfunc)
 		);
 }

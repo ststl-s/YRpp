@@ -188,16 +188,16 @@ public:
 	virtual AbstractType WhatAmI() const RT(AbstractType);
 	virtual int	Size() const R0;
 
-	bool IsAlliedWith(int idxHouse) const 
+	bool IsAlliedWith(int idxHouse) const
 		{ JMP_THIS(0x4F9A10); }
 
-	bool IsAlliedWith(HouseClass const* pHouse) const 
+	bool IsAlliedWith(HouseClass const* pHouse) const
 		{ JMP_THIS(0x4F9A50); }
 
 	bool IsAlliedWith(ObjectClass const* pObject) const
 		{ JMP_THIS(0x4F9A90); }
 
-	bool IsAlliedWith(AbstractClass const* pAbstract) const 
+	bool IsAlliedWith(AbstractClass const* pAbstract) const
 		{ JMP_THIS(0x4F9AF0); }
 
 	void MakeAlly(int iHouse, bool bAnnounce)
