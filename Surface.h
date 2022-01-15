@@ -12,6 +12,8 @@ struct SHPStruct;
 class NOVTABLE Surface
 {
 public:
+	Surface() = default;
+
 	virtual ~Surface() { PUSH_IMM(SDDTOR_NODELETE); THISCALL(0x4115D0); }
 
 	//Surface
@@ -124,6 +126,8 @@ public:
 class NOVTABLE XSurface : public Surface
 {
 public:
+	XSurface(int nWidth = 640, int nHeight = 400) { JMP_THIS(0x5FE020); }
+
 	virtual bool PutPixelClip(Point2D* pPoint, short nUkn, RectangleStruct* pRect) R0;
 
 	virtual short GetPixelClip(Point2D* pPoint, RectangleStruct* pRect) R0;
@@ -136,6 +140,8 @@ class NOVTABLE BSurface : public XSurface
 {
 public:
 	static constexpr constant_ptr<BSurface, 0xB2D928> VoxelSurface {};
+
+	BSurface() : XSurface(), Buffer { this->Width * this->Height * 2 } { BytesPerPixel = 2; ((int*)this)[0] = 0x7E2070; }
 
 	MemoryBuffer Buffer;
 };

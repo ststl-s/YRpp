@@ -436,7 +436,7 @@ public:
 	BYTE               SlopeIndex;  // this + 2 == cell's slope shape as reflected by PLACE.SHP
 	BYTE               unknown_11D;
 
-	unsigned char      Powerup;	//The crate type on this cell. Also indicates some other weird properties
+	unsigned char      OverlayData;	//The crate type on this cell. Also indicates some other weird properties
 
 	BYTE               SmudgeData;
 	char               Visibility; // trust me, you don't wanna know... if you do, see 0x7F4194 and cry

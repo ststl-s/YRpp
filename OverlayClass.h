@@ -59,7 +59,7 @@ public:
 	virtual int Size() const R0;
 
 	//Constructor
-	OverlayClass(OverlayTypeClass* pType) noexcept
+	OverlayClass(OverlayTypeClass* pType, const CellStruct& mapCoord, int flag) noexcept
 		: OverlayClass(noinit_t())
 	{ JMP_THIS(0x5FC380); }
 

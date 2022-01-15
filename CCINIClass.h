@@ -220,6 +220,11 @@ public:
 		return outBuffer;
 	}
 
+	// OverlayPack, OverlayDataPack, IsoMapPack5
+	// Those uses 1=xxxx, 2=xxxx, 3=xxxx .etc.
+	size_t ReadUUBlock(const char* const pSection, void* pBuffer, size_t length)
+		{ JMP_THIS(0x526FB0); }
+
 	// 18 bytes
 	byte* ReadAbilities(byte* pBuffer, const char* pSection, const char* pKey, byte* pDefault)
 		{ JMP_THIS(0x477640); }

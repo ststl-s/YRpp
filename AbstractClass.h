@@ -117,6 +117,8 @@ public:
 	static void __fastcall AnnounceExpiredPointer(AbstractClass* pAbstract, bool removed = true)
 		{ JMP_THIS(0x7258D0); }
 
+	static void __fastcall RemoveAllInactive() JMP_STD(0x725C70);
+
 	void AnnounceExpiredPointer(bool removed = true) {
 		AnnounceExpiredPointer(this, removed);
 	}
