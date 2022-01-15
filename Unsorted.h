@@ -15,6 +15,8 @@ public:
 	// the magic checksum for version validation - linked in StaticInits
 	static constexpr reference<DWORD, 0x83D560u> const Savegame_Magic{};
 
+	static constexpr reference<DynamicVectorClass<DWORD>, 0xB0BC88u> const COMClasses{};
+
 	static constexpr reference<HWND, 0xB73550u> const hWnd{};
 	static constexpr reference<HINSTANCE, 0xB732F0u> const hInstance{};
 
@@ -108,8 +110,14 @@ public:
 class Imports {
 public:
 	// OleLoadFromStream
+	typedef HRESULT(__stdcall* FP_OleSaveToStream)(LPPERSISTSTREAM pPStm, LPSTREAM pStm);
+	static FP_OleSaveToStream& OleSaveToStream;
+
 	typedef HRESULT (__stdcall * FP_OleLoadFromStream)(LPSTREAM pStm, const IID *const iidInterface, LPVOID *ppvObj);
 	static FP_OleLoadFromStream &OleLoadFromStream;
+
+	typedef HRESULT(__stdcall* FP_CoRegisterClassObject)(const IID& rclsid, LPUNKNOWN pUnk, DWORD dwClsContext, DWORD flags, LPDWORD lpdwRegister);
+	static FP_CoRegisterClassObject& CoRegisterClassObject;
 
 	typedef DWORD (* FP_TimeGetTime)();
 	static FP_TimeGetTime &TimeGetTime;
@@ -407,7 +415,11 @@ public:
 	typedef BOOL ( __stdcall * FP_RegisterHotKey)(HWND hWnd, int id, UINT fsModifiers, UINT vk);
 	static FP_RegisterHotKey &RegisterHotKey;
 
+	typedef LONG(__stdcall* FP_InterlockedIncrement)(void* lpAddend);
+	static FP_InterlockedIncrement& InterlockedIncrement;
 
+	typedef LONG(__stdcall* FP_InterlockedDecrement)(void* lpAddend);
+	static FP_InterlockedDecrement& InterlockedDecrement;
 
 };
 
