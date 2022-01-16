@@ -129,7 +129,7 @@ public:
 	int Counter;
 	void* Buffer;
 	void* Buffer2;
-	int BlockSize;
+	size_t BlockSize;
 	int SafetyMargin;
 	short BlockHeader_CompCount;
 	short BlockHeader_UncompCount;

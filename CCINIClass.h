@@ -225,6 +225,9 @@ public:
 	size_t ReadUUBlock(const char* const pSection, void* pBuffer, size_t length)
 		{ JMP_THIS(0x526FB0); }
 
+	bool WriteUUBlock(const char* const pSection, void* pBuffer, size_t length)
+		{ JMP_THIS(0x526E80); }
+
 	// 18 bytes
 	byte* ReadAbilities(byte* pBuffer, const char* pSection, const char* pKey, byte* pDefault)
 		{ JMP_THIS(0x477640); }
