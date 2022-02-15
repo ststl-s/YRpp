@@ -241,7 +241,7 @@ public:
 
 	CoordStruct GetFLH(int idxWeapon, const CoordStruct& base) const {
 		CoordStruct ret;
-		this->GetFLH(&ret, 0, base);
+		this->GetFLH(&ret, idxWeapon, base);
 		return ret;
 	}
 
