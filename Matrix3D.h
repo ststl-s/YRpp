@@ -4,6 +4,8 @@
 #include <GeneralStructures.h>
 #include <Quaternion.h>
 
+#include <Helpers/CompileTime.h>
+
 template <typename T>
 class Vector4D
 {
@@ -19,7 +21,7 @@ public:
 template <typename T>
 const Vector4D<T> Vector4D<T>::Empty = { T(), T(), T(), T() };
 
-class NOVTABLE Matrix3D
+class Matrix3D
 {
 public:
 
@@ -56,6 +58,17 @@ public:
 	Matrix3D(Matrix3D& another) { JMP_THIS(0x5AE610); }
 
 	// Non virtual
+
+	// operators
+	Matrix3D& operator*(const Matrix3D& another)
+	{
+		MatrixMultiply(this, this, &another);
+		return *this;
+	}
+	void operator*=(const Matrix3D& another)
+	{
+		(*this)* another;
+	}
 
 	void MakeIdentity() { JMP_THIS(0x5AE860); } // 1-matrix
 	void Translate(float x, float y, float z) { JMP_THIS(0x5AE890); }
@@ -112,6 +125,9 @@ public:
 	}
 	static Matrix3D* __fastcall sub_5AFC20(Matrix3D* inv, Matrix3D* A) { JMP_STD(0x5AFC20); }
 	static Matrix3D* __fastcall FromQuaternion(Matrix3D* mat, Quaternion* q) { JMP_STD(0x646980); }
+
+	static constexpr reference<Matrix3D, 0xB44318> VoxelDefaultMatrix{};
+	static constexpr reference<Matrix3D, 0xB45188, 21> VoxelRampMatrix{};
 
 	//Properties
 public:

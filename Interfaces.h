@@ -45,6 +45,13 @@ IRTTITypeInfo : IUnknown
 	virtual void __stdcall Create_ID() = 0;
 };
 
+__interface __declspec(uuid("96F02EC4-6FE8-11D1-B6FD-00A024DDAFD1"))
+	IAIHouse : IUnknown
+{
+	virtual void __stdcall Link_House(void* unknown) const = 0;
+	virtual void __stdcall AI(int* unknown) = 0;
+};
+
 __interface __declspec(uuid("941582E0-86DA-11D1-B706-00A024DDAFD1"))
 IHouse : IUnknown
 {

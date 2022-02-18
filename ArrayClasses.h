@@ -286,6 +286,14 @@ public:
 		return &this->Items[this->Count];
 	}
 
+	T* front() const {
+		return begin();
+	}
+
+	T* back() const {
+		return end() - 1;
+	}
+
 	bool AddItem(T item) {
 		if(this->Count >= this->Capacity) {
 			if(!this->IsAllocated && this->Capacity != 0) {
@@ -303,6 +311,12 @@ public:
 
 		this->Items[Count++] = std::move(item);
 		return true;
+	}
+
+	template <class... _Valty>
+	constexpr decltype(auto) emplace_back(_Valty&&... _Val) {
+		AddItem(T{ _Val... });
+		return *back();
 	}
 
 	bool AddUnique(const T &item) {

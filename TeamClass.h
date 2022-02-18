@@ -39,7 +39,7 @@ public:
 	virtual int Size() const R0;
 
 	//Constructor
-	TeamClass(TeamTypeClass* pType) noexcept
+	TeamClass(TeamTypeClass* pType, HouseClass* pOwner, int _unknown_44) noexcept
 		: TeamClass(noinit_t())
 	{ JMP_THIS(0x6E8A90); }
 
@@ -59,7 +59,7 @@ public:
 	HouseClass*    Owner;
 	HouseClass*    Target;
 	CellClass*     SpawnCell;
-	DWORD          unknown_38;
+	FootClass*	   ClosestMember;
 	AbstractClass* QueuedFocus;
 	AbstractClass* Focus;
 	int            unknown_44;
@@ -67,33 +67,30 @@ public:
 	int            TotalThreatValue;
 	int            CreationFrame;
 	FootClass *    FirstUnit;
-	TimerStruct GuardAreaTimer;
-	TimerStruct SuspendTimer;
+	TimerStruct	   GuardAreaTimer;
+	TimerStruct	   SuspendTimer;
 	TagClass*      Tag;
-	bool           unknown_74;
-	bool           unknown_75;
-	bool           unknown_76;
-	bool           unknown_77;
+	bool           IsTransient;
+	bool           NeedsReGrouping;
+	bool           GuardSlowerIsNotUnderStrength;
+	bool           IsForcedActive;
 
-	bool           unknown_78;
-	bool           unknown_79;
-	bool           unknown_7A;
-	bool           unknown_7B;
+	bool           IsHasBeen;
+	bool           IsFullStrength;
+	bool           IsUnderStrength;
+	bool           IsReforming;
 
-	bool           unknown_7C;
+	bool           IsLagging;
 	bool           NeedsToDisappear;
-	bool           unknown_7E;
-	bool           unknown_7F;
+	bool           JustDisappeared;
+	bool           IsMoving;
 
 	bool           StepCompleted; // can proceed to the next step of the script
-	bool           unknown_81;
-	bool           unknown_82;
+	bool           TargetNotAssigned;
+	bool           IsLeavingMap;
 	bool           IsSuspended;
 
 	bool           AchievedGreatSuccess; // executed script action 49, 0
-	bool           unknown_85;
-	bool           unknown_86;
-	bool           unknown_87;
 
 	int CountObjects [6]; // counts of each object specified in the Type
 };

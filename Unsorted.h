@@ -20,8 +20,18 @@ public:
 	static constexpr reference<HWND, 0xB73550u> const hWnd{};
 	static constexpr reference<HINSTANCE, 0xB732F0u> const hInstance{};
 
+	static constexpr reference<bool, 0x887418u> const bVPLRead{};
 	static constexpr reference<bool, 0x840A6Cu> const bVideoBackBuffer{};
 	static constexpr reference<bool, 0xA8EB96u> const bAllowVRAMSidebar{};
+
+	static constexpr reference<RecordFlag, 0xA8D5F8u> const RecordingFlag{};
+	static constexpr reference<CCFileClass, 0xA8D58Cu> const RecordFile{};
+
+	static constexpr reference<bool, 0x822CF1u> const bDrawShadow{};
+	static constexpr reference<bool, 0x8A0DEFu> const bAllowDirect3D{};
+	static constexpr reference<bool, 0x8A0DF0u> const bDirect3DIsUseable{};
+
+
 
 	// the game's own rounding function
 	// infamous for true'ing (F2I(-5.00) == -4.00)
@@ -81,6 +91,9 @@ public:
 
 	static double GetFloaterGravity()
 		{ JMP_STD(0x48ACF0); }
+
+	static LARGE_INTEGER __fastcall AudioGetTime()
+		{ JMP_STD(0x4093B0); }
 };
 
 // this fake class contains the IIDs used by the game
@@ -118,6 +131,9 @@ public:
 
 	typedef HRESULT(__stdcall* FP_CoRegisterClassObject)(const IID& rclsid, LPUNKNOWN pUnk, DWORD dwClsContext, DWORD flags, LPDWORD lpdwRegister);
 	static FP_CoRegisterClassObject& CoRegisterClassObject;
+
+	typedef HRESULT(__stdcall* FP_CoRevokeClassObject)(DWORD dwRegister);
+	static FP_CoRevokeClassObject& CoRevokeClassObject;
 
 	typedef DWORD (* FP_TimeGetTime)();
 	static FP_TimeGetTime &TimeGetTime;

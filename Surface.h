@@ -158,11 +158,19 @@ static void __fastcall CC_Draw_Shape(Surface* Surface, ConvertClass* Palette, SH
 	JMP_STD(0x4AED70);
 }
 
-static Point2D* Fancy_Text_Print_Wide(Point2D* RetVal, const wchar_t* Text, Surface* Surface, RectangleStruct* Bounds,
-	Point2D* Location, COLORREF ForeColor, COLORREF BackColor, TextPrintType Flag, ...)
+static Point2D* Fancy_Text_Print_Wide(const Point2D& retBuffer, const wchar_t* Text, Surface* Surface, const RectangleStruct& Bounds,
+	const Point2D& Location, COLORREF ForeColor, COLORREF BackColor, TextPrintType Flag, ...)
 {
 	JMP_STD(0x4A60E0);
 }
+
+class ColorScheme;
+static Point2D* Fancy_Text_Print_Wide(const Point2D& retBuffer, const wchar_t* Text, Surface* Surface, const RectangleStruct& Bounds,
+	const Point2D& Location, ColorScheme* ForeScheme, ColorScheme* BackScheme, TextPrintType Flag, ...)
+{
+	JMP_STD(0x4A61C0);
+}
+
 
 //static Point2D* __fastcall Simple_Text_Print_Wide(Point2D* RetVal, const wchar_t* Text, Surface* Surface, RectangleStruct* Bounds,
 //	Point2D* Location, COLORREF ForeColor, COLORREF BackColor, TextPrintType Flag, bool bUkn)
@@ -207,7 +215,7 @@ public:
 	{
 		Point2D tmp = { 0, 0 };
 
-		Fancy_Text_Print_Wide(&tmp, pText, this, pBounds, pLocation, ForeColor, BackColor, Flag);
+		Fancy_Text_Print_Wide(tmp, pText, this, *pBounds, *pLocation, ForeColor, BackColor, Flag);
 	}
 
 	void DrawText(const wchar_t* pText, Point2D* pLoction, COLORREF Color)
@@ -216,7 +224,7 @@ public:
 		this->GetRect(&rect);
 
 		Point2D tmp { 0,0 };
-		Fancy_Text_Print_Wide(&tmp, pText, this, &rect, pLoction, Color, 0, TextPrintType::NoShadow);
+		Fancy_Text_Print_Wide(tmp, pText, this, rect, *pLoction, Color, 0, TextPrintType::NoShadow);
 	}
 
 	void DrawText(const wchar_t* pText, int X, int Y, COLORREF Color)

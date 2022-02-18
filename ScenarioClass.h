@@ -12,6 +12,13 @@ struct Variable
 	char Value;
 };
 
+struct LightingStruct
+{
+	TintStruct Tint;
+	int Ground; // all these are stored as ini value * 100 + 0.01
+	int Level; // this one is stored as ini value * 1000 + 0.01
+};
+
 struct ScenarioFlags
 {
 	bool bit00 : 1;
@@ -201,36 +208,20 @@ public:
 	int AmbientOriginal; // set at map creation
 	int AmbientCurrent; // current ambient
 	int AmbientTarget; // target ambient (while changing)
-	int Red;
-	int Green;
-	int Blue;
-	int Ground; // all these are stored as ini value * 100 + 0.01
-	int Level; // this one is stored as ini value * 1000 + 0.01
+	LightingStruct NormalLighting;
 
 	//Ion lighting
 	int IonAmbient;
-	int IonRed;
-	int IonGreen;
-	int IonBlue;
-	int IonGround;
-	int IonLevel;
+	LightingStruct IonLighting;
 
 	//Nuke flash lighting
 	int NukeAmbient;
-	int NukeRed;
-	int NukeGreen;
-	int NukeBlue;
-	int NukeGround;
-	int NukeLevel;
+	LightingStruct NukeLighting;
 	int NukeAmbientChangeRate;
 
 	//Dominator lighting
 	int DominatorAmbient;
-	int DominatorRed;
-	int DominatorGreen;
-	int DominatorBlue;
-	int DominatorGround;
-	int DominatorLevel;
+	LightingStruct DominatorLighting;
 	int DominatorAmbientChangeRate;
 
 	DWORD unknown_3598;

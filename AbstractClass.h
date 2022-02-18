@@ -12,11 +12,8 @@ class TechnoClass;
 class HouseClass;
 class Checksummer;
 
-//--- OwnedTiberiumStruct - holds info about how much of each tiberium type is held.
-struct OwnedTiberiumStruct
+struct StorageClass
 {
-	static const size_t Size = 4;
-
 	float GetAmount(int index) const
 		{ JMP_THIS(0x6C9680); }
 

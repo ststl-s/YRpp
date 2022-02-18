@@ -52,7 +52,7 @@ public:
 		DWORD dwUnk13, DWORD dwUnk14, DWORD dwUnk15, DWORD dwUnk16) RX;
 
 	virtual void Draw_A_VXL(
-		VoxelStruct *VXL, int HVAFrameIndex, int Flags, SomeVoxelCache *Cache, RectangleStruct *Rectangle,
+		VoxelStruct *VXL, int HVAFrameIndex, int Flags, IndexClass<int, int> *Cache, RectangleStruct *Rectangle,
 		Point2D *CenterPoint, Matrix3D *Matrix, DWORD dwUnk8, DWORD DrawFlags, DWORD dwUnk10) RX;
 
 	virtual void vt_entry_514() RX;
@@ -128,9 +128,8 @@ public:
 		{ JMP_THIS(0x4DDB90); }
 
 	//Constructor
-	FootClass(HouseClass* owner) noexcept
-		: FootClass(noinit_t())
-	{ JMP_THIS(0x4D31E0); }
+	FootClass(HouseClass* pOwner) noexcept : FootClass(noinit_t())
+		{ JMP_THIS(0x4D31E0); }
 
 protected:
 	explicit __forceinline FootClass(noinit_t) noexcept
@@ -155,7 +154,7 @@ public:
 	bool            unknown_bool_53C;
 	DWORD           unknown_540;
 
-	AudioController Audio7;
+	DECLARE_PROPERTY(AudioController, Audio7);
 
 	CellStruct      CurrentMapCoords;
 	CellStruct      LastMapCoords; // ::UpdatePosition uses this to remove threat from last occupied cell, etc
@@ -165,11 +164,11 @@ public:
 	PROTECTED_PROPERTY(DWORD,   unused_574);
 	double          SpeedPercentage;
 	double          SpeedMultiplier;
-	DynamicVectorClass<AbstractClass*> unknown_abstract_array_588;
+	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, unknown_abstract_array_588);
 	DWORD           unknown_5A0;
 	AbstractClass*  Destination; // possibly other objects as well
 	AbstractClass*  LastDestination;
-	DynamicVectorClass<AbstractClass*> unknown_abstract_array_5AC;
+	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, unknown_abstract_array_5AC);
 	int             unknown_int_5C4;
 	DWORD           unknown_5C8;
 	DWORD           unknown_5CC;
@@ -179,12 +178,12 @@ public:
 	FootClass*      NextTeamMember;        //next unit in team
 	DWORD           unknown_5DC;
 	int             PathDirections[24]; // list of directions to move in next, like tube directions
-	TimerStruct     PathDelayTimer;
+	DECLARE_PROPERTY(TimerStruct, PathDelayTimer);
 	int             unknown_int_64C;
-	TimerStruct     unknown_timer_650;
-	TimerStruct       SightTimer;
-	TimerStruct       BlockagePathTimer;
-	YRComPtr<ILocomotion> Locomotor;
+	DECLARE_PROPERTY(TimerStruct, unknown_timer_650);
+	DECLARE_PROPERTY(TimerStruct, SightTimer);
+	DECLARE_PROPERTY(TimerStruct, BlockagePathTimer);
+	DECLARE_PROPERTY(YRComPtr<ILocomotion>, Locomotor);
 	CoordStruct       unknown_point3d_678;
 	signed char       TubeIndex;	//I'm in this tunnel
 	bool              unknown_bool_685;
@@ -203,7 +202,7 @@ public:
 	FootClass*        ParasiteEatingMe; // the tdrone/squid that's eating me
 	DWORD             unknown_698;
 	ParasiteClass*    ParasiteImUsing;	// my parasitic half, nonzero for, eg, terror drone or squiddy
-	TimerStruct       ParalysisTimer; // for squid victims
+	DECLARE_PROPERTY(TimerStruct, ParalysisTimer); // for squid victims
 	bool              unknown_bool_6AC;
 	bool              IsAttackedByLocomotor; // the unit's locomotor is jammed by a magnetron
 	bool              IsLetGoByLocomotor; // a magnetron attacked this unit and let it go. falling, landing, or sitting on the ground

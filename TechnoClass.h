@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <Matrix3D.h>
 #include <RadioClass.h>
 #include <RadBeam.h>
 #include <TechnoTypeClass.h>
@@ -291,11 +292,9 @@ public:
 	virtual void DrawActionLines(bool Force, DWORD dwUnk2) RX;
 	virtual DWORD GetDisguiseFlags(DWORD existingFlags) const R0;
 	virtual bool IsClearlyVisibleTo(HouseClass *House) const R0; // can House see right through my disguise?
-
-	//nooooooooooooooooooooooooooooooo (vader-style)
-	//thought 666 is the number of the beast? in hex it's 444 D=
-	virtual void vt_entry_444(DWORD dwUnk, DWORD dwUnk2, DWORD dwUnk3, DWORD dwUnk4, DWORD dwUnk5,
-		DWORD dwUnk6, DWORD dwUnk7, DWORD dwUnk8, DWORD dwUnk9, DWORD dwUnk10) RX;
+	virtual void DrawVoxel(const VoxelStruct& Voxel, DWORD dwUnk2, short Facing, 
+		const IndexClass<int, int>& VoxelIndex, const RectangleStruct& Rect, const Point2D& Location,
+		const Matrix3D& Matrix, int Intensity, DWORD dwUnk9, DWORD dwUnk10) RX;
 	virtual void vt_entry_448(DWORD dwUnk, DWORD dwUnk2) RX;
 	virtual void DrawHealthBar(Point2D *pLocation, RectangleStruct *pBounds, bool bUnk3) const RX;
 	virtual void DrawPipScalePips(Point2D *pLocation, Point2D *pOriginalLocation, RectangleStruct *pBounds) const RX;
@@ -486,9 +485,9 @@ protected:
 
 public:
 
-	FlashData        Flashing;
-	ProgressTimer    Animation; // how the unit animates
-	PassengersClass  Passengers;
+	DECLARE_PROPERTY(FlashData, Flashing);
+	DECLARE_PROPERTY(ProgressTimer, Animation); // how the unit animates
+	DECLARE_PROPERTY(PassengersClass, Passengers);
 	TechnoClass*     Transporter; // unit carrying me
 	int              unknown_int_120;
 	int              CurrentTurretNumber; // for IFV/gattling/charge turrets
@@ -500,20 +499,20 @@ public:
 	Rank             CurrentRanking; // only used for promotion detection
 	int              CurrentGattlingStage;
 	int              GattlingValue; // sum of RateUps and RateDowns
-	DWORD            unknown_148;
+	int              TurretAnimFrame;
 	HouseClass*      InitialOwner; // only set in ctor
-	VeterancyStruct  Veterancy;
+	DECLARE_PROPERTY(VeterancyStruct, Veterancy);
 	PROTECTED_PROPERTY(DWORD, align_154);
 	double           ArmorMultiplier;
 	double           FirepowerMultiplier;
-	TimerStruct      IdleActionTimer; // MOO
-	TimerStruct      RadarFlashTimer;
-	TimerStruct      TargetingTimer; //Duration = 45 on init!
-	TimerStruct      IronCurtainTimer;
-	TimerStruct      IronTintTimer; // how often to alternate the effect color
+	DECLARE_PROPERTY(TimerStruct, IdleActionTimer); // MOO
+	DECLARE_PROPERTY(TimerStruct, RadarFlashTimer);
+	DECLARE_PROPERTY(TimerStruct, TargetingTimer); //Duration = 45 on init!
+	DECLARE_PROPERTY(TimerStruct, IronCurtainTimer);
+	DECLARE_PROPERTY(TimerStruct, IronTintTimer); // how often to alternate the effect color
 	int              IronTintStage; // ^
-	TimerStruct      AirstrikeTimer;
-	TimerStruct      AirstrikeTintTimer; // tracks alternation of the effect color
+	DECLARE_PROPERTY(TimerStruct, AirstrikeTimer);
+	DECLARE_PROPERTY(TimerStruct, AirstrikeTintTimer); // tracks alternation of the effect color
 	DWORD            AirstrikeTintStage; //  ^
 	int              ForceShielded;	//0 or 1, NOT a bool - is this under ForceShield as opposed to IC?
 	bool             Deactivated; //Robot Tanks without power for instance
@@ -522,22 +521,22 @@ public:
 	AnimClass*       DrainAnim;
 	bool             Disguised;
 	DWORD            DisguiseCreationFrame;
-	TimerStruct      InfantryBlinkTimer; // Rules->InfantryBlinkDisguiseTime , detects mirage firing per description
-	TimerStruct      DisguiseBlinkTimer; // disguise disruption timer
-	bool             unknown_bool_1F8;
-	TimerStruct      ReloadTimer;
+	DECLARE_PROPERTY(TimerStruct, InfantryBlinkTimer); // Rules->InfantryBlinkDisguiseTime , detects mirage firing per description
+	DECLARE_PROPERTY(TimerStruct, DisguiseBlinkTimer); // disguise disruption timer
+	bool             UnlimboingInfantry;
+	DECLARE_PROPERTY(TimerStruct, ReloadTimer);
 	DWORD            unknown_208;
 	DWORD            unknown_20C;
 
 	// WARNING! this is actually an index of HouseTypeClass es, but it's being changed to fix typical WW bugs.
-	IndexBitfield<HouseClass *> DisplayProductionTo; // each bit corresponds to one player on the map, telling us whether that player has (1) or hasn't (0) spied this building, and the game should display what's being produced inside it to that player. The bits are arranged by player ID, i.e. bit 0 refers to house #0 in HouseClass::Array, 1 to 1, etc.; query like ((1 << somePlayer->ArrayIndex) & someFactory->DisplayProductionToHouses) != 0
+	DECLARE_PROPERTY(IndexBitfield<HouseClass *>, DisplayProductionTo); // each bit corresponds to one player on the map, telling us whether that player has (1) or hasn't (0) spied this building, and the game should display what's being produced inside it to that player. The bits are arranged by player ID, i.e. bit 0 refers to house #0 in HouseClass::Array, 1 to 1, etc.; query like ((1 << somePlayer->ArrayIndex) & someFactory->DisplayProductionToHouses) != 0
 
 	int              Group; //0-9, assigned by CTRL+Number, these kinds // also set by aimd TeamType->Group !
 	AbstractClass*   Focus; // when told to guard a unit or such; distinguish undeploy and selling
 	HouseClass*      Owner;
 	CloakState       CloakState;
-	ProgressTimer    CloakProgress; // phase from [opaque] -> [fading] -> [transparent] , [General]CloakingStages= long
-	TimerStruct      CloakDelayTimer; // delay before cloaking again
+	DECLARE_PROPERTY(ProgressTimer, CloakProgress); // phase from [opaque] -> [fading] -> [transparent] , [General]CloakingStages= long
+	DECLARE_PROPERTY(TimerStruct, CloakDelayTimer); // delay before cloaking again
 	float            WarpFactor; // don't ask! set to 0 in CTOR, never modified, only used as ((this->Fetch_ID) + this->WarpFactor) % 400 for something in cloak ripple
 	bool             unknown_bool_250;
 	CoordStruct      LastSightCoords;
@@ -586,7 +585,7 @@ public:
 	TechnoClass*     BunkerLinkedItem;
 
 	float            PitchAngle; // not exactly, and it doesn't affect the drawing, only internal state of a dropship
-	TimerStruct      DiskLaserTimer;
+	DECLARE_PROPERTY(TimerStruct, DiskLaserTimer);
 	DWORD            unknown_2F8;
 	int              Ammo;
 	int              Value; // set to actual cost when this gets queued in factory, updated only in building's 42C
@@ -615,16 +614,16 @@ public:
 
 	int              HijackerInfantryType; // mutant hijacker
 
-	OwnedTiberiumStruct Tiberium;
+	DECLARE_PROPERTY(StorageClass, Tiberium);
 	DWORD            unknown_34C;
 
-	TransitionTimer  UnloadTimer; // times the deploy, unload, etc. cycles
+	DECLARE_PROPERTY(TransitionTimer, UnloadTimer); // times the deploy, unload, etc. cycles
 
-	FacingStruct     BarrelFacing;
-	FacingStruct     PrimaryFacing;
-	FacingStruct     SecondaryFacing;
+	DECLARE_PROPERTY(FacingStruct, BarrelFacing);
+	DECLARE_PROPERTY(FacingStruct, PrimaryFacing);
+	DECLARE_PROPERTY(FacingStruct, SecondaryFacing);
 	int              CurrentBurstIndex;
-	TimerStruct      TargetLaserTimer;
+	DECLARE_PROPERTY(TimerStruct, TargetLaserTimer);
 	short            unknown_short_3C8;
 	WORD             unknown_3CA;
 	bool             CountedAsOwned; // is this techno contained in OwningPlayer->Owned... counts?
@@ -637,8 +636,8 @@ public:
 	bool             IsPrimaryFactory; // doubleclicking a warfac/barracks sets it as primary
 	bool             Spawned;
 	bool             IsInPlayfield;
-	RecoilData       TurretRecoil;
-	RecoilData       BarrelRecoil;
+	DECLARE_PROPERTY(RecoilData, TurretRecoil);
+	DECLARE_PROPERTY(RecoilData, BarrelRecoil);
 	bool             unknown_bool_418;
 	bool             unknown_bool_419;
 	bool             IsHumanControlled;
@@ -666,28 +665,28 @@ public:
 	bool             Absorbed; // in UnitAbsorb/InfantryAbsorb or smth, lousy memory
 	bool             unknown_bool_43A;
 	DWORD            unknown_43C;
-	DynamicVectorClass<int> CurrentTargetThreatValues;
-	DynamicVectorClass<AbstractClass*> CurrentTargets;
+	DECLARE_PROPERTY(DynamicVectorClass<int>, CurrentTargetThreatValues);
+	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, CurrentTargets);
 
  // if DistributedFire=yes, this is used to determine which possible targets should be ignored in the latest threat scan
-	DynamicVectorClass<AbstractClass*> AttackedTargets;
+	DECLARE_PROPERTY(DynamicVectorClass<AbstractClass*>, AttackedTargets);
 
-	AudioController  Audio3;
+	DECLARE_PROPERTY(AudioController, Audio3);
 
 	DWORD            unknown_49C;
 	DWORD            unknown_4A0;
 
-	AudioController  Audio4;
+	DECLARE_PROPERTY(AudioController, Audio4);
 
 	bool             unknown_bool_4B8;
 	DWORD            unknown_4BC;
 
-	AudioController  Audio5;
+	DECLARE_PROPERTY(AudioController, Audio5);
 
 	bool             unknown_bool_4D4;
 	DWORD            unknown_4D8;
 
-	AudioController  Audio6;
+	DECLARE_PROPERTY(AudioController, Audio6);
 
 	DWORD            QueuedVoiceIndex;
 	DWORD            unknown_4F4;

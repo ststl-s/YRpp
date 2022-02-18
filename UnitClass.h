@@ -46,9 +46,8 @@ public:
 		{ JMP_THIS(0x70FBD0); }
 
 	//Constructor
-	UnitClass(UnitTypeClass* pType, HouseClass* pOwner) noexcept
-		: UnitClass(noinit_t())
-	{ JMP_THIS(0x7353C0); }
+	UnitClass(UnitTypeClass* pType, HouseClass* pOwner) noexcept : UnitClass(noinit_t())
+		{ JMP_THIS(0x7353C0); }
 
 protected:
 	explicit __forceinline UnitClass(noinit_t) noexcept

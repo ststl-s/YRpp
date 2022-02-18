@@ -142,14 +142,14 @@ public:
 	// Rect1 will be changed, notice that - secsome
 	static RectangleStruct* __fastcall Union(
 		RectangleStruct* pOutBuffer,
-		RectangleStruct& rect1,
-		RectangleStruct& rect2)
+		const RectangleStruct& rect1,
+		const RectangleStruct& rect2)
 			{ JMP_STD(0x487F40); }
 
 	// Rect1 will be changed, notice that - secsome
 	static RectangleStruct __fastcall Union(
-		RectangleStruct& rect1,
-		RectangleStruct& rect2)
+		const RectangleStruct& rect1,
+		const RectangleStruct& rect2)
 	{
 		RectangleStruct buffer;
 		Union(&buffer, rect1, rect2);

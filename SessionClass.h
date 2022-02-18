@@ -53,6 +53,11 @@ class SessionClass
 public:
 	static constexpr reference<SessionClass, 0xA8B238u> const Instance{};
 
+	static bool IsCampaign()
+	{
+		return Instance->GameMode == GameMode::Campaign;
+	}
+
 	GameMode GameMode;
 	MPGameModeClass* MPGameMode;
 	DWORD unknown_08;

@@ -506,6 +506,6 @@ public:
 	int             ZFudgeTunnel;
 	int             ZFudgeBridge;
 	char            PaletteFile[0x20];
-	void*           Palette; //no... idea....
+	DynamicVectorClass<ColorScheme*>*           Palette; //no... idea....
 	DWORD           align_DF4;
 };

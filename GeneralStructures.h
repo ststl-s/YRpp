@@ -223,6 +223,11 @@ struct DirStruct
 		this->value<16>(value);
 	}
 
+	// The vanilla YR formula
+	double get_radian() const {
+		return static_cast<double>(value32() - 8) * -(Math::Pi / 16);
+	}
+
 	template <size_t Bits = 16>
 	double radians() const {
 		static_assert(Bits > 0 && Bits <= 16, "Bits has to be greater than 0 and lower or equal to 16.");
@@ -334,14 +339,6 @@ private:
 	DirStruct Initial; // rotation started here
 	TimerStruct Timer; // counts rotation steps
 	DirStruct ROT; // Rate of Turn. INI Value * 256
-};
-
-struct SomeVoxelCache {
-	void *ptr;
-	DWORD f_4;
-	DWORD f_8;
-	BYTE f_C;
-	DWORD * ptr_10;
 };
 
 struct BasePlanningCell {

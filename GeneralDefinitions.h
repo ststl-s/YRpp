@@ -93,6 +93,15 @@ enum class AbstractType : unsigned int {
 	DiskLaser = 73
 };
 
+enum class RecordFlag : unsigned int
+{
+	Write = 0x1, // I am recording the game now
+	Read = 0x2, // I am playing a recorded game now
+	Attract = 0x4 // Recording enabled by commmand line
+};
+
+MAKE_ENUM_FLAGS(RecordFlag);
+
 enum class Action : unsigned int {
 	None = 0,
 	Move = 1,
@@ -446,6 +455,67 @@ enum class TriggerAction : unsigned int {
 	JumpCameraHome = 0x91
 };
 
+enum class TriggerAttachType : int {
+	Global = 0x1,
+	Object = 0x2,
+	Map = 0x4,
+	House = 0x8,
+	Logic = 0x10
+};
+
+MAKE_ENUM_FLAGS(TriggerAttachType);
+
+enum class LogicNeedType : int {
+	None = 0,
+	Theme,
+	Movie,
+	Sound,
+	Speech,
+	Infantry,
+	Unit,
+	Aircraft,
+	Structure,
+	Waypoint,
+	Number,
+	Trigger,
+	Team,
+	House,
+	Time,
+	Quarry,
+	Bool,
+	Special,
+	Mission,
+	Cell,
+	Script,
+	Rectangle,
+	Global,
+	AnimNWaypoint,
+	WaypointNWeapon,
+	LightBehavior,
+	Tag,
+	MeteorSize,
+	RadarEventNWaypoint,
+	Local,
+	VelocityNWaypoint,
+	ShowerNWaypoint,
+	Velocity,
+	Float,
+	TeamNWaypoint,
+	ParticleNWaypoint,
+	BuildingNProperty,
+	SplitType,
+	SoundNWaypoint,
+	Text,
+	Team2,
+	Anim,
+	SpeechBubble,
+	NumberNTech,
+	CrateNWaypoint,
+	BuildingNWaypoint,
+	NumberNSuper,
+	BuildingNNumber,
+};
+
 enum class AIMode : int {
 	General = 0,
 	LowOnCash = 1, // if HouseClass::AvailableMoney < 25 ! stupidly low value
@@ -572,28 +642,68 @@ enum class Category : int {
 	AirLift = 10
 };
 
+enum class CellFlags : unsigned int
+{
+	Empty = 0x0,
+	CenterRevealed = 0x1,
+	EdgeRevealed = 0x2,
+	IsWaypoint = 0x4,
+	Explored = 0x8, // this means no shroud
+	FlagPresent = 0x10,
+	FlagToShroud = 0x20,
+	IsPlot = 0x40,
+	Bridge_80 = 0x80,
+	Bridge = 0x100,
+	Unknown_200 = 0x200,
+	Bridge_400 = 0x400,
+	Bridge_800 = 0x800,
+	Unknown_1000 = 0x1000,
+	Unknown_2000 = 0x2000,
+	Unknown_4000 = 0x4000,
+	Unknown_8000 = 0x8000,
+	Unknown_10000 = 0x10000,
+	VeinsPresent = 0x20000,
+	Unknown_40000 = 0x40000,
+	EMPPresent = 0x80000,
+	Unknown_100000 = 0x100000,
+	Unknown_200000 = 0x200000,
+	Fogged = 0x400000,
 
-typedef int eCellFlags;
+	Revealed = CenterRevealed | EdgeRevealed
+};
 
-#define cf_CenterRevealed	0x01
-#define cf_EdgeRevealed		0x02
-#define	cf_IsWaypoint		0x04
-#define	cf_Explored			0x08 //this means no shroud
-#define	cf_FlagPresent		0x10
-#define cf_HasShroudCounter	0x20
-#define cf_IsPlot			0x40
-#define cf_Bridge			0x100
-#define	cf_VeinsPresent		0x20000
-#define	cf_EMPPresent		0x80000
-#define	cf_Fogged			0x400000
+MAKE_ENUM_FLAGS(CellFlags);
 
+enum class AltCellFlags : unsigned int
+{
+	Unknown_1 = 0x1,
+	ContainsBuilding = 0x2,
+	Unknown_4 = 0x4, // 47EED4 PlaceShape related
+	Mapped = 0x8,
+	NoFog = 0x10,
+	Unknown_20 = 0x20,
+	Unknown_40 = 0x40,
+	Unknown_80 = 0x80,
+	Unknown_100 = 0x100,
 
-typedef int eCellFlags_12C;
+	Clear = Mapped | NoFog
+};
 
-#define cf2_ContainsBuilding	0x02 // ?
-#define	cf2_NoShadow			0x08 //else tooltip is TXT_SHADOW
-#define cf2_NoFog				0x10
+MAKE_ENUM_FLAGS(AltCellFlags);
 
+enum FacingType : char
+{
+	FACING_N = 0x0,
+	FACING_NE = 0x1,
+	FACING_E = 0x2,
+	FACING_SE = 0x3,
+	FACING_S = 0x4,
+	FACING_SW = 0x5,
+	FACING_W = 0x6,
+	FACING_NW = 0x7,
+	FACING_COUNT = 0x8,
+	FACING_NONE = -1,
+};
 
 enum class CloakState : int {
 	Uncloaked = 0,
@@ -1434,6 +1544,18 @@ enum class ParasiteState : int {
 	PushRight = 3, // push the victim, variant B
 	Damage = 4 // wait until rocking stops; deliver damage
 };
+
+enum class WWKey : int {
+	Shift = 0x100,
+	Ctrl = 0x200,
+	Alt = 0x400,
+	Release = 0x800,
+	VirtualKey = 0x1000,
+	DoubleClick = 0x2000,
+	Button = 0x8000,
+};
+
+MAKE_ENUM_FLAGS(WWKey);
 
 //Westwood custom messages (e.g. for SendMessage)
 #define	WW_SLIDER_GETVALUE			0x400

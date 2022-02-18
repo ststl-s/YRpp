@@ -10,6 +10,8 @@
 ALIAS(Imports::FP_OleSaveToStream, Imports::OleSaveToStream, 0x7E15F4);
 ALIAS(Imports::FP_OleLoadFromStream, Imports::OleLoadFromStream, 0x7E15F8);
 ALIAS(Imports::FP_CoRegisterClassObject, Imports::CoRegisterClassObject, 0x7E15D8);
+ALIAS(Imports::FP_CoRevokeClassObject, Imports::CoRevokeClassObject, 0x7E15CC);
+
 ALIAS(Imports::FP_TimeGetTime, Imports::TimeGetTime, 0x7E1530);
 
 ALIAS(Imports::FP_DefWindowProcA, Imports::DefWindowProcA, 0x7E1394);

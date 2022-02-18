@@ -134,11 +134,11 @@ public:
 	virtual void DrawBehind(Point2D* pLocation, RectangleStruct* pBounds) const RX;
 	virtual void DrawExtras(Point2D* pLocation, RectangleStruct* pBounds) const RX; // draws ivan bomb, health bar, talk bubble, etc
 	virtual void Draw(Point2D* pLocation, RectangleStruct* pBounds) const RX;
-	virtual void DrawAgain(Point2D* pLocation, RectangleStruct* pBounds) const RX; // just forwards the call to Draw
+	virtual void DrawAgain(const Point2D& location, const RectangleStruct& bounds) const RX; // just forwards the call to Draw
 	virtual void Undiscover() RX;
 	virtual void See(DWORD dwUnk, DWORD dwUnk2) RX;
 	virtual bool UpdatePlacement(PlacementType value) R0;
-	virtual RectangleStruct* vt_entry_128(RectangleStruct* pRect) const R0;
+	virtual RectangleStruct* GetDimensions(RectangleStruct* pRect) const R0;
 	virtual RectangleStruct* GetRenderDimensions(RectangleStruct* pRect) R0;
 	virtual void DrawRadialIndicator(DWORD dwUnk) RX;
 	virtual void MarkForRedraw() RX;
@@ -218,6 +218,9 @@ public:
 	HealthState GetHealthStatus() const
 		{ JMP_THIS(0x5F5DD0); }
 
+	bool AttachTrigger(TagClass* pTag)
+		{ JMP_THIS(0x5F5B50); }
+
 	void BecomeUntargetable()
 		{ JMP_THIS(0x70D4A0); }
 
@@ -245,10 +248,9 @@ public:
 		return ret;
 	}
 
-	//Constructor
-	ObjectClass()  noexcept
-		: ObjectClass(noinit_t())
-	{ JMP_THIS(0x5F3900); }
+	//Constructor NEVER CALL IT DIRECTLY
+	/*ObjectClass()  noexcept
+		{ JMP_THIS(0x5F3900); }*/
 
 protected:
 	explicit __forceinline ObjectClass(noinit_t)  noexcept
@@ -267,8 +269,8 @@ public:
 	ObjectClass*       NextObject;	//Next Object in the same cell or transport. This is a linked list of Objects.
 	TagClass*          AttachedTag; //Should be TagClass , TODO: change when implemented
 	BombClass*         AttachedBomb; //Ivan's little friends.
-	AudioController    AmbientSoundController; // the "mofo" struct, evil evil stuff
-	AudioController    CustomSoundController; // the "mofo" struct, evil evil stuff
+	DECLARE_PROPERTY(AudioController, AmbientSoundController); // the "mofo" struct, evil evil stuff
+	DECLARE_PROPERTY(AudioController, CustomSoundController); // the "mofo" struct, evil evil stuff
 	int                CustomSound;
 	bool               BombVisible; // In range of player's bomb seeing units, so should draw it
 	PROTECTED_PROPERTY(BYTE, align_69[0x3]);
