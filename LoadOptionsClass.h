@@ -94,7 +94,7 @@ public:
 	DWORD unknown_14;
 	DWORD unknown_18;
 	DWORD unknown_1C;
-	DynamicVectorClass<FileEntryClass*> FileEntries;
+	DECLARE_PROPERTY(DynamicVectorClass<FileEntryClass*>, FileEntries);
 };
 
 class SavegameInformation

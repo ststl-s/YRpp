@@ -29,7 +29,7 @@ public:
 	//===== Properties ==========================================================
 	//===========================================================================
 public:
-	ProgressTimer Progress;
+	DECLARE_PROPERTY(ProgressTimer, Progress);
 	int Thickness; // only respected if IsHouseColor
 	bool IsHouseColor;
 	bool IsSupported; // this changes the values for InnerColor (false: halve, true: double), HouseColor only

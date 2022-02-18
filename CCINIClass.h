@@ -309,11 +309,12 @@ public:
 	//Properties
 
 public:
+	using IndexType = IndexClass<int, INISection*>;
 
 	char* CurrentSectionName;
 	INISection* CurrentSection;
-	List<INISection> Sections;
-	IndexClass<int, INISection*> SectionIndex; // <CRCValue of the Name, Pointer to the section>
+	DECLARE_PROPERTY(List<INISection>, Sections);
+	DECLARE_PROPERTY(IndexType, SectionIndex); // <CRCValue of the Name, Pointer to the section>
 	INIComment* LineComments;
 };
 
