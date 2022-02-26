@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Unsorted.h>
 #include <Objbase.h>
 
 class YRComHelpers {

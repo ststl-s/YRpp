@@ -214,7 +214,7 @@ public:
 	}
 
 	DynamicVectorClass(DynamicVectorClass &&other) noexcept
-		: VectorClass(std::move(other)), Count(other.Count),
+		: VectorClass<T>(std::move(other)), Count(other.Count),
 		CapacityIncrement(other.CapacityIncrement)
 	{ }
 
@@ -229,7 +229,7 @@ public:
 	}
 
 	virtual bool SetCapacity(int capacity, T* pMem = nullptr) override {
-		bool bRet = VectorClass::SetCapacity(capacity, pMem);
+		bool bRet = VectorClass<T>::SetCapacity(capacity, pMem);
 
 		if(this->Capacity < this->Count) {
 			this->Count = this->Capacity;
@@ -239,7 +239,7 @@ public:
 	}
 
 	virtual void Clear() override {
-		VectorClass::Clear();
+		VectorClass<T>::Clear();
 		this->Count = 0;
 	}
 
@@ -343,7 +343,7 @@ public:
 	}
 
 	void Swap(DynamicVectorClass& other) noexcept {
-		VectorClass::Swap(other);
+		VectorClass<T>::Swap(other);
 		using std::swap;
 		swap(this->Count, other.Count);
 		swap(this->CapacityIncrement, other.CapacityIncrement);

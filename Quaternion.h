@@ -42,6 +42,7 @@ public:
 		Y = another.Y;
 		Z = another.Z;
 		W = another.W;
+		return *this;
 	}
 
 	Quaternion __fastcall Inverse(const Quaternion& value)
