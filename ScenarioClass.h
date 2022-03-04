@@ -6,6 +6,8 @@
 #include <TechnoTypeClass.h>
 #include <Helpers/CompileTime.h>
 
+class INIClass;
+
 struct Variable
 {
 	char Name[40];
@@ -86,6 +88,9 @@ public:
 
 	static bool __fastcall SaveGame(const char* FileName, const wchar_t* Description, bool BarGraph = false)
 		{ JMP_STD(0x67CEF0); }
+
+	void ReadStartPoints(INIClass& ini)
+		{ JMP_THIS(0x689D30); }
 
 	// valid range [0..701]
 	bool IsDefinedWaypoint(int idx)
