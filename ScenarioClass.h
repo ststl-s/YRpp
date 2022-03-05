@@ -232,8 +232,8 @@ public:
 	DWORD unknown_3598;
 	int InitTime;
 	short Stage;
-	bool unknown_35A2;
-	BYTE unknown_35A3;
+	bool UserInputLocked;
+	bool unknown_35A3;
 	int ParTimeEasy;
 	int ParTimeMedium;
 	int ParTimeDifficult;
