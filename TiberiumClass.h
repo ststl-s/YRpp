@@ -52,7 +52,7 @@ public:
 			Datas = nullptr;
 		}
 
-		if (Datas)
+		if (States)
 		{
 			YRMemory::Deallocate(States);
 			States = nullptr;
