@@ -445,6 +445,9 @@ public:
 
 	void ClearSidebarTabObject() const
 		{ JMP_THIS(0x734270); }
+		
+	LightConvertClass* GetDrawer() const
+		{ JMP_THIS(0x705D70); }
 
 	int GetIonCannonValue(AIDifficulty difficulty) const;
 
