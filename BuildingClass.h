@@ -140,6 +140,10 @@ public:
 	void PlayAnim(const char* animName, BuildingAnimSlot Slot, bool Damaged, bool Garrisoned, int effectDelay = 0)
 		{ JMP_THIS(0x451890); }
 
+	// changes between building's damaged and undamaged animations.
+	void ToggleDamagedAnims(bool isDamaged)
+		{ JMP_THIS(0x451EE0); }
+
 	// when the building is switched off
 	void DisableStuff()
 		{ JMP_THIS(0x452480); }
