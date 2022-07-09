@@ -121,8 +121,8 @@ public:
 	Randomizer Random; //218
 	DWORD Difficulty1;
 	DWORD Difficulty2; // 2 - Difficulty1
-	TimerStruct ElapsedTimer;
-	TimerStruct PauseTimer;
+	CDTimerClass ElapsedTimer;
+	CDTimerClass PauseTimer;
 	DWORD unknown_62C;
 	bool IsGamePaused;
 	CellStruct Waypoints [702];
@@ -138,14 +138,14 @@ public:
 	CellStruct HouseHomeCells [0x8];
 	bool TeamsPresent;
 	int NumCoopHumanStartSpots;
-	TimerStruct MissionTimer;
+	CDTimerClass MissionTimer;
 	wchar_t * MissionTimerTextCSF;
 	char MissionTimerText [32];
-	TimerStruct ShroudRegrowTimer;
-	TimerStruct FogTimer;
-	TimerStruct IceTimer;
-	TimerStruct unknown_timer_123c;
-	TimerStruct AmbientTimer;
+	CDTimerClass ShroudRegrowTimer;
+	CDTimerClass FogTimer;
+	CDTimerClass IceTimer;
+	CDTimerClass unknown_timer_123c;
+	CDTimerClass AmbientTimer;
 	int TechLevel;
 	TheaterType Theater;
 	char FileName [0x104];
@@ -202,7 +202,7 @@ public:
 	bool MultiplayerOnly; //34BC
 	bool IsRandom;
 	bool PickedUpAnyCrate;
-	TimerStruct unknown_timer_34C0;
+	CDTimerClass unknown_timer_34C0;
 	int CampaignIndex;
 	int StartingDropships;
 	TypeList<TechnoTypeClass*> AllowableUnits;

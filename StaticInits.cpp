@@ -242,7 +242,7 @@ bool HouseClass::IsIonCannonEligibleTarget(const TechnoClass* const pTechno) con
 	if(this->AIDifficulty == AIDifficulty::Hard) {
 		for(const auto* pFactory : *FactoryClass::Array) {
 			if(pFactory->Object == pTechno
-				&& pFactory->Production.Timer.Duration
+				&& pFactory->Production.Rate
 				&& !pFactory->IsSuspended)
 			{
 				return true;
