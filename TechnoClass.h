@@ -292,7 +292,7 @@ public:
 	virtual void DrawActionLines(bool Force, DWORD dwUnk2) RX;
 	virtual DWORD GetDisguiseFlags(DWORD existingFlags) const R0;
 	virtual bool IsClearlyVisibleTo(HouseClass *House) const R0; // can House see right through my disguise?
-	virtual void DrawVoxel(const VoxelStruct& Voxel, DWORD dwUnk2, short Facing, 
+	virtual void DrawVoxel(const VoxelStruct& Voxel, DWORD dwUnk2, short Facing,
 		const IndexClass<int, int>& VoxelIndex, const RectangleStruct& Rect, const Point2D& Location,
 		const Matrix3D& Matrix, int Intensity, DWORD dwUnk9, DWORD dwUnk10) RX;
 	virtual void vt_entry_448(DWORD dwUnk, DWORD dwUnk2) RX;
@@ -433,6 +433,9 @@ public:
 	void SetTargetForPassengers(AbstractClass* pTarget)
 		{ JMP_THIS(0x710550); }
 
+	void KillPassengers(TechnoClass* pSource)
+		{ JMP_THIS(0x707CB0); }
+
 	// returns the house that created this object (factoring in Mind Control)
 	HouseClass * GetOriginalOwner()
 		{ JMP_THIS(0x70F820); }
@@ -445,7 +448,7 @@ public:
 
 	void ClearSidebarTabObject() const
 		{ JMP_THIS(0x734270); }
-		
+
 	LightConvertClass* GetDrawer() const
 		{ JMP_THIS(0x705D70); }
 
