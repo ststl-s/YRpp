@@ -73,7 +73,7 @@ public:
 		return this->IsTicking() && !this->HasTimeLeft();
 	}
 
-	// returns whether a delay is active or a timer is still counting down.
+	// Returns whether a delay is active or a timer is still counting down.
 	// this is the 'opposite' of Completed() (meaning: incomplete / still busy)
 	// and logically the same as !Expired() (meaning: blocked / delay in progress)
 	bool InProgress() const
@@ -81,18 +81,20 @@ public:
 		return this->IsTicking() && this->HasTimeLeft();
 	}
 
-	// returns whether a delay is inactive. same as !InProgress().
+	// Returns whether a delay is inactive. same as !InProgress().
 	bool Expired() const
 	{
 		return !this->IsTicking() || !this->HasTimeLeft();
 	}
 
-protected:
+	// Returns whether or not the timer is currently ticking (started but not stopped or paused),
+	// regardless of if there is time left or not.
 	bool IsTicking() const
 	{
 		return this->StartTime != -1;
 	}
 
+	// Returns whether or not the timer has time left.
 	bool HasTimeLeft() const
 	{
 		return this->GetTimeLeft() > 0;
