@@ -41,7 +41,7 @@ public:
 
 	virtual bool Fill(COLORREF nColor) R0;
 
-	virtual bool FillRectTrans(RectangleStruct* pClipRect, ColorStruct Color, COLORREF nUnknown) R0;
+	virtual bool FillRectTrans(RectangleStruct* pClipRect, ColorStruct* pColor, int nOpacity) R0;
 
 	virtual bool DrawEllipse(
 		int XOff, int YOff, int CenterX, int CenterY, RectangleStruct Rect, COLORREF nColor) R0;
