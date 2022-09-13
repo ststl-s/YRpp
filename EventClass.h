@@ -3,6 +3,7 @@
 #include <Helpers/CompileTime.h>
 
 #include <TargetClass.h>
+#include <Unsorted.h>
 
 enum class EventType : unsigned char
 {
@@ -186,8 +187,7 @@ public:
 
 		OutList->List[OutList->Tail] = event;
 
-		// timeGetTime();
-		OutList->Timings[OutList->Tail] = ((int(__stdcall*)())0x7E1530)();
+		OutList->Timings[OutList->Tail] = static_cast<int>(Imports::TimeGetTime());
 
 		++OutList->Count;
 		OutList->Tail = (OutList->Tail + 1) & 127;
