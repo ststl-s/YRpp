@@ -171,8 +171,9 @@ public:
 	static constexpr reference<const char*, 0x82091C, 47> const EventNames{};
 
 	static constexpr reference<EventList<0x80>, 0xA802C8> OutList{};
-	static constexpr reference<EventList<0x100>, 0xA83ED0> DoList_256{};
 	static constexpr reference<EventList<0x4000>, 0x8B41F8> DoList{};
+	// If the event is a MegaMission, then add it to this list
+	static constexpr reference<EventList<0x100>, 0xA83ED0> MegaMissionList{};
 
 	// this points to CRCs from 0x100 last frames
 	static constexpr reference<DWORD, 0xB04474, 256> const LatestFramesCRC{};
