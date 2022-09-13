@@ -4,6 +4,7 @@
 #include <GeneralDefinitions.h>
 #include <GeneralStructures.h>
 #include <ArrayClasses.h>
+#include <IndexClass.h>
 
 #include <Helpers\CompileTime.h>
 
@@ -43,6 +44,7 @@ public:
 	static const AbstractType AbsID = AbstractType::Abstract;
 
 	static constexpr constant_ptr<DynamicVectorClass<AbstractClass*>, 0xB0F720u> const Array{};
+	static constexpr reference<IndexClass<int, int>, 0xB0E840u> const TargetIndex{};
 
 	//static
 	const char* GetClassName() const
