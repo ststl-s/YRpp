@@ -360,6 +360,24 @@ public:
 	static signed int __fastcall FindIndexByName(const char *name)
 		{ JMP_STD(0x50C170); }
 
+	static int __fastcall GetPlayerAtFromString(const char* name)
+		{ JMP_STD(0x510FB0); }
+	static bool __fastcall IsPlayerAtType(int at)
+	{
+		// JMP_STD(0x510F60);
+		return
+			at == PlayerAtA ||
+			at == PlayerAtB ||
+			at == PlayerAtC ||
+			at == PlayerAtD ||
+			at == PlayerAtE ||
+			at == PlayerAtF ||
+			at == PlayerAtG
+			;
+	}
+	static HouseClass* __fastcall FindByPlayerAt(int at)
+		{ JMP_STD(0x510ED0); }
+
 	// gets the first house of a type with this name
 	static HouseClass* FindByCountryName(const char* name) {
 		auto idx = HouseTypeClass::FindIndexOfName(name);
