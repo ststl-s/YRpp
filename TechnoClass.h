@@ -646,8 +646,8 @@ public:
 	DECLARE_PROPERTY(RecoilData, BarrelRecoil);
 	bool             unknown_bool_418;
 	bool             unknown_bool_419;
-	bool             IsHumanControlled;
-	bool             DiscoveredByPlayer;
+	bool             IsOwnedByCurrentPlayer; // Returns true if owned by the player on this computer
+	bool             DiscoveredByCurrentPlayer;
 	bool             DiscoveredByComputer;
 	bool             unknown_bool_41D;
 	bool             unknown_bool_41E;

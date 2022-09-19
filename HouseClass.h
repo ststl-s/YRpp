@@ -168,8 +168,8 @@ public:
 	//Static
 	static constexpr constant_ptr<DynamicVectorClass<HouseClass*>, 0xA80228u> const Array{};
 
-	static constexpr reference<HouseClass*, 0xA83D4Cu> const Player{};
-	static constexpr reference<HouseClass*, 0xAC1198u> const Observer{};;
+	static constexpr reference<HouseClass*, 0xA83D4Cu> const CurrentPlayer{}; // House of player at this computer.
+	static constexpr reference<HouseClass*, 0xAC1198u> const Observer{};;     // House of player that is observer.
 
 	//IConnectionPointContainer
 	virtual HRESULT __stdcall EnumConnectionPoints(IEnumConnectionPoints** ppEnum) R0;
@@ -445,21 +445,21 @@ public:
 	bool AllPrerequisitesAvailable(TechnoTypeClass const* pItem, DynamicVectorClass<BuildingTypeClass*> const& vectorBuildings, int vectorLength)
 		{ JMP_THIS(0x505360); }
 
-	// whether any human player controls this house
-	bool ControlledByHuman() const { // { JMP_THIS(0x50B730); }
-		bool result = this->CurrentPlayer;
+	// Whether any human player controls this house.
+	bool IsControlledByHuman() const { // { JMP_THIS(0x50B730); }
+		bool result = this->IsHumanPlayer;
 		if(SessionClass::Instance->GameMode == GameMode::Campaign) {
-			result = result || this->PlayerControl;
+			result = result || this->IsInPlayerControl;
 		}
 		return result;
 	}
 
-	// whether the human player on this PC can control this house
-	bool ControlledByPlayer() const { // { JMP_THIS(0x50B6F0); }
+	// Whether the human player on this computer can control this house.
+	bool IsControlledByCurrentPlayer() const { // { JMP_THIS(0x50B6F0); }
 		if(SessionClass::Instance->GameMode != GameMode::Campaign) {
-			return this->IsPlayer();
+			return this->IsCurrentPlayer();
 		}
-		return this->CurrentPlayer || this->PlayerControl;
+		return this->IsHumanPlayer || this->IsInPlayerControl;
 	}
 
 	// Target ought to be Object, I imagine, but cell doesn't work then
@@ -681,22 +681,19 @@ public:
 		return this->Type->MultiplayPassive;
 	}
 
-	// whether this house is equal to Player
-	bool IsPlayer() const {
-		return this == Player;
+	// Whether this house is equal to CurrentPlayer
+	bool IsCurrentPlayer() const {
+		return this == CurrentPlayer;
 	}
 
-	bool IsPlayerControl() const
-		{ JMP_THIS(0x50B730); }
-
-	// whether this house is equal to Observer
+	// Whether this house is equal to Observer
 	bool IsObserver() const {
 		return this == Observer;
 	}
 
-	// whether Player is equal to Observer
-	static bool IsPlayerObserver() {
-		return Player && Player->IsObserver();
+	// Whether CurrentPlayer is equal to Observer
+	static bool IsCurrentPlayerObserver() {
+		return CurrentPlayer && CurrentPlayer->IsObserver();
 	}
 
 	int CalculateCostMultipliers()
@@ -758,9 +755,9 @@ public:
 	Edge                  StartingEdge;
 	DWORD                 AIState_1E4;
 	int                   SideIndex;
-	bool                  CurrentPlayer;		//is controlled by the player at this computer
-	bool                  PlayerControl;		//a human controls this House
-	bool                  Production;		//AI production has begun
+	bool                  IsHumanPlayer;		// Is controlled by a human player.
+	bool                  IsInPlayerControl;	// Is controlled by current player.
+	bool                  Production;		    // AI production has begun.
 	bool                  AutocreateAllowed;
 	bool			      NodeLogic_1F0;
 	bool			      ShipYardConst_1F1;
