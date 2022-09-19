@@ -121,7 +121,7 @@ public:
 	//VTable
 	virtual HRESULT __stdcall Load(IStream* pStm) R0;
 	virtual HRESULT __stdcall Save(IStream* pStm) R0;
-	virtual void CalculateChecksum(Checksummer& checksum) const RX;
+	virtual void ComputeCRC(CRCEngine& crc) const RX;
 
 	//virtual ~BaseClass() { /*???*/ }; // gcc demands a virtual since virtual funcs exist
 
