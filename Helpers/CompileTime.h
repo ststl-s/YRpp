@@ -1,5 +1,7 @@
 #pragma once
 
+#include <type_traits>
+
 struct noinit_t;
 
 // defines a compile time pointer to a known memory address
