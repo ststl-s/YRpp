@@ -7,6 +7,7 @@
 #include <wchar.h>
 #include <ASMMacros.h>
 #include <ColorScheme.h>
+#include <TextLabelClass.h>
 
 #include <Helpers/CompileTime.h>
 
@@ -27,4 +28,28 @@ public:
 
 	void PrintMessage(const wchar_t* pMessage, double durationMinutes, int nColorSchemeIndex = ColorScheme::White, bool bSilent = false)
 		{ this->PrintMessage(nullptr, 0, pMessage, nColorSchemeIndex, 0x4046, static_cast<int>(durationMinutes * 900), bSilent); }
+
+
+	TextLabelClass* MessageList;
+	Point2D MessagePos;
+	int MaxMessageCount;
+	int MaxCharacters;
+	int Height;
+	bool EnableOverflow;
+	bool IsEdit;
+	bool AdjustEdit;
+	Point2D EditPos;
+	TextLabelClass* EditLabel;
+	wchar_t EditBuffer[162];
+	wchar_t OverflowBuffer[162];
+	DWORD EditCurrentPos;
+	DWORD EditInitialPos;
+	wchar_t CursorCharacter;
+	DWORD OverflowStart;
+	DWORD OverflowEnd;
+	int Width;
+	wchar_t MessageBuffers[14][162];
+	wchar_t BufferAvail[14];
 };
+
+static_assert(sizeof(MessageListClass) == 0x149C);
