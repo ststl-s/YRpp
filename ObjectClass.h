@@ -90,14 +90,10 @@ public:
 	// can the current player control this unit? (owned by him, not paralyzed, not spawned, not warping, not slaved...)
 	virtual bool IsControllable() const R0;
 
-	// stupid! return this->GetCoords(pCrd);
-	virtual CoordStruct* GetPosition_0(CoordStruct* pCrd) const R0;
-
+	virtual CoordStruct* GetTargetCoords(CoordStruct* pCrd) const R0;
 	// gets a building's free dock coordinates for a unit. falls back to this->GetCoords(pCrd);
 	virtual CoordStruct* GetDockCoords(CoordStruct* pCrd, TechnoClass* docker) const R0;
-
-	// stupid! guess what happens again?
-	virtual CoordStruct* GetCenterCoord(CoordStruct* pCrd) const R0;
+	virtual CoordStruct* GetRenderCoords(CoordStruct* pCrd) const R0;
 	virtual CoordStruct* GetFLH(CoordStruct *pDest, int idxWeapon, CoordStruct BaseCoords) const R0;
 	virtual CoordStruct* GetExitCoords(CoordStruct* pCrd, DWORD dwUnk) const R0;
 	virtual int GetYSort() const R0;
@@ -239,6 +235,12 @@ public:
 	CellStruct GetMapCoordsAgain() const {
 		CellStruct ret;
 		this->GetMapCoordsAgain(&ret);
+		return ret;
+	}
+
+	CoordStruct GetRenderCoords() const {
+		CoordStruct ret;
+		this->GetRenderCoords(&ret);
 		return ret;
 	}
 
