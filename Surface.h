@@ -146,6 +146,9 @@ public:
 	MemoryBuffer Buffer;
 };
 
+#pragma warning(push)
+#pragma warning( disable : 4505) // 'function' : unreferenced local function has been removed
+
 // Comments from thomassneddon
 static void __fastcall CC_Draw_Shape(Surface* Surface, ConvertClass* Palette, SHPStruct* SHP, int FrameIndex,
 	const Point2D* const Position, const RectangleStruct* const Bounds, BlitterFlags Flags,
@@ -171,6 +174,8 @@ static Point2D* Fancy_Text_Print_Wide(const Point2D& retBuffer, const wchar_t* T
 	JMP_STD(0x4A61C0);
 }
 
+#pragma warning(pop)
+
 
 //static Point2D* __fastcall Simple_Text_Print_Wide(Point2D* RetVal, const wchar_t* Text, Surface* Surface, RectangleStruct* Bounds,
 //	Point2D* Location, COLORREF ForeColor, COLORREF BackColor, TextPrintType Flag, bool bUkn)
@@ -181,17 +186,17 @@ static Point2D* Fancy_Text_Print_Wide(const Point2D& retBuffer, const wchar_t* T
 class NOVTABLE DSurface : public XSurface
 {
 public:
-	static constexpr reference<DSurface*, 0x8872FCu> const Tile{};
-	static constexpr reference<DSurface*, 0x887300u> const Sidebar{};
-	static constexpr reference<DSurface*, 0x887308u> const Primary{};
-	static constexpr reference<DSurface*, 0x88730Cu> const Hidden{};
-	static constexpr reference<DSurface*, 0x887310u> const Alternate{};
-	static constexpr reference<DSurface*, 0x887314u> const Temp{};
-	static constexpr reference<DSurface*, 0x88731Cu> const Composite{};
+	static constexpr reference<DSurface*, 0x8872FCu> const Tile {};
+	static constexpr reference<DSurface*, 0x887300u> const Sidebar {};
+	static constexpr reference<DSurface*, 0x887308u> const Primary {};
+	static constexpr reference<DSurface*, 0x88730Cu> const Hidden {};
+	static constexpr reference<DSurface*, 0x887310u> const Alternate {};
+	static constexpr reference<DSurface*, 0x887314u> const Temp {};
+	static constexpr reference<DSurface*, 0x88731Cu> const Composite {};
 
-	static constexpr reference<RectangleStruct, 0x886F90u> const SidebarBounds{};
-	static constexpr reference<RectangleStruct, 0x886FA0u> const ViewBounds{};
-	static constexpr reference<RectangleStruct, 0x886FB0u> const WindowBounds{};
+	static constexpr reference<RectangleStruct, 0x886F90u> const SidebarBounds {};
+	static constexpr reference<RectangleStruct, 0x886FA0u> const ViewBounds {};
+	static constexpr reference<RectangleStruct, 0x886FB0u> const WindowBounds {};
 
 	virtual bool DrawGradientLine(RectangleStruct* pRect, Point2D* pStart, Point2D* pEnd,
 		ColorStruct* pStartColor, ColorStruct* pEndColor, float fStep, int nColor) R0;
