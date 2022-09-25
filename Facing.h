@@ -24,8 +24,8 @@ public:
 		, StartFacing { another.StartFacing }
 		, RotationTimer { another.RotationTimer }
 		, ROT { another.ROT }
-	{
-	}
+	{ }
+
 	FacingClass& operator=(const FacingClass& another)
 	{
 		if (this != &another)

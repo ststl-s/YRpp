@@ -106,14 +106,14 @@ MAKE_ENUM_FLAGS(RecordFlag);
 
 enum class DirType : unsigned char
 {
-	North = 0,
-	NorthEast = 32,
-	East = 64,
-	SouthEast = 96,
-	South = 128,
-	SouthWest = 160,
-	West = 192,
-	NorthWest = 224,
+	North = 0 << 5,
+	NorthEast = 1 << 5,
+	East = 2 << 5,
+	SouthEast = 3 << 5,
+	South = 4 << 5,
+	SouthWest = 5 << 5,
+	West = 6 << 5,
+	NorthWest = 7 << 5,
 };
 MAKE_ENUM_FLAGS(DirType);
 
@@ -253,7 +253,7 @@ enum class TextPrintType : int
 };
 MAKE_ENUM_FLAGS(TextPrintType);
 
-enum class TriggerPersistence : unsigned int
+enum class TriggerPersistance : unsigned int
 {
 	Volatile = 0, // trigger for the first object whose events fired, then disable
 	SemiPersistant = 1, // trigger after all object's events fired, then disable
