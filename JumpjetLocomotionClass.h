@@ -79,7 +79,7 @@ public:
 	BYTE unknown_4E;
 	BYTE unknown_4F;
 	int State;
-	FacingStruct LocomotionFacing;
+	FacingClass LocomotionFacing;
 	BYTE unknown_6C;
 	BYTE unknown_6D;
 	BYTE unknown_6E;

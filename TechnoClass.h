@@ -625,9 +625,9 @@ public:
 
 	DECLARE_PROPERTY(TransitionTimer, UnloadTimer); // times the deploy, unload, etc. cycles
 
-	DECLARE_PROPERTY(FacingStruct, BarrelFacing);
-	DECLARE_PROPERTY(FacingStruct, PrimaryFacing);
-	DECLARE_PROPERTY(FacingStruct, SecondaryFacing);
+	DECLARE_PROPERTY(FacingClass, BarrelFacing);
+	DECLARE_PROPERTY(FacingClass, PrimaryFacing);
+	DECLARE_PROPERTY(FacingClass, SecondaryFacing);
 	int              CurrentBurstIndex;
 	DECLARE_PROPERTY(CDTimerClass, TargetLaserTimer);
 	short            unknown_short_3C8;

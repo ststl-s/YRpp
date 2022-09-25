@@ -112,7 +112,7 @@ public:
 	virtual bool Limbo() R0;
 
 	// place the object on the map
-	virtual bool Unlimbo(const CoordStruct& Crd, Direction::Value dFaceDir) R0;
+	virtual bool Unlimbo(const CoordStruct& Crd, DirType dFaceDir) R0;
 
 	// cleanup things (lose line trail, deselect, etc). Permanently: destroyed/removed/gone opposed to just going out of sight.
 	virtual void Disappear(bool permanently) RX;

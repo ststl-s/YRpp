@@ -2,6 +2,7 @@
 
 #include <ArrayClasses.h>
 #include <GeneralDefinitions.h>
+#include <CCFileClass.h>
 #include <Helpers/CompileTime.h>
 
 struct TacticalSelectableStruct;
