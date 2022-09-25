@@ -35,6 +35,8 @@ public:
 			RotationTimer = another.RotationTimer;
 			ROT = another.ROT;
 		}
+
+		return *this;
 	}
 
 	bool Set_Desired(const DirStruct& facing)
