@@ -15,8 +15,8 @@ struct DirStruct
 public:
 	explicit DirStruct() noexcept : Raw { 0 } { }
 	explicit DirStruct(int raw) noexcept : Raw { static_cast<unsigned short>(raw) } { }
-	explicit DirStruct(double rad) noexcept { Set_Radians(rad); }
-	explicit DirStruct(const DirType dir) noexcept { Set_Dir(dir); }
+	explicit DirStruct(double rad) noexcept { SetRadians(rad); }
+	explicit DirStruct(const DirType dir) noexcept { SetDir(dir); }
 	explicit DirStruct(const noinit_t& noinit) noexcept { }
 
 	bool operator==(const DirStruct& another) const
@@ -28,12 +28,12 @@ public:
 		return !(*this == another);
 	}
 
-	void Set_Dir(DirType dir)
+	void SetDir(DirType dir)
 	{
 		Raw = static_cast<unsigned short>(static_cast<unsigned char>(dir) * 256);
 	}
 
-	DirType Get_Dir() const
+	DirType GetDir() const
 	{
 		return static_cast<DirType>(Raw / 256);
 	}
@@ -63,16 +63,16 @@ public:
 	}
 
 	template<size_t Count>
-	constexpr size_t SetFacing(size_t offset = 0)
+	constexpr size_t SetFacing(size_t value, size_t offset = 0)
 	{
 		static_assert(HasSingleBit(Count));
 
 		constexpr size_t Bits = BitWidth<Count - 1>();
-		return SetValue<Bits>(value, offset);
+		SetValue<Bits>(value, offset);
 	}
 
 	template <size_t Bits = 16>
-	double Get_Radians() const
+	double GetRadians() const
 	{
 		constexpr int Max = ((1 << Bits) - 1);
 		int value = Max / 4 - this->value<Bits>();
@@ -80,7 +80,7 @@ public:
 	}
 
 	template <size_t Bits = 16>
-	void Set_Radians(double rad)
+	void SetRadians(double rad)
 	{
 		constexpr int Max = ((1 << Bits) - 1);
 		int value = static_cast<int>(rad * (Max / Math::TwoPi));

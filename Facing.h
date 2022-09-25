@@ -3,6 +3,8 @@
 #include <Dir.h>
 #include <Timer.h>
 
+#include <algorithm>
+
 class FacingClass
 {
 public:
@@ -17,7 +19,7 @@ public:
 	}
 	explicit FacingClass(DirType dir) noexcept
 	{
-		DesiredFacing.Set_Dir(dir);
+		DesiredFacing.SetDir(dir);
 	}
 	explicit FacingClass(const FacingClass& another) noexcept
 		: DesiredFacing { another.DesiredFacing }
@@ -47,7 +49,7 @@ public:
 		StartFacing = Current();
 		DesiredFacing = facing;
 
-		if (ROT.Raw > 0)
+		if (static_cast<short>(ROT.Raw) > 0)
 			RotationTimer.Start(NumSteps());
 
 		return true;
@@ -73,7 +75,7 @@ public:
 		if (Is_Rotating())
 		{
 			const short diff = Difference().Raw;
-			const int num_steps = NumSteps();
+			const short num_steps = static_cast<short>(NumSteps());
 			if (num_steps > 0)
 			{
 				const int steps_left = RotationTimer.GetTimeLeft();
@@ -85,10 +87,7 @@ public:
 
 	bool Is_Rotating() const
 	{
-		if (static_cast<short>(ROT.Raw) <= 0)
-			return false;
-
-		return RotationTimer.GetTimeLeft() != 0;
+		return static_cast<short>(ROT.Raw) > 0 && RotationTimer.GetTimeLeft();
 	}
 	bool Is_Rotating_L() const
 	{
@@ -107,20 +106,20 @@ public:
 
 	DirStruct Difference() const
 	{
-		return DirStruct { static_cast<int>(DesiredFacing.Raw - StartFacing.Raw) };
+		return DirStruct { static_cast<short>(DesiredFacing.Raw) - static_cast<short>(StartFacing.Raw) };
 	}
 
 	void Set_ROT(int rate)
 	{
 		if (rate > 127)
 			rate = 127;
-		ROT.Set_Dir(static_cast<DirType>(rate));
+		ROT.SetDir(static_cast<DirType>(rate));
 	}
 
 private:
 	int NumSteps() const
 	{
-		return std::abs(Difference().Raw) / ROT.Raw;
+		return std::abs(static_cast<short>(Difference().Raw)) / ROT.Raw;
 	}
 
 public:
