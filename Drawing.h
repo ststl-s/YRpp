@@ -273,8 +273,9 @@ struct MainVoxelIndexKey
 {
 public:
 	unsigned FrameIndex : 5;
+	unsigned RampType : 5;
 private:
-	unsigned bitfield_5 : 11;
+	unsigned bitfield_10 : 6;
 public:
 	unsigned UseAuxVoxel : 1; // !(!pUnit->Type->NoSpawnAlt || pUnit->SpawnManager->Draw_State())
 private:
