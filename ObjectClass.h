@@ -133,7 +133,7 @@ public:
 	virtual CellStruct const* GetFoundationData(bool includeBib = false) const R0;
 	virtual void DrawBehind(Point2D* pLocation, RectangleStruct* pBounds) const RX;
 	virtual void DrawExtras(Point2D* pLocation, RectangleStruct* pBounds) const RX; // draws ivan bomb, health bar, talk bubble, etc
-	virtual void Draw(Point2D* pLocation, RectangleStruct* pBounds) const RX;
+	virtual void DrawIt(Point2D* pLocation, RectangleStruct* pBounds) const RX;
 	virtual void DrawAgain(const Point2D& location, const RectangleStruct& bounds) const RX; // just forwards the call to Draw
 	virtual void Undiscover() RX;
 	virtual void See(DWORD dwUnk, DWORD dwUnk2) RX;
