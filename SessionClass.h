@@ -62,6 +62,12 @@ public:
 		return Instance->GameMode == GameMode::Campaign;
 	}
 
+	static bool IsSingleplayer()
+	{
+		return Instance->GameMode == GameMode::Campaign
+			|| Instance->GameMode == GameMode::Skirmish;
+	}
+
 	GameMode GameMode;
 	MPGameModeClass* MPGameMode;
 	DWORD unknown_08;
