@@ -24,7 +24,10 @@ public:
 	virtual ~FootClass() RX;
 
 	//AbstractClass
+
 	//ObjectClass
+	virtual DamageState IronCurtain(int nDuration, HouseClass* pSource, bool ForceShield) override JMP_THIS(0x4DEAE0);
+
 	//MissionClass
 	//TechnoClass
 	virtual void Destroyed(ObjectClass *Killer) RX;
