@@ -94,14 +94,14 @@ public:
 		if (!Is_Rotating())
 			return false;
 
-		return Difference().Raw < 0;
+		return static_cast<short>(Difference().Raw) < 0;
 	}
 	bool Is_Rotating_G() const
 	{
 		if (!Is_Rotating())
 			return false;
 
-		return Difference().Raw > 0;
+		return static_cast<short>(Difference().Raw) > 0;
 	}
 
 	DirStruct Difference() const
