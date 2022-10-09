@@ -29,6 +29,7 @@ namespace GameStrings
 	GAMEMD_STRING(AudioVisual , 0x839EA8u);
 	GAMEMD_STRING(CombatDamage, 0x839E8Cu);
 	GAMEMD_STRING(Radiation   , 0x839E80u);
+	GAMEMD_STRING(ToolTips    , 0x833188u);
 
 	// EVA entry names
 	GAMEMD_STRING(EVA_StructureSold      , 0x819030u);
