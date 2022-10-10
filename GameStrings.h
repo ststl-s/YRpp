@@ -10,6 +10,8 @@ namespace GameStrings
 {
 	// unsorted names
 	GAMEMD_STRING(YURI_S_REVENGE, 0x849F48u);
+	GAMEMD_STRING(BLOWFISH_DLL  , 0x840A78u);
+	GAMEMD_STRING(XXICON_SHP    , 0x8204FCu);
 
 	// ini file names
 	GAMEMD_STRING(UIMD_INI    , 0x827DC8u);
