@@ -90,8 +90,8 @@ public:
 	// can the current player control this unit? (owned by him, not paralyzed, not spawned, not warping, not slaved...)
 	virtual bool IsControllable() const R0;
 
-	// This does basically the same as GetCenterCoords().
-	virtual CoordStruct* GetCenterCoordsAlt(CoordStruct* pCrd) const R0;
+	// On non-buildings this is same as GetCenterCoord(), on buildings it returns the target coordinate that is affected by TargetCoordOffset.
+	virtual CoordStruct* GetTargetCoords(CoordStruct* pCrd) const R0;
 	// gets a building's free dock coordinates for a unit. falls back to this->GetCoords(pCrd);
 	virtual CoordStruct* GetDockCoords(CoordStruct* pCrd, TechnoClass* docker) const R0;
 	virtual CoordStruct* GetRenderCoords(CoordStruct* pCrd) const R0;
@@ -236,6 +236,14 @@ public:
 	CellStruct GetMapCoordsAgain() const {
 		CellStruct ret;
 		this->GetMapCoordsAgain(&ret);
+		return ret;
+	}
+
+	// On non-buildings this is same as GetCenterCoord(), on buildings it returns the target coordinate that is affected by TargetCoordOffset.
+	CoordStruct GetTargetCoords() const
+	{
+		CoordStruct ret;
+		this->GetTargetCoords(&ret);
 		return ret;
 	}
 

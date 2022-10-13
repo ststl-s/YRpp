@@ -286,7 +286,8 @@ public:
 	virtual void Sensed() RX;
 	virtual void Reload() RX;
 	virtual void vt_entry_428() RX;
-	virtual CoordStruct* GetTargetCoords(CoordStruct* pCrd) const R0;
+	// Returns target's coordinates if on attack mission & have target, otherwise own coordinates.
+	virtual CoordStruct* GetAttackCoordinates(CoordStruct* pCrd) const R0;
 	virtual bool IsNotWarpingIn() const R0;
 	virtual bool vt_entry_434(DWORD dwUnk) const R0;
 	virtual void DrawActionLines(bool Force, DWORD dwUnk2) RX;
