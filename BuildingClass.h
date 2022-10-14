@@ -232,16 +232,6 @@ public:
 		return this->AnimStates[static_cast<int>(slot)];
 	}
 
-	// Returns building's logical center coordinates based on foundation size.
-	CoordStruct GetBuildingCenterCoords(bool includeBib = false)
-	{
-		auto coords = this->GetCoords();
-		coords.X += this->Type->GetFoundationWidth() / 2;
-		coords.Y += this->Type->GetFoundationHeight(includeBib) / 2;
-
-		return coords;
-	}
-
 	//Constructor
 	BuildingClass(BuildingTypeClass* pType, HouseClass* pOwner) noexcept
 		: BuildingClass(noinit_t())
