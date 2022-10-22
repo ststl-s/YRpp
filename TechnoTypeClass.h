@@ -104,7 +104,7 @@ public:
 	//ObjectTypeClass
 
 	//TechnoTypeClass
-	virtual bool vt_entry_A0() R0;
+	virtual bool CanUseWaypoint() const R0;
 	virtual bool CanAttackMove() const R0;
 	virtual bool CanCreateHere(const CellStruct& mapCoords, HouseClass* pOwner) const R0;
 	virtual int GetCost() const R0;
